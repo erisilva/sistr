@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\Tipo;
+use App\Models\Responsavel;
 use App\Models\Perpage;
 
 use Response;
@@ -13,20 +14,19 @@ use Illuminate\Support\Facades\Gate;
 
 use Illuminate\Support\Facades\DB;
 
-use App\Exports\TiposExport;
+use App\Exports\ResponsavelExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class TipoController extends Controller
+class ResponsavelController extends Controller
 {
-
     public function __construct() 
     {
         $this->middleware(['middleware' => 'auth']);
         $this->middleware(['middleware' => 'hasaccess']);
     }
-        
+
     /**
      * Display a listing of the resource.
      *
@@ -34,14 +34,14 @@ class TipoController extends Controller
      */
     public function index()
     {
-        if (Gate::denies('tipo-index')) {
+        if (Gate::denies('responsavel-index')) {
             abort(403, 'Acesso negado.');
         }
 
-        $tipos = new Tipo;
+        $responsavels = new Responsavel;
 
         // ordena
-        $tipos = $tipos->orderBy('descricao', 'asc');
+        $responsavels = $responsavels->orderBy('nome', 'asc');
 
         // se a requisição tiver um novo valor para a quantidade
         // de páginas por visualização ele altera aqui
@@ -54,9 +54,9 @@ class TipoController extends Controller
         $perpages = Perpage::orderBy('valor')->get();
 
         // paginação
-        $tipos = $tipos->paginate(session('perPage', '5'));
+        $responsavels = $responsavels->paginate(session('perPage', '5'));
 
-        return view('tipos.index', compact('tipos', 'perpages'));
+        return view('responsavels.index', compact('responsavels', 'perpages'));
     }
 
     /**
@@ -66,11 +66,11 @@ class TipoController extends Controller
      */
     public function create()
     {
-        if (Gate::denies('tipo-create')) {
+        if (Gate::denies('responsavel-create')) {
             abort(403, 'Acesso negado.');
         } 
 
-        return view('tipos.create');
+        return view('responsavels.create');
     }
 
     /**
@@ -82,16 +82,16 @@ class TipoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-          'descricao' => 'required',
+          'nome' => 'required',
         ]);
 
-        $tipo = $request->all();
+        $responsavel = $request->all();
 
-        Tipo::create($tipo); //salva
+        Responsavel::create($responsavel); //salva
 
-        Session::flash('create_tipo', 'Tipo do TR cadastrado com sucesso!');
+        Session::flash('create_responsavel', 'Responsável cadastrado com sucesso!');
 
-        return redirect(route('tipos.index'));
+        return redirect(route('responsavels.index'));
     }
 
     /**
@@ -102,13 +102,13 @@ class TipoController extends Controller
      */
     public function show($id)
     {
-        if (Gate::denies('tipo-show')) {
+        if (Gate::denies('responsavel-show')) {
             abort(403, 'Acesso negado.');
         }
 
-        $tipo = Tipo::findOrFail($id);
+        $responsavel = Responsavel::findOrFail($id);
 
-        return view('tipos.show', compact('tipo'));
+        return view('responsavels.show', compact('responsavel'));
     }
 
     /**
@@ -119,13 +119,13 @@ class TipoController extends Controller
      */
     public function edit($id)
     {
-        if (Gate::denies('tipo-edit')) {
+        if (Gate::denies('responsavel-edit')) {
             abort(403, 'Acesso negado.');
         }
 
-        $tipo = Tipo::findOrFail($id);
+        $responsavel = Responsavel::findOrFail($id);
 
-        return view('tipos.edit', compact('tipo'));
+        return view('responsavels.edit', compact('responsavel'));
     }
 
     /**
@@ -138,16 +138,16 @@ class TipoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-          'descricao' => 'required',
+          'nome' => 'required',
         ]);
 
-        $tipo = Tipo::findOrFail($id);
+        $responsavel = Responsavel::findOrFail($id);
             
-        $tipo->update($request->all());
+        $responsavel->update($request->all());
         
-        Session::flash('edited_tipo', 'Tipo do TR alterado com sucesso!');
+        Session::flash('edited_responsavel', 'Responsável do TR alterada com sucesso!');
 
-        return redirect(route('tipos.edit', $id));
+        return redirect(route('responsavels.edit', $id));
     }
 
     /**
@@ -158,51 +158,51 @@ class TipoController extends Controller
      */
     public function destroy($id)
     {
-        if (Gate::denies('tipo-delete')) {
+        if (Gate::denies('responsavel-delete')) {
             abort(403, 'Acesso negado.');
         }
 
-        Tipo::findOrFail($id)->delete();
+        Responsavel::findOrFail($id)->delete();
 
-        Session::flash('deleted_tipo', 'Tipo do TR excluído com sucesso!');
+        Session::flash('deleted_responsavel', 'Responsável do TR excluído com sucesso!');
 
-        return redirect(route('tipos.index'));
+        return redirect(route('responsavels.index'));
     }
 
     public function exportcsv()
     {
-        if (Gate::denies('tipo-export')) {
+        if (Gate::denies('responsavel-export')) {
             abort(403, 'Acesso negado.');
         }
 
-        return Excel::download(new TiposExport(), 'Tipos_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
+        return Excel::download(new ResponsavelExport(), 'Responsaveis_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
     public function exportxls()
     {
-        if (Gate::denies('tipo-export')) {
+        if (Gate::denies('responsavel-export')) {
             abort(403, 'Acesso negado.');
         }
 
-        return Excel::download(new TiposExport(), 'Tipos_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        return Excel::download(new ResponsavelExport(), 'Responsaveis_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function exportpdf()
     {
-        if (Gate::denies('tipo-export')) {
+        if (Gate::denies('responsavel-export')) {
             abort(403, 'Acesso negado.');
         }
 
         # criação do dataset
-        $dataset = new Tipo;
+        $dataset = new Responsavel;
 
-        $dataset = $dataset->select('descricao');
+        $dataset = $dataset->select('nome');
 
         $dataset = $dataset->get();
 
-        $pdf = PDF::loadView('tipos.report', compact('dataset'));
+        $pdf = PDF::loadView('responsavels.report', compact('dataset'));
         
-        return $pdf->download('Tipos_' .  date("Y-m-d H:i:s") . '.pdf');
+        return $pdf->download('Responsaveis_' .  date("Y-m-d H:i:s") . '.pdf');
 
-    }      
+    }         
 }

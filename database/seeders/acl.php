@@ -82,7 +82,34 @@ class acl extends Seeder
         $tipo_delete = Permission::where('name', '=', 'tipo-delete')->get()->first();
         $tipo_show = Permission::where('name', '=', 'tipo-show')->get()->first();  
         $tipo_export = Permission::where('name', '=', 'tipo-export')->get()->first();
-
+        // para responsavel
+        $responsavel_index = Permission::where('name', '=', 'responsavel-index')->get()->first(); 
+        $responsavel_create = Permission::where('name', '=', 'responsavel-create')->get()->first();
+        $responsavel_edit = Permission::where('name', '=', 'responsavel-edit')->get()->first();  
+        $responsavel_delete = Permission::where('name', '=', 'responsavel-delete')->get()->first();
+        $responsavel_show = Permission::where('name', '=', 'responsavel-show')->get()->first();  
+        $responsavel_export = Permission::where('name', '=', 'responsavel-export')->get()->first();
+        // para origem
+        $origem_index = Permission::where('name', '=', 'origem-index')->get()->first(); 
+        $origem_create = Permission::where('name', '=', 'origem-create')->get()->first();
+        $origem_edit = Permission::where('name', '=', 'origem-edit')->get()->first();  
+        $origem_delete = Permission::where('name', '=', 'origem-delete')->get()->first();
+        $origem_show = Permission::where('name', '=', 'origem-show')->get()->first();  
+        $origem_export = Permission::where('name', '=', 'origem-export')->get()->first();
+        // para deliberacao
+        $deliberacao_index = Permission::where('name', '=', 'deliberacao-index')->get()->first(); 
+        $deliberacao_create = Permission::where('name', '=', 'deliberacao-create')->get()->first();
+        $deliberacao_edit = Permission::where('name', '=', 'deliberacao-edit')->get()->first();  
+        $deliberacao_delete = Permission::where('name', '=', 'deliberacao-delete')->get()->first();
+        $deliberacao_show = Permission::where('name', '=', 'deliberacao-show')->get()->first();  
+        $deliberacao_export = Permission::where('name', '=', 'deliberacao-export')->get()->first();
+        // para modalidade
+        $modalidade_index = Permission::where('name', '=', 'modalidade-index')->get()->first(); 
+        $modalidade_create = Permission::where('name', '=', 'modalidade-create')->get()->first();
+        $modalidade_edit = Permission::where('name', '=', 'modalidade-edit')->get()->first();  
+        $modalidade_delete = Permission::where('name', '=', 'modalidade-delete')->get()->first();
+        $modalidade_show = Permission::where('name', '=', 'modalidade-show')->get()->first();  
+        $modalidade_export = Permission::where('name', '=', 'modalidade-export')->get()->first();
 
         // salva os relacionamentos entre perfil e suas permissões
         
@@ -120,6 +147,34 @@ class acl extends Seeder
         $administrador_perfil->permissions()->attach($tipo_delete);
         $administrador_perfil->permissions()->attach($tipo_show);
         $administrador_perfil->permissions()->attach($tipo_export);
+        #responsavel
+        $administrador_perfil->permissions()->attach($responsavel_index);
+        $administrador_perfil->permissions()->attach($responsavel_create);
+        $administrador_perfil->permissions()->attach($responsavel_edit);
+        $administrador_perfil->permissions()->attach($responsavel_delete);
+        $administrador_perfil->permissions()->attach($responsavel_show);
+        $administrador_perfil->permissions()->attach($responsavel_export);
+        #origem
+        $administrador_perfil->permissions()->attach($origem_index);
+        $administrador_perfil->permissions()->attach($origem_create);
+        $administrador_perfil->permissions()->attach($origem_edit);
+        $administrador_perfil->permissions()->attach($origem_delete);
+        $administrador_perfil->permissions()->attach($origem_show);
+        $administrador_perfil->permissions()->attach($origem_export);
+        #deliberacao
+        $administrador_perfil->permissions()->attach($deliberacao_index);
+        $administrador_perfil->permissions()->attach($deliberacao_create);
+        $administrador_perfil->permissions()->attach($deliberacao_edit);
+        $administrador_perfil->permissions()->attach($deliberacao_delete);
+        $administrador_perfil->permissions()->attach($deliberacao_show);
+        $administrador_perfil->permissions()->attach($deliberacao_export);
+        #modalidade
+        $administrador_perfil->permissions()->attach($modalidade_index);
+        $administrador_perfil->permissions()->attach($modalidade_create);
+        $administrador_perfil->permissions()->attach($modalidade_edit);
+        $administrador_perfil->permissions()->attach($modalidade_delete);
+        $administrador_perfil->permissions()->attach($modalidade_show);
+        $administrador_perfil->permissions()->attach($modalidade_export);
 
 
         // o gerente (diretor) pode gerenciar os operadores do sistema
@@ -140,6 +195,30 @@ class acl extends Seeder
         $gerente_perfil->permissions()->attach($tipo_edit);
         $gerente_perfil->permissions()->attach($tipo_show);
         $gerente_perfil->permissions()->attach($tipo_export);
+        #responsavel
+        $gerente_perfil->permissions()->attach($responsavel_index);
+        $gerente_perfil->permissions()->attach($responsavel_create);
+        $gerente_perfil->permissions()->attach($responsavel_edit);
+        $gerente_perfil->permissions()->attach($responsavel_show);
+        $gerente_perfil->permissions()->attach($responsavel_export);
+        #origem
+        $gerente_perfil->permissions()->attach($origem_index);
+        $gerente_perfil->permissions()->attach($origem_create);
+        $gerente_perfil->permissions()->attach($origem_edit);
+        $gerente_perfil->permissions()->attach($origem_show);
+        $gerente_perfil->permissions()->attach($origem_export);
+        #deliberacao
+        $gerente_perfil->permissions()->attach($deliberacao_index);
+        $gerente_perfil->permissions()->attach($deliberacao_create);
+        $gerente_perfil->permissions()->attach($deliberacao_edit);
+        $gerente_perfil->permissions()->attach($deliberacao_show);
+        $gerente_perfil->permissions()->attach($deliberacao_export);
+        #modalidade
+        $gerente_perfil->permissions()->attach($modalidade_index);
+        $gerente_perfil->permissions()->attach($modalidade_create);
+        $gerente_perfil->permissions()->attach($modalidade_edit);
+        $gerente_perfil->permissions()->attach($modalidade_show);
+        $gerente_perfil->permissions()->attach($modalidade_export);
 
 
         // o operador é o nível de operação do sistema não pode criar
@@ -155,6 +234,22 @@ class acl extends Seeder
         $operador_perfil->permissions()->attach($tipo_index);
         $operador_perfil->permissions()->attach($tipo_show);
         $operador_perfil->permissions()->attach($tipo_export);
+        #responsavel
+        $operador_perfil->permissions()->attach($responsavel_index);
+        $operador_perfil->permissions()->attach($responsavel_show);
+        $operador_perfil->permissions()->attach($responsavel_export);
+        #origem
+        $operador_perfil->permissions()->attach($origem_index);
+        $operador_perfil->permissions()->attach($origem_show);
+        $operador_perfil->permissions()->attach($origem_export);
+        #deliberacao
+        $operador_perfil->permissions()->attach($deliberacao_index);
+        $operador_perfil->permissions()->attach($deliberacao_show);
+        $operador_perfil->permissions()->attach($deliberacao_export);
+        #modalidade
+        $operador_perfil->permissions()->attach($modalidade_index);
+        $operador_perfil->permissions()->attach($modalidade_show);
+        $operador_perfil->permissions()->attach($modalidade_export);
 
 
         // leitura é um tipo de operador que só pode ler
@@ -167,6 +262,18 @@ class acl extends Seeder
         #tipos
         $leitor_perfil->permissions()->attach($tipo_index);
         $leitor_perfil->permissions()->attach($tipo_show);
+        #responsavel
+        $leitor_perfil->permissions()->attach($responsavel_index);
+        $leitor_perfil->permissions()->attach($responsavel_show);
+        #origem
+        $leitor_perfil->permissions()->attach($origem_index);
+        $leitor_perfil->permissions()->attach($origem_show);
+        #deliberacao
+        $leitor_perfil->permissions()->attach($deliberacao_index);
+        $leitor_perfil->permissions()->attach($deliberacao_show);
+        #modalidade
+        $leitor_perfil->permissions()->attach($modalidade_index);
+        $leitor_perfil->permissions()->attach($modalidade_show);
 
 
     }

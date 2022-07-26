@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\Tipo;
+use App\Models\Origem;
 use App\Models\Perpage;
 
 use Response;
@@ -13,20 +14,19 @@ use Illuminate\Support\Facades\Gate;
 
 use Illuminate\Support\Facades\DB;
 
-use App\Exports\TiposExport;
+use App\Exports\OrigemsExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class TipoController extends Controller
+class OrigemController extends Controller
 {
-
     public function __construct() 
     {
         $this->middleware(['middleware' => 'auth']);
         $this->middleware(['middleware' => 'hasaccess']);
     }
-        
+    
     /**
      * Display a listing of the resource.
      *
@@ -34,14 +34,14 @@ class TipoController extends Controller
      */
     public function index()
     {
-        if (Gate::denies('tipo-index')) {
+        if (Gate::denies('origem-index')) {
             abort(403, 'Acesso negado.');
         }
 
-        $tipos = new Tipo;
+        $origems = new Origem;
 
         // ordena
-        $tipos = $tipos->orderBy('descricao', 'asc');
+        $origems = $origems->orderBy('descricao', 'asc');
 
         // se a requisição tiver um novo valor para a quantidade
         // de páginas por visualização ele altera aqui
@@ -54,9 +54,9 @@ class TipoController extends Controller
         $perpages = Perpage::orderBy('valor')->get();
 
         // paginação
-        $tipos = $tipos->paginate(session('perPage', '5'));
+        $origems = $origems->paginate(session('perPage', '5'));
 
-        return view('tipos.index', compact('tipos', 'perpages'));
+        return view('origems.index', compact('origems', 'perpages'));
     }
 
     /**
@@ -66,11 +66,11 @@ class TipoController extends Controller
      */
     public function create()
     {
-        if (Gate::denies('tipo-create')) {
+        if (Gate::denies('origem-create')) {
             abort(403, 'Acesso negado.');
         } 
 
-        return view('tipos.create');
+        return view('origems.create');
     }
 
     /**
@@ -85,13 +85,13 @@ class TipoController extends Controller
           'descricao' => 'required',
         ]);
 
-        $tipo = $request->all();
+        $origem = $request->all();
 
-        Tipo::create($tipo); //salva
+        Origem::create($origem); //salva
 
-        Session::flash('create_tipo', 'Tipo do TR cadastrado com sucesso!');
+        Session::flash('create_origem', 'Origem cadastrada com sucesso!');
 
-        return redirect(route('tipos.index'));
+        return redirect(route('origems.index'));
     }
 
     /**
@@ -102,13 +102,13 @@ class TipoController extends Controller
      */
     public function show($id)
     {
-        if (Gate::denies('tipo-show')) {
+        if (Gate::denies('origem-show')) {
             abort(403, 'Acesso negado.');
         }
 
-        $tipo = Tipo::findOrFail($id);
+        $origem = Origem::findOrFail($id);
 
-        return view('tipos.show', compact('tipo'));
+        return view('origems.show', compact('origem'));
     }
 
     /**
@@ -119,13 +119,13 @@ class TipoController extends Controller
      */
     public function edit($id)
     {
-        if (Gate::denies('tipo-edit')) {
+        if (Gate::denies('origem-edit')) {
             abort(403, 'Acesso negado.');
         }
 
-        $tipo = Tipo::findOrFail($id);
+        $origem = Origem::findOrFail($id);
 
-        return view('tipos.edit', compact('tipo'));
+        return view('origems.edit', compact('origem'));
     }
 
     /**
@@ -141,13 +141,13 @@ class TipoController extends Controller
           'descricao' => 'required',
         ]);
 
-        $tipo = Tipo::findOrFail($id);
+        $origem = Origem::findOrFail($id);
             
-        $tipo->update($request->all());
+        $origem->update($request->all());
         
-        Session::flash('edited_tipo', 'Tipo do TR alterado com sucesso!');
+        Session::flash('edited_origem', 'Origem do TR alterada com sucesso!');
 
-        return redirect(route('tipos.edit', $id));
+        return redirect(route('origems.edit', $id));
     }
 
     /**
@@ -158,51 +158,51 @@ class TipoController extends Controller
      */
     public function destroy($id)
     {
-        if (Gate::denies('tipo-delete')) {
+        if (Gate::denies('origem-delete')) {
             abort(403, 'Acesso negado.');
         }
 
-        Tipo::findOrFail($id)->delete();
+        Origem::findOrFail($id)->delete();
 
-        Session::flash('deleted_tipo', 'Tipo do TR excluído com sucesso!');
+        Session::flash('deleted_origem', 'Origem do TR excluído com sucesso!');
 
-        return redirect(route('tipos.index'));
+        return redirect(route('origems.index'));
     }
 
     public function exportcsv()
     {
-        if (Gate::denies('tipo-export')) {
+        if (Gate::denies('origem-export')) {
             abort(403, 'Acesso negado.');
         }
 
-        return Excel::download(new TiposExport(), 'Tipos_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
+        return Excel::download(new OrigemsExport(), 'Origens_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
     public function exportxls()
     {
-        if (Gate::denies('tipo-export')) {
+        if (Gate::denies('origem-export')) {
             abort(403, 'Acesso negado.');
         }
 
-        return Excel::download(new TiposExport(), 'Tipos_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        return Excel::download(new OrigemsExport(), 'Origens_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function exportpdf()
     {
-        if (Gate::denies('tipo-export')) {
+        if (Gate::denies('origem-export')) {
             abort(403, 'Acesso negado.');
         }
 
         # criação do dataset
-        $dataset = new Tipo;
+        $dataset = new Origem;
 
         $dataset = $dataset->select('descricao');
 
         $dataset = $dataset->get();
 
-        $pdf = PDF::loadView('tipos.report', compact('dataset'));
+        $pdf = PDF::loadView('origems.report', compact('dataset'));
         
-        return $pdf->download('Tipos_' .  date("Y-m-d H:i:s") . '.pdf');
+        return $pdf->download('Origens_' .  date("Y-m-d H:i:s") . '.pdf');
 
-    }      
+    }         
 }

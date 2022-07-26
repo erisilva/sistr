@@ -148,6 +148,113 @@ class PermissionSeeder extends Seeder
 
 
 
+        DB::table('permissions')->insert([
+            'name' => 'responsavel-index',
+            'description' => 'Lista de responsáveis',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'responsavel-create',
+            'description' => 'Registrar novo Responsável',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'responsavel-edit',
+            'description' => 'Alterar dados do Responsável',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'responsavel-delete',
+            'description' => 'Excluir Responsável',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'responsavel-show',
+            'description' => 'Mostrar dados do Responsável',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'responsavel-export',
+            'description' => 'Exportação de dados dos responsáveis',
+        ]);
+
+
+        DB::table('permissions')->insert([
+            'name' => 'origem-index',
+            'description' => 'Lista de origens',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'origem-create',
+            'description' => 'Registrar nova origem',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'origem-edit',
+            'description' => 'Alterar dados da origem',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'origem-delete',
+            'description' => 'Excluir origem',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'origem-show',
+            'description' => 'Mostrar dados da origem',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'origem-export',
+            'description' => 'Exportação de dados das origens',
+        ]);
+
+
+        DB::table('permissions')->insert([
+            'name' => 'deliberacao-index',
+            'description' => 'Lista de deliberações',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'deliberacao-create',
+            'description' => 'Registrar nova deliberação',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'deliberacao-edit',
+            'description' => 'Alterar dados da deliberação',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'deliberacao-delete',
+            'description' => 'Excluir deliberação',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'deliberacao-show',
+            'description' => 'Mostrar dados da deliberação',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'deliberacao-export',
+            'description' => 'Exportação de dados das deliberações',
+        ]);
+
+
+
+        DB::table('permissions')->insert([
+            'name' => 'modalidade-index',
+            'description' => 'Lista de modalidades',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'modalidade-create',
+            'description' => 'Registrar nova modalidade',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'modalidade-edit',
+            'description' => 'Alterar dados da modalidade',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'modalidade-delete',
+            'description' => 'Excluir modalidade',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'modalidade-show',
+            'description' => 'Mostrar dados da modalidade',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'modalidade-export',
+            'description' => 'Exportação de dados das modalidades',
+        ]);
+
+
+
+
 
     }
 }

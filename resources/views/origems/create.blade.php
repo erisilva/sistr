@@ -4,13 +4,13 @@
 <div class="container-fluid">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ route('tipos.index') }}">Lista de Tipos do TR</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('origems.index') }}">Lista de Origens do TR</a></li>
       <li class="breadcrumb-item active" aria-current="page">Novo Registro</li>
     </ol>
   </nav>
 </div>
 <div class="container">
-  <form method="POST" action="{{ route('tipos.store') }}">
+  <form method="POST" action="{{ route('origems.store') }}">
     @csrf
     <div class="form-row">
       <div class="form-group col-md-6">
@@ -23,10 +23,10 @@
         @endif
       </div>
     </div>
-    <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Incluir Tipo do TR</button>
+    <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Incluir Origem do TR</button>
   </form>
   <div class="float-right">
-    <a href="{{ route('tipos.index') }}" class="btn btn-secondary btn-sm" role="button"><i class="fas fa-long-arrow-alt-left"></i> Voltar</i></a>
+    <a href="{{ route('origems.index') }}" class="btn btn-secondary btn-sm" role="button"><i class="fas fa-long-arrow-alt-left"></i> Voltar</i></a>
   </div>
 </div>
 @endsection

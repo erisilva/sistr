@@ -78,3 +78,26 @@ Route::get('/tipos/export/pdf', 'TipoController@exportpdf')->name('tipos.export.
 Route::get('/tipos/autocomplete', 'TipoController@autocomplete')->name('tipos.autocomplete');
 Route::resource('/tipos', 'TipoController');
 
+Route::get('/responsavels/export/csv', 'ResponsavelController@exportcsv')->name('responsavels.export.csv');
+Route::get('/responsavels/export/xls', 'ResponsavelController@exportxls')->name('responsavels.export.xls');
+Route::get('/responsavels/export/pdf', 'ResponsavelController@exportpdf')->name('responsavels.export.pdf');
+Route::get('/responsavels/autocomplete', 'ResponsavelController@autocomplete')->name('responsavels.autocomplete');
+Route::resource('/responsavels', 'ResponsavelController');
+
+Route::get('/origems/export/csv', 'OrigemController@exportcsv')->name('origems.export.csv');
+Route::get('/origems/export/xls', 'OrigemController@exportxls')->name('origems.export.xls');
+Route::get('/origems/export/pdf', 'OrigemController@exportpdf')->name('origems.export.pdf');
+Route::get('/origems/autocomplete', 'OrigemController@autocomplete')->name('origems.autocomplete');
+Route::resource('/origems', 'OrigemController');
+
+Route::get('/deliberacaos/export/csv', 'DeliberacaoController@exportcsv')->name('deliberacaos.export.csv');
+Route::get('/deliberacaos/export/xls', 'DeliberacaoController@exportxls')->name('deliberacaos.export.xls');
+Route::get('/deliberacaos/export/pdf', 'DeliberacaoController@exportpdf')->name('deliberacaos.export.pdf');
+Route::get('/deliberacaos/autocomplete', 'DeliberacaoController@autocomplete')->name('deliberacaos.autocomplete');
+Route::resource('/deliberacaos', 'DeliberacaoController');
+
+Route::get('/modalidades/export/csv', 'ModalidadeController@exportcsv')->name('modalidades.export.csv');
+Route::get('/modalidades/export/xls', 'ModalidadeController@exportxls')->name('modalidades.export.xls');
+Route::get('/modalidades/export/pdf', 'ModalidadeController@exportpdf')->name('modalidades.export.pdf');
+Route::get('/modalidades/autocomplete', 'ModalidadeController@autocomplete')->name('modalidades.autocomplete');
+Route::resource('/modalidades', 'ModalidadeController');

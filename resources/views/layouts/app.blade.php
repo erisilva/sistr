@@ -26,7 +26,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <i class="bi bi-emoji-wink"></i> {{ config('app.name', 'ACL80') }}
+                <i class="bi bi-file-earmark-post"></i> {{ config('app.name', 'ACL80') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -45,6 +45,12 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarConfig">
                           <a class="dropdown-item" href="{{ route('users.index') }}"><i class="bi bi-person-lines-fill"></i> Operadores do Sistema</a>
+                          <a class="dropdown-item" href="{{ route('origems.index') }}"><i class="bi bi-table"></i> Origens do TR</a>
+                          <a class="dropdown-item" href="{{ route('responsavels.index') }}"><i class="bi bi-table"></i> Responsáveis do TR</a>
+                          <a class="dropdown-item" href="{{ route('situacaos.index') }}"><i class="bi bi-table"></i> Situações do TR</a>
+                          <a class="dropdown-item" href="{{ route('tipos.index') }}"><i class="bi bi-table"></i> Tipos do TR</a>
+                          <a class="dropdown-item" href="{{ route('deliberacaos.index') }}"><i class="bi bi-table"></i> Deliberações CCOAF do TR</a>
+                          <a class="dropdown-item" href="{{ route('modalidades.index') }}"><i class="bi bi-table"></i> Modalidades do TR</a>
                         </div>
                     </li>                    
                 </ul>
