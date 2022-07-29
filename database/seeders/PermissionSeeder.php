@@ -253,6 +253,33 @@ class PermissionSeeder extends Seeder
         ]);
 
 
+        # TRS ------------------
+
+
+        DB::table('permissions')->insert([
+            'name' => 'tr-index',
+            'description' => 'Lista de TRs',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'tr-create',
+            'description' => 'Registrar nova TR',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'tr-edit',
+            'description' => 'Alterar dados da TR',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'tr-delete',
+            'description' => 'Excluir TR',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'tr-show',
+            'description' => 'Mostrar dados da TR',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'tr-export',
+            'description' => 'Exportação de dados das TRs',
+        ]);
 
 
 

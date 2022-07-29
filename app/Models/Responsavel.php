@@ -12,4 +12,9 @@ class Responsavel extends Model
     protected $fillable = [
         'nome'
     ];
+
+    public function trs()
+    {
+        return $this->hasMany(Tr::class);
+    } 
 }

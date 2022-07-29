@@ -101,3 +101,9 @@ Route::get('/modalidades/export/xls', 'ModalidadeController@exportxls')->name('m
 Route::get('/modalidades/export/pdf', 'ModalidadeController@exportpdf')->name('modalidades.export.pdf');
 Route::get('/modalidades/autocomplete', 'ModalidadeController@autocomplete')->name('modalidades.autocomplete');
 Route::resource('/modalidades', 'ModalidadeController');
+
+Route::get('/trs/export/csv', 'TrController@exportcsv')->name('trs.export.csv');
+Route::get('/trs/export/xls', 'TrController@exportxls')->name('trs.export.xls');
+Route::get('/trs/export/pdf', 'TrController@exportpdf')->name('trs.export.pdf');
+Route::get('/trs/autocomplete', 'TrController@autocomplete')->name('trs.autocomplete');
+Route::resource('/trs', 'TrController');

@@ -12,4 +12,9 @@ class Origem extends Model
     protected $fillable = [
         'descricao'
     ];
+
+    public function trs()
+    {
+        return $this->hasMany(Tr::class);
+    } 
 }

@@ -85,5 +85,10 @@ class User extends Authenticatable
         }
         return (boolean) $this->roles()->find($role->id);
 
-    }    
+    }
+
+    public function trs()
+    {
+        return $this->hasMany(Tr::class);
+    }  
 }

@@ -110,6 +110,16 @@ class acl extends Seeder
         $modalidade_delete = Permission::where('name', '=', 'modalidade-delete')->get()->first();
         $modalidade_show = Permission::where('name', '=', 'modalidade-show')->get()->first();  
         $modalidade_export = Permission::where('name', '=', 'modalidade-export')->get()->first();
+        // para TRs -------
+        $tr_index = Permission::where('name', '=', 'tr-index')->get()->first(); 
+        $tr_create = Permission::where('name', '=', 'tr-create')->get()->first();
+        $tr_edit = Permission::where('name', '=', 'tr-edit')->get()->first();  
+        $tr_delete = Permission::where('name', '=', 'tr-delete')->get()->first();
+        $tr_show = Permission::where('name', '=', 'tr-show')->get()->first();  
+        $tr_export = Permission::where('name', '=', 'tr-export')->get()->first();
+
+
+
 
         // salva os relacionamentos entre perfil e suas permissões
         
@@ -175,6 +185,13 @@ class acl extends Seeder
         $administrador_perfil->permissions()->attach($modalidade_delete);
         $administrador_perfil->permissions()->attach($modalidade_show);
         $administrador_perfil->permissions()->attach($modalidade_export);
+        #tr
+        $administrador_perfil->permissions()->attach($tr_index);
+        $administrador_perfil->permissions()->attach($tr_create);
+        $administrador_perfil->permissions()->attach($tr_edit);
+        $administrador_perfil->permissions()->attach($tr_delete);
+        $administrador_perfil->permissions()->attach($tr_show);
+        $administrador_perfil->permissions()->attach($tr_export);
 
 
         // o gerente (diretor) pode gerenciar os operadores do sistema
@@ -219,6 +236,12 @@ class acl extends Seeder
         $gerente_perfil->permissions()->attach($modalidade_edit);
         $gerente_perfil->permissions()->attach($modalidade_show);
         $gerente_perfil->permissions()->attach($modalidade_export);
+        #modalidade
+        $gerente_perfil->permissions()->attach($tr_index);
+        $gerente_perfil->permissions()->attach($tr_create);
+        $gerente_perfil->permissions()->attach($tr_edit);
+        $gerente_perfil->permissions()->attach($tr_show);
+        $gerente_perfil->permissions()->attach($tr_export);
 
 
         // o operador é o nível de operação do sistema não pode criar
@@ -250,6 +273,10 @@ class acl extends Seeder
         $operador_perfil->permissions()->attach($modalidade_index);
         $operador_perfil->permissions()->attach($modalidade_show);
         $operador_perfil->permissions()->attach($modalidade_export);
+        #tr
+        $operador_perfil->permissions()->attach($tr_index);
+        $operador_perfil->permissions()->attach($tr_show);
+        $operador_perfil->permissions()->attach($tr_export);
 
 
         // leitura é um tipo de operador que só pode ler
@@ -274,6 +301,9 @@ class acl extends Seeder
         #modalidade
         $leitor_perfil->permissions()->attach($modalidade_index);
         $leitor_perfil->permissions()->attach($modalidade_show);
+        #tr
+        $leitor_perfil->permissions()->attach($tr_index);
+        $leitor_perfil->permissions()->attach($tr_show);
 
 
     }

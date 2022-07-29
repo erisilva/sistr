@@ -16,6 +16,7 @@ class SituacaosTableSeeder extends Seeder
     public function run()
     {
 
+        DB::table('situacaos')->insert(['descricao' => 'Não Definido']);
         DB::table('situacaos')->insert(['descricao' => 'CONCLUÍDO']);
         DB::table('situacaos')->insert(['descricao' => 'HOMOLOGAÇÃO']);
         DB::table('situacaos')->insert(['descricao' => 'MINUTA ARP']);
@@ -23,8 +24,7 @@ class SituacaosTableSeeder extends Seeder
         DB::table('situacaos')->insert(['descricao' => 'DEVOLVIDO']);
         DB::table('situacaos')->insert(['descricao' => 'ANÁLISE TÉCNICA']);
         DB::table('situacaos')->insert(['descricao' => 'PGM']);
-        DB::table('situacaos')->insert(['descricao' => 'COTAÇÃO']);
-        DB::table('situacaos')->insert(['descricao' => 'X']);
+        DB::table('situacaos')->insert(['descricao' => 'COTAÇÃO']);        
         DB::table('situacaos')->insert(['descricao' => 'CCOAF']);
         DB::table('situacaos')->insert(['descricao' => 'ORIGEM']);
         DB::table('situacaos')->insert(['descricao' => 'MINUTA CONTRATO']);

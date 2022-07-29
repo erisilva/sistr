@@ -22,7 +22,6 @@ class ResponsavelsTableSeeder extends Seeder
         DB::table('responsavels')->insert(['nome' => 'JOÃO PEDRO']);
         DB::table('responsavels')->insert(['nome' => 'CLEONICE']);
         DB::table('responsavels')->insert(['nome' => 'CECÍLIA']);
-        DB::table('responsavels')->insert(['nome' => 'ORGIEM']);
         DB::table('responsavels')->insert(['nome' => 'MATHEUS']);
         DB::table('responsavels')->insert(['nome' => 'ORIGEM']);
         DB::table('responsavels')->insert(['nome' => 'ANA PAULA']);
