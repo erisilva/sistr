@@ -41,22 +41,30 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Número</th>
-                <th scope="col">Ano</th>
                 <th scope="col"></th>
+                <th scope="col">TR nº/Ano</th>
+                <th scope="col">Data</th>
+                <th scope="col">Hora</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Status</th>
+                
             </tr>
         </thead>
         <tbody>
             @foreach($trs as $tr)
             <tr>
-                <td>{{$tr->numero}}</td>
-                <td>{{$tr->ano}}</td>
                 <td>
                   <div class="btn-group" role="group">
                     <a href="{{route('trs.edit', $tr->id)}}" class="btn btn-primary btn-sm" role="button"><i class="bi bi-pencil-square"></i></a>
-                    <a href="{{route('trs.show', $tr->id)}}" class="btn btn-secondary btn-sm" role="button"><i class="bi bi-trash"></i></a>
+                    <a href="{{route('trs.show', $tr->id)}}" class="btn btn-secondary btn-sm" role="button"><i class="bi bi-eye"></i></a>
                   </div>
                 </td>
+                <td class="text-nowrap">TR nº{{$tr->numero}}/{{$tr->ano}}</td>
+                <td>{{ $tr->created_at->format('d/m/Y') }}</td>
+                <td>{{ $tr->created_at->format('H:i') }}</td>
+                <td>{{$tr->descricao}}</td>
+                <td>{{$tr->situacao->descricao}}</td>
+                
             </tr>    
             @endforeach                                                 
         </tbody>

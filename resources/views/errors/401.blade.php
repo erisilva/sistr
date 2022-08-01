@@ -8,7 +8,7 @@
 			  <div class="card-body">
 			  	<h5 class="card-title"><i class="fas fa-exclamation-triangle"></i> Erro 401: Acesso não altenticado.</h5>
     			<p class="card-text">{{ $exception->getMessage() }}</p>
-    			<a href="#" class="btn btn-primary" onclick="window.history.go(-1); return false;"><i class="fas fa-long-arrow-alt-left"></i> Voltar</a>
+    			<a href="#" class="btn btn-primary" onclick="window.history.go(-1); return false;"><i class="bi bi-arrow-left"></i> Voltar</a>
 			  </div>
 			</div>
         </div>

@@ -26,7 +26,7 @@
     <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Incluir Tipo do TR</button>
   </form>
   <div class="float-right">
-    <a href="{{ route('tipos.index') }}" class="btn btn-secondary btn-sm" role="button"><i class="fas fa-long-arrow-alt-left"></i> Voltar</i></a>
+    <a href="{{ route('tipos.index') }}" class="btn btn-secondary btn-sm" role="button"><i class="bi bi-arrow-left"></i> Voltar</i></a>
   </div>
 </div>
 @endsection

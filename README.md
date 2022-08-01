@@ -120,7 +120,13 @@ Login: leitor@mail.com senha: 123456, somente consulta.
 
 ```
 php artisan serve
+```
 
 ## Licenças
 
 Código aberto licenciado sob a [licença MIT](https://opensource.org/licenses/MIT).
+
+## Notas
+
+- uma configuração que permita que o operador escolha quais campos do TR serão mostrados no index.blade
+- essa configuração precisa ser sempre mantida no banco de dados

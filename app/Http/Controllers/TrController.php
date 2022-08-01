@@ -9,10 +9,13 @@ use App\Models\Origem;
 use App\Models\Tipo;
 use App\Models\Responsavel;
 use App\Models\Deliberacao;
+use App\Models\Modalidade;
 
 use App\Models\Perpage;
 
 use Response;
+
+use Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,6 +28,8 @@ use App\Exports\TrsExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 use Barryvdh\DomPDF\Facade\Pdf;
+
+use Carbon\Carbon;
 
 class TrController extends Controller
 {
@@ -94,8 +99,9 @@ class TrController extends Controller
         $tipos = Tipo::orderBy('descricao', 'asc')->get();
         $responsavels = Responsavel::orderBy('nome', 'asc')->get();
         $deliberacaos = Deliberacao::orderBy('descricao', 'asc')->get();
+        $modalidades = Modalidade::orderBy('descricao', 'asc')->get();
 
-        return view('trs.create', compact('situacaos', 'origems', 'tipos', 'responsavels','deliberacaos'));
+        return view('trs.create', compact('situacaos', 'origems', 'tipos', 'responsavels','deliberacaos', 'modalidades'));
     }
 
     /**
@@ -107,11 +113,127 @@ class TrController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-          'name' => 'required',
-          'description' => 'required',
+          'situacao_id' => 'required',
+          'origem_id' => 'required',
+          'descricao' => 'required',
+          'tipo_id' => 'required',
+          'responsavel_id' => 'required',
+          'deliberacao_id' => 'required',
+          'modalidade_id' => 'required',
+        ],
+        [
+            'situacao_id.required' => 'Selecione o status do TR na lista',
+            'origem_id.required' => 'Selecione a origem do TR na lista',
+            'descricao.required' => 'É obrigatório preencher a descrição do TR',
+            'tipo_id.required' => 'Selecione o tipo do TR na lista',
+            'responsavel_id.required' => 'Selecione o responsável do TR na lista',
+            'deliberacao_id.required' => 'Selecione a deliberação do TR na lista',
+            'modalidade_id.required' => 'Selecione a modalidade do TR na lista',
         ]);
 
+
+
         $tr = $request->all();
+
+        $user = Auth::user(); // usuário logado no sistema
+
+        $tr['user_id'] = $user->id; // sava o id d user logado no sistema
+
+        # Conversão das datas para formato MySQL Y-m-d
+        if(isset($tr['entregueSupAdm'])) {
+            $tr['entregueSupAdm'] =  Carbon::createFromFormat('d/m/Y', $tr['entregueSupAdm'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['entregueComprasContrato'])) {
+            $tr['entregueComprasContrato'] =  Carbon::createFromFormat('d/m/Y', $tr['entregueComprasContrato'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['inicioCotacao'])) {
+            $tr['inicioCotacao'] =  Carbon::createFromFormat('d/m/Y', $tr['inicioCotacao'] )->format('Y-m-d');
+        }
+            
+        if(isset($tr['terminoCotacao'])) {
+            $tr['terminoCotacao'] =  Carbon::createFromFormat('d/m/Y', $tr['terminoCotacao'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['envioSuplanPro'])) {
+            $tr['envioSuplanPro'] =  Carbon::createFromFormat('d/m/Y', $tr['envioSuplanPro'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['retornoSuplanPro'])) {
+            $tr['retornoSuplanPro'] =  Carbon::createFromFormat('d/m/Y', $tr['retornoSuplanPro'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['assinaturasGabinete'])) {
+            $tr['assinaturasGabinete'] =  Carbon::createFromFormat('d/m/Y', $tr['assinaturasGabinete'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['envioCCOAF'])) {
+            $tr['envioCCOAF'] =  Carbon::createFromFormat('d/m/Y', $tr['envioCCOAF'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['retornoCCOAF'])) {
+            $tr['retornoCCOAF'] =  Carbon::createFromFormat('d/m/Y', $tr['retornoCCOAF'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['autuacao'])) {
+            $tr['autuacao'] =  Carbon::createFromFormat('d/m/Y', $tr['autuacao'] )->format('Y-m-d');
+        }
+
+
+        if(isset($tr['inicioMinutas'])) {
+            $tr['inicioMinutas'] =  Carbon::createFromFormat('d/m/Y', $tr['inicioMinutas'] )->format('Y-m-d');
+        }
+
+
+        if(isset($tr['teminoMinutas'])) {
+            $tr['teminoMinutas'] =  Carbon::createFromFormat('d/m/Y', $tr['teminoMinutas'] )->format('Y-m-d');
+        }
+
+
+        if(isset($tr['inicioMinutasEdital'])) {
+            $tr['inicioMinutasEdital'] =  Carbon::createFromFormat('d/m/Y', $tr['inicioMinutasEdital'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['terminoMinutasEdital'])) {
+            $tr['terminoMinutasEdital'] =  Carbon::createFromFormat('d/m/Y', $tr['terminoMinutasEdital'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['envioPgm'])) {
+            $tr['envioPgm'] =  Carbon::createFromFormat('d/m/Y', $tr['envioPgm'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['retornoPgm'])) {
+            $tr['retornoPgm'] =  Carbon::createFromFormat('d/m/Y', $tr['retornoPgm'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['pendenciasPgm'])) {
+            $tr['pendenciasPgm'] =  Carbon::createFromFormat('d/m/Y', $tr['pendenciasPgm'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['dataPregao'])) {
+            $tr['dataPregao'] =  Carbon::createFromFormat('d/m/Y', $tr['dataPregao'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['dataHomologacao'])) {
+            $tr['dataHomologacao'] =  Carbon::createFromFormat('d/m/Y', $tr['dataHomologacao'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['dataRatificacao'])) {
+            $tr['dataRatificacao'] =  Carbon::createFromFormat('d/m/Y', $tr['dataRatificacao'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['formalizacaoContratoArp'])) {
+            $tr['formalizacaoContratoArp'] =  Carbon::createFromFormat('d/m/Y', $tr['formalizacaoContratoArp'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['dataContratoArp'])) {
+            $tr['dataContratoArp'] =  Carbon::createFromFormat('d/m/Y', $tr['dataContratoArp'] )->format('Y-m-d');
+        }
+
+        if(isset($tr['solicitacaoEmpenho'])) {
+            $tr['solicitacaoEmpenho'] =  Carbon::createFromFormat('d/m/Y', $tr['solicitacaoEmpenho'] )->format('Y-m-d');
+        }
 
         Tr::create($tr); //salva
 
@@ -128,7 +250,13 @@ class TrController extends Controller
      */
     public function show($id)
     {
-        //
+        if (Gate::denies('tr-show')) {
+            abort(403, 'Acesso negado.');
+        }
+
+        $tr = Tr::findOrFail($id);
+
+        return view('trs.show', compact('tr'));
     }
 
     /**
@@ -139,7 +267,21 @@ class TrController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (Gate::denies('tr-edit')) {
+            abort(403, 'Acesso negado.');
+        }
+
+        // usuário que será alterado
+        $tr = Tr::findOrFail($id);
+
+        $situacaos = Situacao::orderBy('descricao', 'asc')->get();
+        $origems = Origem::orderBy('descricao', 'asc')->get();
+        $tipos = Tipo::orderBy('descricao', 'asc')->get();
+        $responsavels = Responsavel::orderBy('nome', 'asc')->get();
+        $deliberacaos = Deliberacao::orderBy('descricao', 'asc')->get();
+        $modalidades = Modalidade::orderBy('descricao', 'asc')->get();
+
+        return view('trs.edit', compact('tr','situacaos', 'origems', 'tipos', 'responsavels','deliberacaos', 'modalidades'));
     }
 
     /**
@@ -151,7 +293,155 @@ class TrController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+          'situacao_id' => 'required',
+          'origem_id' => 'required',
+          'descricao' => 'required',
+          'tipo_id' => 'required',
+          'responsavel_id' => 'required',
+          'deliberacao_id' => 'required',
+          'modalidade_id' => 'required',
+        ],
+        [
+            'situacao_id.required' => 'Selecione o status do TR na lista',
+            'origem_id.required' => 'Selecione a origem do TR na lista',
+            'descricao.required' => 'É obrigatório preencher a descrição do TR',
+            'tipo_id.required' => 'Selecione o tipo do TR na lista',
+            'responsavel_id.required' => 'Selecione o responsável do TR na lista',
+            'deliberacao_id.required' => 'Selecione a deliberação do TR na lista',
+            'modalidade_id.required' => 'Selecione a modalidade do TR na lista',
+        ]);
+
+        $tr = $request->all();
+
+        //dd($tr);
+
+        # Conversão das datas para formato MySQL Y-m-d
+        if(isset($tr['entregueSupAdm']) && !empty($tr['entregueSupAdm'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('entregueSupAdm'))->format('Y-m-d');
+            $tr['entregueSupAdm'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['entregueComprasContrato']) && !empty($tr['entregueComprasContrato'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('entregueComprasContrato'))->format('Y-m-d');
+            $tr['entregueComprasContrato'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['inicioCotacao']) && !empty($tr['inicioCotacao'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('inicioCotacao'))->format('Y-m-d');
+            $tr['inicioCotacao'] =  $dataFormatadaMysql;
+        }
+            
+        if(isset($tr['terminoCotacao']) && !empty($tr['terminoCotacao'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('terminoCotacao'))->format('Y-m-d');
+            $tr['terminoCotacao'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['envioSuplanPro']) && !empty($tr['envioSuplanPro'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('envioSuplanPro'))->format('Y-m-d');
+            $tr['envioSuplanPro'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['retornoSuplanPro']) && !empty($tr['retornoSuplanPro'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('retornoSuplanPro'))->format('Y-m-d');
+            $tr['retornoSuplanPro'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['assinaturasGabinete']) && !empty($tr['assinaturasGabinete'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('assinaturasGabinete'))->format('Y-m-d');
+            $tr['assinaturasGabinete'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['envioCCOAF']) && !empty($tr['envioCCOAF'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('envioCCOAF'))->format('Y-m-d');
+            $tr['envioCCOAF'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['retornoCCOAF']) && !empty($tr['retornoCCOAF'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('retornoCCOAF'))->format('Y-m-d');
+            $tr['retornoCCOAF'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['autuacao']) && !empty($tr['autuacao'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('autuacao'))->format('Y-m-d');
+            $tr['autuacao'] =  $dataFormatadaMysql;
+        }
+
+
+        if(isset($tr['inicioMinutas']) && !empty($tr['inicioMinutas'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('inicioMinutas'))->format('Y-m-d');
+            $tr['inicioMinutas'] =  $dataFormatadaMysql;
+        }
+
+
+        if(isset($tr['teminoMinutas']) && !empty($tr['teminoMinutas'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('teminoMinutas'))->format('Y-m-d');
+            $tr['teminoMinutas'] =  $dataFormatadaMysql;
+        }
+
+
+        if(isset($tr['inicioMinutasEdital']) && !empty($tr['inicioMinutasEdital'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('inicioMinutasEdital'))->format('Y-m-d');
+            $tr['inicioMinutasEdital'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['terminoMinutasEdital']) && !empty($tr['terminoMinutasEdital'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('terminoMinutasEdital'))->format('Y-m-d');
+            $tr['terminoMinutasEdital'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['envioPgm']) && !empty($tr['envioPgm'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('envioPgm'))->format('Y-m-d');
+            $tr['envioPgm'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['retornoPgm']) && !empty($tr['retornoPgm'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('retornoPgm'))->format('Y-m-d');
+            $tr['retornoPgm'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['pendenciasPgm']) && !empty($tr['pendenciasPgm'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('pendenciasPgm'))->format('Y-m-d');
+            $tr['pendenciasPgm'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['dataPregao']) && !empty($tr['dataPregao'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dataPregao'))->format('Y-m-d');
+            $tr['dataPregao'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['dataHomologacao']) && !empty($tr['dataHomologacao'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dataHomologacao'))->format('Y-m-d');
+            $tr['dataHomologacao'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['dataRatificacao']) && !empty($tr['dataRatificacao'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dataRatificacao'))->format('Y-m-d');
+            $tr['dataRatificacao'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['formalizacaoContratoArp']) && !empty($tr['formalizacaoContratoArp'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('formalizacaoContratoArp'))->format('Y-m-d');
+            $tr['formalizacaoContratoArp'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['dataContratoArp']) && !empty($tr['dataContratoArp'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dataContratoArp'))->format('Y-m-d');
+            $tr['dataContratoArp'] =  $dataFormatadaMysql;
+        }
+
+        if(isset($tr['solicitacaoEmpenho']) && !empty($tr['solicitacaoEmpenho'])) {
+            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('solicitacaoEmpenho'))->format('Y-m-d');
+            $tr['solicitacaoEmpenho'] =  $dataFormatadaMysql;
+        }
+
+        $new_tr = Tr::findOrFail($id);
+            
+        $new_tr->update($tr);
+        
+        Session::flash('edited_tr', 'TR alterado com sucesso!');
+
+        return redirect(route('trs.edit', $id));
     }
 
     /**
@@ -162,6 +452,14 @@ class TrController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Gate::denies('tr-delete')) {
+            abort(403, 'Acesso negado.');
+        }
+
+        Tr::findOrFail($id)->delete();
+
+        Session::flash('deleted_tr', 'TR excluído com sucesso!');
+
+        return redirect(route('trs.index'));
     }
 }

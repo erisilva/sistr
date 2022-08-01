@@ -47,4 +47,6 @@ class Tr extends Model
     {
         return $this->belongsTo(Modalidade::class);
     }
+
+    protected $dates = ['deleted_at', 'entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'pendenciasPgm', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'solicitacaoEmpenho'];
 }

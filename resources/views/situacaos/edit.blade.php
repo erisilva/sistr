@@ -37,7 +37,7 @@
 </div>
 <div class="container">
   <div class="float-right">
-    <a href="{{ route('situacaos.index') }}" class="btn btn-secondary btn-sm" role="button"><i class="fas fa-long-arrow-alt-left"></i> Voltar</i></a>
+    <a href="{{ route('situacaos.index') }}" class="btn btn-secondary btn-sm" role="button"><i class="bi bi-arrow-left"></i> Voltar</i></a>
   </div>
 </div>
 @endsection

@@ -18,27 +18,6 @@
     @csrf
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="numero">TR nº</label>
-        <input type="text" class="form-control{{ $errors->has('numero') ? ' is-invalid' : '' }}" name="numero" value="{{ old('numero') ?? '' }}">
-        @if ($errors->has('numero'))
-        <div class="invalid-feedback">
-        {{ $errors->first('numero') }}
-        </div>
-        @endif
-      </div>
-      <div class="form-group col-md-6">
-        <label for="ano">Ano</label>
-        <input type="text" class="form-control{{ $errors->has('ano') ? ' is-invalid' : '' }}" name="ano" value="{{ old('ano') ?? '' }}">
-        @if ($errors->has('ano'))
-        <div class="invalid-feedback">
-        {{ $errors->first('ano') }}
-        </div>
-        @endif
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-6">
         <label for="situacao_id">STATUS <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="situacao_id" name="situacao_id">
             <option value="" selected="true">Clique para escolher...</option> 
@@ -133,11 +112,11 @@
 
     <div class="form-row">
       <div class="form-group col-md-3">
-        <label for="requisicaoCompras">Requisição Compras<strong  class="text-warning">(opcional)</strong></label>  
+        <label for="requisicaoCompras">Requisição Compras <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="requisicaoCompras" id="requisicaoCompras" value="{{ old('requisicaoCompras') ?? '' }}">
       </div>
       <div class="form-group col-md-3">
-        <label for="valor">Valor R$<strong  class="text-warning">(opcional)</strong></label>  
+        <label for="valor">Valor R$ <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="valor" id="valor" value="{{ old('valor') ?? '' }}">
       </div>
       <div class="form-group col-md-3">
@@ -152,11 +131,11 @@
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="assinaturasGabinete">Assinaturas GABINETE<strong  class="text-warning">(opcional)</strong></label>  
-        <input type="text" class="form-control" name="assinaturasGabinete" id="assinaturasGabinete" value="{{ old('assinaturasGabinete') ?? '' }}">
+        <label for="assinaturasGabinete">Assinaturas GABINETE <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="assinaturasGabinete" id="assinaturasGabinete" value="{{ old('assinaturasGabinete') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
-        <label for="protocoloSisprot">Protocolo SISPROT<strong  class="text-warning">(opcional)</strong></label>  
+        <label for="protocoloSisprot">Protocolo SISPROT <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="protocoloSisprot" id="protocoloSisprot" value="{{ old('protocoloSisprot') ?? '' }}">
       </div>
     </div>  
@@ -164,12 +143,12 @@
 
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="envioCCOAF">Envio CCOAF<strong  class="text-warning">(opcional)</strong></label>  
-        <input type="text" class="form-control" name="envioCCOAF" id="envioCCOAF" value="{{ old('envioCCOAF') ?? '' }}">
+        <label for="envioCCOAF">Envio CCOAF <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="envioCCOAF" id="envioCCOAF" value="{{ old('envioCCOAF') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-4">
-        <label for="retornoCCOAF">Retorno CCOAF<strong  class="text-warning">(opcional)</strong></label>  
-        <input type="text" class="form-control" name="retornoCCOAF" id="retornoCCOAF" value="{{ old('retornoCCOAF') ?? '' }}">
+        <label for="retornoCCOAF">Retorno CCOAF <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="retornoCCOAF" id="retornoCCOAF" value="{{ old('retornoCCOAF') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-4">
         <label for="deliberacao_id">Deliberação CCOAF <strong  class="text-danger">(*)</strong></label>
@@ -187,18 +166,120 @@
       </div>
     </div>  
 
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="numeroPAC">PAC Nº <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="numeroPAC" id="numeroPAC" value="{{ old('numeroPAC') ?? '' }}">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="modalidade_id">MODALIDADE <strong  class="text-danger">(*)</strong></label>
+        <select class="form-control" id="modalidade_id" name="modalidade_id">
+            <option value="1" selected="true">Não Definindo</option> 
+            @foreach($modalidades as $modalidade)
+            <option value="{{$modalidade->id}}">{{$modalidade->descricao}}</option>
+            @endforeach
+        </select>
+        @if ($errors->has('modalidade_id'))
+        <div class="text-danger">
+        {{ $errors->first('modalidade_id') }}
+        </div>
+        @endif
+      </div>
+      <div class="form-group col-md-3">
+        <label for="numeroModalidade">Nº modalidade <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="numeroModalidade" id="numeroModalidade" value="{{ old('numeroModalidade') ?? '' }}">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="autuacao">Autuação / Ordenador Despesa <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="autuacao" id="autuacao" value="{{ old('autuacao') ?? '' }}" autocomplete="off">
+      </div>
+    </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
-
+        <label for="inicioMinutas">Início MINUTAS (contrato/ARP) <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="inicioMinutas" id="inicioMinutas" value="{{ old('inicioMinutas') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
+        <label for="teminoMinutas">Término MINUTAS (contrato/ARP) <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="teminoMinutas" id="teminoMinutas" value="{{ old('teminoMinutas') ?? '' }}" autocomplete="off">
+      </div>
+    </div> 
 
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inicioMinutasEdital">Início minuta EDITAL <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="inicioMinutasEdital" id="inicioMinutasEdital" value="{{ old('inicioMinutasEdital') ?? '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="terminoMinutasEdital">Término minuta EDITAL <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="terminoMinutasEdital" id="terminoMinutasEdital" value="{{ old('terminoMinutasEdital') ?? '' }}" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="envioPgm">Envio PGM <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="envioPgm" id="envioPgm" value="{{ old('envioPgm') ?? '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="retornoPgm">Retorno PGM <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="retornoPgm" id="retornoPgm" value="{{ old('retornoPgm') ?? '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="pendenciasPgm">Pendências PGM <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="pendenciasPgm" id="pendenciasPgm" value="{{ old('pendenciasPgm') ?? '' }}" autocomplete="off">
       </div>
     </div>  
 
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="numeroEdital">Nº EDITAL <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="numeroEdital" id="numeroEdital" value="{{ old('numeroEdital') ?? '' }}">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="dataPregao">Data PREGÃO <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="dataPregao" id="dataPregao" value="{{ old('dataPregao') ?? '' }}" autocomplete="off">
+      </div>
+    </div>
 
-    <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Incluir Permissão</button>
+    <div class="form-group">
+      <label for="observacaoLicitacao">Observação da Licitação <strong  class="text-warning">(opcional)</strong></label>
+      <textarea class="form-control" name="observacaoLicitacao" id="observacaoLicitacao" rows="2">{{ old('observacaoLicitacao') ?? '' }}</textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="dataHomologacao">Data Homologação <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="dataHomologacao" id="dataHomologacao" value="{{ old('dataHomologacao') ?? '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="dataRatificacao">Data Ratificação <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="dataRatificacao" id="dataRatificacao" value="{{ old('dataRatificacao') ?? '' }}" autocomplete="off">
+      </div>
+    </div>  
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="formalizacaoContratoArp">Formalização Contrato/ARP <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="formalizacaoContratoArp" id="formalizacaoContratoArp" value="{{ old('formalizacaoContratoArp') ?? '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="dataContratoArp">Data Contrato/ARP <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="dataContratoArp" id="dataContratoArp" value="{{ old('dataContratoArp') ?? '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="solicitacaoEmpenho">Solicitação Empenho <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="solicitacaoEmpenho" id="solicitacaoEmpenho" value="{{ old('solicitacaoEmpenho') ?? '' }}" autocomplete="off">
+      </div>
+    </div>  
+
+    <div class="form-group">
+      <label for="observacao">Observações <strong  class="text-warning">(opcional)</strong></label>
+      <textarea class="form-control" name="observacao" id="observacao" rows="3">{{ old('observacao') ?? '' }}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Incluir TR</button>
   </form>
   <div class="float-right">
     <a href="{{ route('trs.index') }}" class="btn btn-secondary btn-sm" role="button"><i class="bi bi-arrow-left-square"></i> Voltar</i></a>
@@ -213,34 +294,7 @@
 <script>
   $(document).ready(function(){
 
-      $('#entregueSupAdm').datepicker({
-          format: "dd/mm/yyyy",
-          todayBtn: "linked",
-          clearBtn: true,
-          language: "pt-BR",
-          autoclose: true,
-          todayHighlight: true
-      });
-
-      $('#entregueComprasContrato').datepicker({
-          format: "dd/mm/yyyy",
-          todayBtn: "linked",
-          clearBtn: true,
-          language: "pt-BR",
-          autoclose: true,
-          todayHighlight: true
-      });
-
-      $('#inicioCotacao').datepicker({
-          format: "dd/mm/yyyy",
-          todayBtn: "linked",
-          clearBtn: true,
-          language: "pt-BR",
-          autoclose: true,
-          todayHighlight: true
-      });
-
-      $('#terminoCotacao').datepicker({
+      $('#entregueSupAdm, #entregueComprasContrato, #inicioCotacao, #terminoCotacao, #envioSuplanPro, #retornoSuplanPro, #assinaturasGabinete, #envioCCOAF, #retornoCCOAF, #autuacao, #inicioMinutas, #teminoMinutas, #inicioMinutasEdital, #terminoMinutasEdital, #envioPgm, #retornoPgm, #pendenciasPgm, #dataPregao, #dataHomologacao, #dataRatificacao, #formalizacaoContratoArp, #dataContratoArp, #solicitacaoEmpenho').datepicker({
           format: "dd/mm/yyyy",
           todayBtn: "linked",
           clearBtn: true,
@@ -260,51 +314,6 @@
             onBeforeMask: function (value, opts) {
               return value;
             }
-      });
-
-      $('#envioSuplanPro').datepicker({
-          format: "dd/mm/yyyy",
-          todayBtn: "linked",
-          clearBtn: true,
-          language: "pt-BR",
-          autoclose: true,
-          todayHighlight: true
-      });
-
-      $('#retornoSuplanPro').datepicker({
-          format: "dd/mm/yyyy",
-          todayBtn: "linked",
-          clearBtn: true,
-          language: "pt-BR",
-          autoclose: true,
-          todayHighlight: true
-      });
-
-      $('#assinaturasGabinete').datepicker({
-          format: "dd/mm/yyyy",
-          todayBtn: "linked",
-          clearBtn: true,
-          language: "pt-BR",
-          autoclose: true,
-          todayHighlight: true
-      });
-
-      $('#envioCCOAF').datepicker({
-          format: "dd/mm/yyyy",
-          todayBtn: "linked",
-          clearBtn: true,
-          language: "pt-BR",
-          autoclose: true,
-          todayHighlight: true
-      });
-
-      $('#retornoCCOAF').datepicker({
-          format: "dd/mm/yyyy",
-          todayBtn: "linked",
-          clearBtn: true,
-          language: "pt-BR",
-          autoclose: true,
-          todayHighlight: true
       });
 
   });

@@ -4,60 +4,265 @@
 <div class="container-fluid">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Lista de Operadores</a></li>
-      <li class="breadcrumb-item"><a href="{{ route('permissions.index') }}">Permissões</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('trs.index') }}">Lista de TRs</a></li>
       <li class="breadcrumb-item active" aria-current="page">Exibir Registro</li>
     </ol>
   </nav>
 </div>
 <div class="container">
-  <div class="card">
-    <div class="card-header">
-      Permissões
-    </div>
-    <div class="card-body">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Nome: {{$permission->name}}</li>
-        <li class="list-group-item">Descrição: {{$permission->description}}</li>
-      </ul>
-    </div>
-    <div class="card-footer text-right">
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalLixeira"><i class="bi bi-trash"></i> Enviar para Lixeira</button>
-      <a href="{{ route('permissions.index') }}" class="btn btn-primary" role="button"><i class="bi bi-arrow-left-square"></i> Voltar</i></a>      
-    </div>
-  </div>  
-  <br>
+  <form>
 
- <div class="modal fade" id="modalLixeira" tabindex="-1" role="dialog" aria-labelledby="JanelaProfissional" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle"><i class="bi bi-patch-question"></i> Apagar Registro</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="alert alert-danger" role="alert">
-            <p><strong>Atenção!</strong> Ao excluir esse registro todo e qualquer vínculo que ele tiver com outros dados será excluído.</p>
-            <h2>Confirma?</h2>
-          </div>
-          <form method="post" action="{{route('permissions.destroy', $permission->id)}}">
-            @csrf
-            @method('DELETE')
-            <div class="form-group">
-              <label for="motivo">Motivo</label>  
-              <input type="text" class="form-control" name="motivo" id="motivo" value="">
-            </div>
-            <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Apagar Registro</button>
-          </form>
-        </div>     
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="bi bi-x-square"></i> Cancelar</button>
-        </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+          <div class="p-3 bg-primary text-white text-right h2">Nº {{ $tr->numero }}/{{ $tr->ano }}</div>    
+      </div>
+      <div class="form-group col-md-4">
+        <label for="situacao">STATUS</label>
+        <input type="text" class="form-control" name="situacao" value="{{ $tr->situacao->descricao }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="origem">Origem</label>
+        <input type="text" class="form-control" name="origem" value="{{ $tr->origem->descricao }}" readonly>
       </div>
     </div>
-  </div>  
-</div>
 
+    <div class="form-group">
+      <label for="descricao">Descrição básica do Objeto</label>
+      <textarea class="form-control" name="descricao" id="descricao" rows="3" readonly>{{ $tr->descricao }}</textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="tipo">Tipo</label>
+        <input type="text" class="form-control" name="tipo" value="{{ $tr->tipo->descricao }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="entregueSupAdm">Entregue SUP.ADM.</label>
+        <input type="text" class="form-control" name="entregueSupAdm" value="{{ isset($tr->entregueSupAdm) ?  $tr->entregueSupAdm->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="entregueComprasContrato">Entregue COMPRAS / CONTRATOS</label>
+        <input type="text" class="form-control" name="entregueComprasContrato" value="{{ isset($tr->entregueComprasContrato) ?  $tr->entregueComprasContrato->format('d/m/Y') : '-' }}" readonly>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="responsavel">Responsável cotação</label>
+        <input type="text" class="form-control" name="responsavel" value="{{ $tr->responsavel->nome }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inicioCotacao">Início cotação </label>
+        <input type="text" class="form-control" name="inicioCotacao" value="{{ isset($tr->inicioCotacao) ?  $tr->inicioCotacao->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="terminoCotacao">Término cotação </label>
+        <input type="text" class="form-control" name="terminoCotacao" value="{{ isset($tr->terminoCotacao) ?  $tr->terminoCotacao->format('d/m/Y') : '-' }}" readonly>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="requisicaoCompras">Requisição Compras</label>
+        <input type="text" class="form-control" name="requisicaoCompras" value="{{ $tr->requisicaoCompras }}" readonly>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="valor">Valor R$ </label>
+        <input type="text" class="form-control" name="valor" value="{{ $tr->valor }}" readonly>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="envioSuplanPro">Envio SUPLAN_PRO  </label>
+        <input type="text" class="form-control" name="envioSuplanPro" value="{{ isset($tr->envioSuplanPro) ?  $tr->envioSuplanPro->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="retornoSuplanPro">Retorno SUPLAN_PRO</label>
+        <input type="text" class="form-control" name="retornoSuplanPro" value="{{ isset($tr->retornoSuplanPro) ?  $tr->retornoSuplanPro->format('d/m/Y') : '-' }}" readonly>
+      </div>
+    </div>  
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="assinaturasGabinete">Assinaturas GABINETE</label>
+        <input type="text" class="form-control" name="assinaturasGabinete" value="{{ isset($tr->assinaturasGabinete) ?  $tr->assinaturasGabinete->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="protocoloSisprot">Protocolo SISPROT </label>
+        <input type="text" class="form-control" name="protocoloSisprot" value="{{ $tr->protocoloSisprot }}" readonly>
+      </div>
+    </div>  
+
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="envioCCOAF">Envio CCOAF</label>
+        <input type="text" class="form-control" name="envioCCOAF" value="{{ isset($tr->envioCCOAF) ?  $tr->envioCCOAF->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="retornoCCOAF">Retorno CCOAF</label>
+        <input type="text" class="form-control" name="retornoCCOAF" value="{{ isset($tr->retornoCCOAF) ?  $tr->retornoCCOAF->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="deliberacao">Deliberação CCOAF</label>
+        <input type="text" class="form-control" name="deliberacao" value="{{ $tr->deliberacao->descricao }}" readonly>
+      </div>
+    </div>  
+
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="numeroPAC">PAC Nº</label>
+        <input type="text" class="form-control" name="numeroPAC" value="{{ $tr->numeroPAC }}" readonly>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="modalidade">MODALIDADE</label>
+        <input type="text" class="form-control" name="modalidade" value="{{ $tr->modalidade->descricao }}" readonly>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="numeroModalidade">Nº modalidade </label>
+        <input type="text" class="form-control" name="numeroModalidade" value="{{ $tr->numeroModalidade }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="autuacao">Autuação / Ordenador Despesa</label>
+        <input type="text" class="form-control" name="autuacao" value="{{ isset($tr->autuacao) ?  $tr->autuacao->format('d/m/Y') : '-' }}" readonly>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inicioMinutas">Início MINUTAS (contrato/ARP)</label>
+        <input type="text" class="form-control" name="inicioMinutas" value="{{ isset($tr->autinicioMinutasuacao) ?  $tr->inicioMinutas->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="teminoMinutas">Término MINUTAS (contrato/ARP)</label>
+        <input type="text" class="form-control" name="teminoMinutas" value="{{ isset($tr->teminoMinutas) ?  $tr->teminoMinutas->format('d/m/Y') : '-' }}" readonly>
+      </div>
+    </div> 
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inicioMinutasEdital">Início minuta EDITAL</label>
+        <input type="text" class="form-control" name="inicioMinutasEdital" value="{{ isset($tr->inicioMinutasEdital) ?  $tr->inicioMinutasEdital->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="terminoMinutasEdital">Término minuta EDITAL</label>
+        <input type="text" class="form-control" name="terminoMinutasEdital" value="{{ isset($tr->terminoMinutasEdital) ?  $tr->terminoMinutasEdital->format('d/m/Y') : '-' }}" readonly>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="envioPgm">Envio PGM </label>
+        <input type="text" class="form-control" name="envioPgm" value="{{ isset($tr->envioPgm) ?  $tr->envioPgm->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="retornoPgm">Retorno PGM</label>
+        <input type="text" class="form-control" name="retornoPgm" value="{{ isset($tr->retornoPgm) ?  $tr->retornoPgm->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="pendenciasPgm">Pendências PGM </label>
+        <input type="text" class="form-control" name="pendenciasPgm" value="{{ isset($tr->pendenciasPgm) ?  $tr->pendenciasPgm->format('d/m/Y') : '-' }}" readonly>
+      </div>
+    </div>  
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="numeroEdital">Nº EDITAL </label>
+        <input type="text" class="form-control" name="numeroEdital" value="{{ $tr->numeroEdital }}" readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="dataPregao">Data PREGÃO </label>
+        <input type="text" class="form-control" name="dataPregao" value="{{ isset($tr->dataPregao) ?  $tr->dataPregao->format('d/m/Y') : '-' }}" readonly>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="observacaoLicitacao">Observação da Licitação</label>
+      <textarea class="form-control" name="observacaoLicitacao" id="observacaoLicitacao" rows="3" readonly>{{ $tr->observacaoLicitacao }}</textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="dataHomologacao">Data Homologação </label>
+        <input type="text" class="form-control" name="dataHomologacao" value="{{ isset($tr->dataHomologacao) ?  $tr->dataHomologacao->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="dataRatificacao">Data Ratificação </label>
+        <input type="text" class="form-control" name="dataRatificacao" value="{{ isset($tr->dataRatificacao) ?  $tr->dataRatificacao->format('d/m/Y') : '-' }}" readonly>
+      </div>
+    </div>  
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="formalizacaoContratoArp">Formalização Contrato/ARP </label>
+        <input type="text" class="form-control" name="formalizacaoContratoArp" value="{{ isset($tr->formalizacaoContratoArp) ?  $tr->formalizacaoContratoArp->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="dataContratoArp">Data Contrato/ARP  </label>
+        <input type="text" class="form-control" name="dataContratoArp" value="{{ isset($tr->dataContratoArp) ?  $tr->dataContratoArp->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="solicitacaoEmpenho">Solicitação Empenho</label>
+        <input type="text" class="form-control" name="solicitacaoEmpenho" value="{{ isset($tr->solicitacaoEmpenho) ?  $tr->solicitacaoEmpenho->format('d/m/Y') : '-' }}" readonly>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="observacao">Observações</label>
+      <textarea class="form-control" name="observacao" id="observacao" rows="3" readonly>{{ $tr->observacao }}</textarea>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="datacadastro">Data de Cadastro</label>
+        <input type="text" class="form-control" name="datacadastro" value="{{ $tr->created_at->format('d/m/Y') }}" readonly>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="horacadastro">Hora de Cadastro </label>
+        <input type="text" class="form-control" name="horacadastro" value="{{ $tr->created_at->format('H:i') }}" readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="username">Funcionário Responsável</label>
+        <input type="text" class="form-control" name="username" value="{{ $tr->user->name }}" readonly>
+      </div>
+    </div>  
+
+
+  </form> 
+</div>
+<div class="container py-3">
+  <a href="{{ route('trs.index') }}" class="btn btn-primary" role="button"><i class="bi bi-arrow-left"></i> Voltar</i></a>
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalLixeira"><i class="bi bi-trash"></i> Enviar para Lixeira</button>
+</div>
+<div class="modal fade" id="modalLixeira" tabindex="-1" role="dialog" aria-labelledby="JanelaProfissional" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle"><i class="bi bi-question-square"></i> Excluir TR?s</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" role="alert">
+          <p><strong>Atenção!</strong> Confirma exclusão desse TR?</p>
+          <h2>Confirma?</h2>
+        </div>
+        <form method="post" action="{{route('trs.destroy', $tr->id)}}">
+          @csrf
+          @method('DELETE')
+          <div class="form-group">
+            <label for="motivo">Motivo</label>  
+            <input type="text" class="form-control" name="motivo" id="motivo" value="">
+          </div>
+          <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Enviar para Lixeira</button>
+        </form>
+      </div>     
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

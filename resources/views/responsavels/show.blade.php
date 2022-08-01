@@ -32,7 +32,7 @@
   </div>  
 </div>
 <div class="container py-2 text-right">
-  <a href="{{ route('responsavels.index') }}" class="btn btn-primary" role="button"><i class="fas fa-long-arrow-alt-left"></i> Voltar</a>
+  <a href="{{ route('responsavels.index') }}" class="btn btn-primary" role="button"><i class="bi bi-arrow-left"></i> Voltar</a>
 </div>
 
 @endsection
