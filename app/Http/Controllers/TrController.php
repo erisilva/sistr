@@ -52,13 +52,31 @@ class TrController extends Controller
 
         $trs = new Tr;
 
+        /*
+numero
+ano
+descricao
+situacao_id
+origem_id
+tipo_id
+requisicaoCompras
+protocoloSisprot
+modalidade_id
+numeroModalidade
+numeroEdital
+        */
+
         // filtros
-        if (request()->has('numero')){
+        if (request()->has('numero') && !empty(request('numero'))){
             $trs = $trs->where('numero', '=', request('numero'));
         }
 
-        if (request()->has('ano')){
+        if (request()->has('ano') && !empty(request('ano'))){
             $trs = $trs->where('ano', '=', request('ano'));
+        }
+
+        if (request()->has('descricao') && !empty(request('descricao'))){
+            $trs = $trs->where('descricao', '=', request('descricao'));
         }
 
         // ordena
@@ -77,10 +95,24 @@ class TrController extends Controller
         // paginação
         $trs = $trs->paginate(session('perPage', '5'))->appends([          
             'numero' => request('numero'),
-            'ano' => request('ano'),           
+            'descricao' => request('descricao'),           
+            'situacao_id' => request('situacao_id'),           
+            'origem_id' => request('origem_id'),           
+            'tipo_id' => request('tipo_id'),           
+            'requisicaoCompras' => request('requisicaoCompras'),           
+            'protocoloSisprot' => request('protocoloSisprot'),           
+            'modalidade_id' => request('modalidade_id'),           
+            'numeroModalidade' => request('numeroModalidade'),           
+            'numeroEdital' => request('numeroEdital'),                   
             ]);
 
-        return view('trs.index', compact('trs', 'perpages'));
+
+        $situacaos = Situacao::orderBy('descricao', 'asc')->get();
+        $origems = Origem::orderBy('descricao', 'asc')->get();
+        $tipos = Tipo::orderBy('descricao', 'asc')->get();
+        $modalidades = Modalidade::orderBy('descricao', 'asc')->get();
+
+        return view('trs.index', compact('trs', 'perpages', 'situacaos', 'origems', 'tipos', 'modalidades'));
     }
 
     /**

@@ -30,7 +30,7 @@ class Tr extends Model
 
     public function tipo()
     {
-        return $this->belongsTo(Origem::class);
+        return $this->belongsTo(Tipo::class);
     }
 
     public function responsavel()
