@@ -21,17 +21,39 @@ class TrsExport implements FromQuery, WithHeadings
     * 
     *
     */
+        /*
+numero
+ano
+descricao
+situacao_id
+origem_id
+tipo_id
+requisicaoCompras
+protocoloSisprot
+modalidade_id
+numeroModalidade
+numeroEdital
+        */
 
-    public function __construct($name, $description)
+    public function __construct($numero, $ano, $descricao, $situacao_id, $origem_id, $tipo_id, $requisicaoCompras, $protocoloSisprot, $modalidade_id, $numeroModalidade, $numeroEdital)
     {
-        $this->name = $name;
-        $this->description = $description;
+        $this->numero = $numero;
+        $this->ano = $ano;
+        $this->descricao = $descricao;
+        $this->situacao_id = $situacao_id;
+        $this->origem_id = $origem_id;
+        $this->tipo_id = $tipo_id;
+        $this->requisicaoCompras = $requisicaoCompras;
+        $this->protocoloSisprot = $protocoloSisprot;
+        $this->modalidade_id = $modalidade_id;
+        $this->numeroModalidade = $numeroModalidade;
+        $this->numeroEdital = $numeroEdital;
     }
 
 
     public function query()
     {
-        $result = Tr::query()->select('name', 'description');
+        $result = Tr::query()->select('numero', 'ano');
 
         if (!empty($this->name)){
             $result = $result->where('name', 'like', '%' . $this->name . '%');    
@@ -40,7 +62,6 @@ class TrsExport implements FromQuery, WithHeadings
         if (!empty($this->description)){
             $result = $result->Where('description', 'like', '%' . $this->description . '%');
         }
-
 
         return $result;
     }

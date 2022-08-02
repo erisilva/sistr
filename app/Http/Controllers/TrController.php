@@ -76,7 +76,39 @@ numeroEdital
         }
 
         if (request()->has('descricao') && !empty(request('descricao'))){
-            $trs = $trs->where('descricao', '=', request('descricao'));
+            $trs = $trs->where('descricao', 'like', '%' . request('descricao') . '%');
+        }
+
+        if (request()->has('situacao_id') && !empty(request('situacao_id'))){
+            $trs = $trs->where('situacao_id', '=', request('situacao_id'));
+        }
+
+        if (request()->has('origem_id') && !empty(request('origem_id'))){
+            $trs = $trs->where('origem_id', '=', request('origem_id'));
+        }
+
+        if (request()->has('tipo_id') && !empty(request('tipo_id'))){
+            $trs = $trs->where('tipo_id', '=', request('tipo_id'));
+        }
+
+        if (request()->has('requisicaoCompras') && !empty(request('requisicaoCompras'))){
+            $trs = $trs->where('requisicaoCompras', 'like', '%' . request('requisicaoCompras') . '%');
+        }
+
+        if (request()->has('protocoloSisprot') && !empty(request('protocoloSisprot'))){
+            $trs = $trs->where('protocoloSisprot', 'like', '%' . request('protocoloSisprot') . '%');
+        }
+
+        if (request()->has('modalidade_id') && !empty(request('modalidade_id'))){
+            $trs = $trs->where('modalidade_id', '=', request('modalidade_id'));
+        }
+
+        if (request()->has('numeroModalidade') && !empty(request('numeroModalidade'))){
+            $trs = $trs->where('numeroModalidade', 'like', '%' . request('numeroModalidade') . '%');
+        }
+
+        if (request()->has('numeroEdital') && !empty(request('numeroEdital'))){
+            $trs = $trs->where('numeroEdital', 'like', '%' . request('numeroEdital') . '%');
         }
 
         // ordena
