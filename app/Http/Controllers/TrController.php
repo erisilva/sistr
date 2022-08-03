@@ -52,67 +52,21 @@ class TrController extends Controller
 
         $trs = new Tr;
 
-        /*
-numero
-ano
-descricao
-situacao_id
-origem_id
-tipo_id
-requisicaoCompras
-protocoloSisprot
-modalidade_id
-numeroModalidade
-numeroEdital
-        */
+        // fitros
+        $lista_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital'];
 
-        // filtros
-        if (request()->has('numero') && !empty(request('numero'))){
-            $trs = $trs->where('numero', '=', request('numero'));
-        }
-
-        if (request()->has('ano') && !empty(request('ano'))){
-            $trs = $trs->where('ano', '=', request('ano'));
-        }
-
-        if (request()->has('descricao') && !empty(request('descricao'))){
-            $trs = $trs->where('descricao', 'like', '%' . request('descricao') . '%');
-        }
-
-        if (request()->has('situacao_id') && !empty(request('situacao_id'))){
-            $trs = $trs->where('situacao_id', '=', request('situacao_id'));
-        }
-
-        if (request()->has('origem_id') && !empty(request('origem_id'))){
-            $trs = $trs->where('origem_id', '=', request('origem_id'));
-        }
-
-        if (request()->has('tipo_id') && !empty(request('tipo_id'))){
-            $trs = $trs->where('tipo_id', '=', request('tipo_id'));
-        }
-
-        if (request()->has('requisicaoCompras') && !empty(request('requisicaoCompras'))){
-            $trs = $trs->where('requisicaoCompras', 'like', '%' . request('requisicaoCompras') . '%');
-        }
-
-        if (request()->has('protocoloSisprot') && !empty(request('protocoloSisprot'))){
-            $trs = $trs->where('protocoloSisprot', 'like', '%' . request('protocoloSisprot') . '%');
-        }
-
-        if (request()->has('modalidade_id') && !empty(request('modalidade_id'))){
-            $trs = $trs->where('modalidade_id', '=', request('modalidade_id'));
-        }
-
-        if (request()->has('numeroModalidade') && !empty(request('numeroModalidade'))){
-            $trs = $trs->where('numeroModalidade', 'like', '%' . request('numeroModalidade') . '%');
-        }
-
-        if (request()->has('numeroEdital') && !empty(request('numeroEdital'))){
-            $trs = $trs->where('numeroEdital', 'like', '%' . request('numeroEdital') . '%');
+        foreach ($lista_de_filtros as $filtro) {
+            if (request()->has($filtro) && !empty(request($filtro))){
+                if (is_int(request($filtro))) {
+                    $trs = $trs->where($filtro, '=', request($filtro));
+                } else {
+                    $trs = $trs->where($filtro, 'like', '%' . request($filtro) . '%');
+                }
+            }   
         }
 
         // ordena
-        $trs = $trs->orderBy('numero', 'asc');
+        $trs = $trs->orderBy('ano', 'desc')->orderBy('numero', 'asc');
 
         // se a requisição tiver um novo valor para a quantidade
         // de páginas por visualização ele altera aqui
@@ -195,115 +149,27 @@ numeroEdital
             'modalidade_id.required' => 'Selecione a modalidade do TR na lista',
         ]);
 
-
-
         $tr = $request->all();
 
         $user = Auth::user(); // usuário logado no sistema
 
         $tr['user_id'] = $user->id; // sava o id d user logado no sistema
 
-        # Conversão das datas para formato MySQL Y-m-d
-        if(isset($tr['entregueSupAdm'])) {
-            $tr['entregueSupAdm'] =  Carbon::createFromFormat('d/m/Y', $tr['entregueSupAdm'] )->format('Y-m-d');
+        // conversão dos formatos dos campos de data em formato do banco
+        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'pendenciasPgm', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'solicitacaoEmpenho'];
+
+        foreach ($datas_a_ajustar as $formatacao_de_data) {
+            if(isset($tr[$formatacao_de_data]) && !empty($tr[$formatacao_de_data])) {
+                $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', $tr[$formatacao_de_data])->format('Y-m-d');
+                $tr[$formatacao_de_data] =  $dataFormatadaMysql;
+            }
         }
 
-        if(isset($tr['entregueComprasContrato'])) {
-            $tr['entregueComprasContrato'] =  Carbon::createFromFormat('d/m/Y', $tr['entregueComprasContrato'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['inicioCotacao'])) {
-            $tr['inicioCotacao'] =  Carbon::createFromFormat('d/m/Y', $tr['inicioCotacao'] )->format('Y-m-d');
-        }
-            
-        if(isset($tr['terminoCotacao'])) {
-            $tr['terminoCotacao'] =  Carbon::createFromFormat('d/m/Y', $tr['terminoCotacao'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['envioSuplanPro'])) {
-            $tr['envioSuplanPro'] =  Carbon::createFromFormat('d/m/Y', $tr['envioSuplanPro'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['retornoSuplanPro'])) {
-            $tr['retornoSuplanPro'] =  Carbon::createFromFormat('d/m/Y', $tr['retornoSuplanPro'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['assinaturasGabinete'])) {
-            $tr['assinaturasGabinete'] =  Carbon::createFromFormat('d/m/Y', $tr['assinaturasGabinete'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['envioCCOAF'])) {
-            $tr['envioCCOAF'] =  Carbon::createFromFormat('d/m/Y', $tr['envioCCOAF'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['retornoCCOAF'])) {
-            $tr['retornoCCOAF'] =  Carbon::createFromFormat('d/m/Y', $tr['retornoCCOAF'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['autuacao'])) {
-            $tr['autuacao'] =  Carbon::createFromFormat('d/m/Y', $tr['autuacao'] )->format('Y-m-d');
-        }
-
-
-        if(isset($tr['inicioMinutas'])) {
-            $tr['inicioMinutas'] =  Carbon::createFromFormat('d/m/Y', $tr['inicioMinutas'] )->format('Y-m-d');
-        }
-
-
-        if(isset($tr['teminoMinutas'])) {
-            $tr['teminoMinutas'] =  Carbon::createFromFormat('d/m/Y', $tr['teminoMinutas'] )->format('Y-m-d');
-        }
-
-
-        if(isset($tr['inicioMinutasEdital'])) {
-            $tr['inicioMinutasEdital'] =  Carbon::createFromFormat('d/m/Y', $tr['inicioMinutasEdital'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['terminoMinutasEdital'])) {
-            $tr['terminoMinutasEdital'] =  Carbon::createFromFormat('d/m/Y', $tr['terminoMinutasEdital'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['envioPgm'])) {
-            $tr['envioPgm'] =  Carbon::createFromFormat('d/m/Y', $tr['envioPgm'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['retornoPgm'])) {
-            $tr['retornoPgm'] =  Carbon::createFromFormat('d/m/Y', $tr['retornoPgm'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['pendenciasPgm'])) {
-            $tr['pendenciasPgm'] =  Carbon::createFromFormat('d/m/Y', $tr['pendenciasPgm'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['dataPregao'])) {
-            $tr['dataPregao'] =  Carbon::createFromFormat('d/m/Y', $tr['dataPregao'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['dataHomologacao'])) {
-            $tr['dataHomologacao'] =  Carbon::createFromFormat('d/m/Y', $tr['dataHomologacao'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['dataRatificacao'])) {
-            $tr['dataRatificacao'] =  Carbon::createFromFormat('d/m/Y', $tr['dataRatificacao'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['formalizacaoContratoArp'])) {
-            $tr['formalizacaoContratoArp'] =  Carbon::createFromFormat('d/m/Y', $tr['formalizacaoContratoArp'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['dataContratoArp'])) {
-            $tr['dataContratoArp'] =  Carbon::createFromFormat('d/m/Y', $tr['dataContratoArp'] )->format('Y-m-d');
-        }
-
-        if(isset($tr['solicitacaoEmpenho'])) {
-            $tr['solicitacaoEmpenho'] =  Carbon::createFromFormat('d/m/Y', $tr['solicitacaoEmpenho'] )->format('Y-m-d');
-        }
-
-        Tr::create($tr); //salva
+        $new_tr = Tr::create($tr); //salva
 
         Session::flash('create_tr', 'TR cadastrada com sucesso!');
 
-        return redirect(route('trs.index'));
+        return redirect(route('trs.edit', $new_tr->id));
     }
 
     /**
@@ -378,125 +244,14 @@ numeroEdital
 
         $tr = $request->all();
 
-        //dd($tr);
+        // conversão dos formatos dos campos de data em formato do banco
+        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'pendenciasPgm', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'solicitacaoEmpenho'];
 
-        # Conversão das datas para formato MySQL Y-m-d
-        if(isset($tr['entregueSupAdm']) && !empty($tr['entregueSupAdm'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('entregueSupAdm'))->format('Y-m-d');
-            $tr['entregueSupAdm'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['entregueComprasContrato']) && !empty($tr['entregueComprasContrato'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('entregueComprasContrato'))->format('Y-m-d');
-            $tr['entregueComprasContrato'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['inicioCotacao']) && !empty($tr['inicioCotacao'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('inicioCotacao'))->format('Y-m-d');
-            $tr['inicioCotacao'] =  $dataFormatadaMysql;
-        }
-            
-        if(isset($tr['terminoCotacao']) && !empty($tr['terminoCotacao'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('terminoCotacao'))->format('Y-m-d');
-            $tr['terminoCotacao'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['envioSuplanPro']) && !empty($tr['envioSuplanPro'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('envioSuplanPro'))->format('Y-m-d');
-            $tr['envioSuplanPro'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['retornoSuplanPro']) && !empty($tr['retornoSuplanPro'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('retornoSuplanPro'))->format('Y-m-d');
-            $tr['retornoSuplanPro'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['assinaturasGabinete']) && !empty($tr['assinaturasGabinete'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('assinaturasGabinete'))->format('Y-m-d');
-            $tr['assinaturasGabinete'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['envioCCOAF']) && !empty($tr['envioCCOAF'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('envioCCOAF'))->format('Y-m-d');
-            $tr['envioCCOAF'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['retornoCCOAF']) && !empty($tr['retornoCCOAF'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('retornoCCOAF'))->format('Y-m-d');
-            $tr['retornoCCOAF'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['autuacao']) && !empty($tr['autuacao'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('autuacao'))->format('Y-m-d');
-            $tr['autuacao'] =  $dataFormatadaMysql;
-        }
-
-
-        if(isset($tr['inicioMinutas']) && !empty($tr['inicioMinutas'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('inicioMinutas'))->format('Y-m-d');
-            $tr['inicioMinutas'] =  $dataFormatadaMysql;
-        }
-
-
-        if(isset($tr['teminoMinutas']) && !empty($tr['teminoMinutas'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('teminoMinutas'))->format('Y-m-d');
-            $tr['teminoMinutas'] =  $dataFormatadaMysql;
-        }
-
-
-        if(isset($tr['inicioMinutasEdital']) && !empty($tr['inicioMinutasEdital'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('inicioMinutasEdital'))->format('Y-m-d');
-            $tr['inicioMinutasEdital'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['terminoMinutasEdital']) && !empty($tr['terminoMinutasEdital'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('terminoMinutasEdital'))->format('Y-m-d');
-            $tr['terminoMinutasEdital'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['envioPgm']) && !empty($tr['envioPgm'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('envioPgm'))->format('Y-m-d');
-            $tr['envioPgm'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['retornoPgm']) && !empty($tr['retornoPgm'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('retornoPgm'))->format('Y-m-d');
-            $tr['retornoPgm'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['pendenciasPgm']) && !empty($tr['pendenciasPgm'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('pendenciasPgm'))->format('Y-m-d');
-            $tr['pendenciasPgm'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['dataPregao']) && !empty($tr['dataPregao'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dataPregao'))->format('Y-m-d');
-            $tr['dataPregao'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['dataHomologacao']) && !empty($tr['dataHomologacao'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dataHomologacao'))->format('Y-m-d');
-            $tr['dataHomologacao'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['dataRatificacao']) && !empty($tr['dataRatificacao'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dataRatificacao'))->format('Y-m-d');
-            $tr['dataRatificacao'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['formalizacaoContratoArp']) && !empty($tr['formalizacaoContratoArp'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('formalizacaoContratoArp'))->format('Y-m-d');
-            $tr['formalizacaoContratoArp'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['dataContratoArp']) && !empty($tr['dataContratoArp'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dataContratoArp'))->format('Y-m-d');
-            $tr['dataContratoArp'] =  $dataFormatadaMysql;
-        }
-
-        if(isset($tr['solicitacaoEmpenho']) && !empty($tr['solicitacaoEmpenho'])) {
-            $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('solicitacaoEmpenho'))->format('Y-m-d');
-            $tr['solicitacaoEmpenho'] =  $dataFormatadaMysql;
+        foreach ($datas_a_ajustar as $formatacao_de_data) {
+            if(isset($tr[$formatacao_de_data]) && !empty($tr[$formatacao_de_data])) {
+                $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', $tr[$formatacao_de_data])->format('Y-m-d');
+                $tr[$formatacao_de_data] =  $dataFormatadaMysql;
+            }
         }
 
         $new_tr = Tr::findOrFail($id);
@@ -525,5 +280,41 @@ numeroEdital
         Session::flash('deleted_tr', 'TR excluído com sucesso!');
 
         return redirect(route('trs.index'));
+    }
+
+    public function exportcsv()
+    {
+        if (Gate::denies('tr-export')) {
+            abort(403, 'Acesso negado.');
+        }
+
+        # filtragem
+        $lista_de_campos_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital'];
+
+        $lista_de_filtros_ajustada = [];
+
+        foreach ($lista_de_campos_de_filtros as $filtro) {
+            $lista_de_filtros_ajustada[$filtro] =(request()->has($filtro) ? request($filtro) : '');
+        }
+
+        return Excel::download(new TrsExport($lista_de_filtros_ajustada), 'Trs_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function exportxls()
+    {
+        if (Gate::denies('tr-export')) {
+            abort(403, 'Acesso negado.');
+        }
+
+        # filtragem
+        $lista_de_campos_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital'];
+
+        $lista_de_filtros_ajustada = [];
+
+        foreach ($lista_de_campos_de_filtros as $filtro) {
+            $lista_de_filtros_ajustada[$filtro] = (request()->has($filtro) ? request($filtro) : '');
+        }
+
+        return Excel::download(new TrsExport($lista_de_filtros_ajustada), 'Trs_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }

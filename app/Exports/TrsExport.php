@@ -35,39 +35,43 @@ numeroModalidade
 numeroEdital
         */
 
-    public function __construct($numero, $ano, $descricao, $situacao_id, $origem_id, $tipo_id, $requisicaoCompras, $protocoloSisprot, $modalidade_id, $numeroModalidade, $numeroEdital)
+    public function __construct($filtros)
     {
-        $this->numero = $numero;
-        $this->ano = $ano;
-        $this->descricao = $descricao;
-        $this->situacao_id = $situacao_id;
-        $this->origem_id = $origem_id;
-        $this->tipo_id = $tipo_id;
-        $this->requisicaoCompras = $requisicaoCompras;
-        $this->protocoloSisprot = $protocoloSisprot;
-        $this->modalidade_id = $modalidade_id;
-        $this->numeroModalidade = $numeroModalidade;
-        $this->numeroEdital = $numeroEdital;
+        $this->filtros = $filtros;
     }
 
 
     public function query()
     {
-        $result = Tr::query()->select('numero', 'ano');
+        $result = Tr::query()->select('trs.numero', 
+                                      'trs.ano', 
+                                      'trs.descricao',
+                                      'users.name as operador'
+                                  );
 
-        if (!empty($this->name)){
-            $result = $result->where('name', 'like', '%' . $this->name . '%');    
+        // joins
+        $result = $result->join('users', 'users.id', '=', 'trs.user_id');
+
+        // fitros
+        foreach ($this->filtros as $filtro => $valor) {
+            if (!empty($valor)){
+                if (is_int($valor)){
+                    $result = $result->where('trs.' . $filtro, '=', $valor);   
+                } else {
+                    $result = $result->Where('trs.' . $filtro, 'like', '%' . $valor . '%');
+                }
+            }    
         }
 
-        if (!empty($this->description)){
-            $result = $result->Where('description', 'like', '%' . $this->description . '%');
-        }
+        // sort
+        $result = $result->orderBy('trs.ano', 'desc');
+        $result = $result->orderBy('trs.numero', 'asc'); 
 
         return $result;
     }
 
     public function headings(): array
     {
-        return ["Nome", "Descrição"];
+        return ["TR Nº", "Ano", "Descrição Básica do Objeto", "Funcionario Responsável"];
     }
 }

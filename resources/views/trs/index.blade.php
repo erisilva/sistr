@@ -16,14 +16,6 @@
     </button>
   </div>
   @endif
-  @if(Session::has('create_tr'))
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Info!</strong>  {{ session('create_tr') }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  @endif
   <div class="btn-group py-1" role="group" aria-label="Opções">
     <a href="{{ route('trs.create') }}" class="btn btn-secondary btn-sm" role="button"><i class="bi bi-plus-circle"></i> Novo Registro</a>
     <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalFilter"><i class="bi bi-funnel"></i> Filtrar</button>
@@ -244,7 +236,7 @@ $(document).ready(function(){
         }
         var filtro_numeroModalidade = $('input[name="numeroModalidade"]').val();
         var filtro_numeroEdital = $('input[name="numeroEdital"]').val();
-        window.open("{{ route('trs.export.xls') }}" + "?numero=" + "?numero=" + filtro_numero + "&ano=" + filtro_ano + "&descricao=" + filtro_descricao + "&situacao_id=" + filtro_situacao_id + "&origem_id=" + filtro_origem_id + "&tipo_id=" + filtro_tipo_id + "&requisicaoCompras=" + filtro_requisicaoCompras + "&protocoloSisprot=" + filtro_protocoloSisprot + "&modalidade_id=" + filtro_modalidade_id + "&numeroModalidade=" + filtro_numeroModalidade + "&numeroEdital=" + filtro_numeroEdital,"_self");
+        window.open("{{ route('trs.export.xls') }}" + "?numero=" + filtro_numero + "&ano=" + filtro_ano + "&descricao=" + filtro_descricao + "&situacao_id=" + filtro_situacao_id + "&origem_id=" + filtro_origem_id + "&tipo_id=" + filtro_tipo_id + "&requisicaoCompras=" + filtro_requisicaoCompras + "&protocoloSisprot=" + filtro_protocoloSisprot + "&modalidade_id=" + filtro_modalidade_id + "&numeroModalidade=" + filtro_numeroModalidade + "&numeroEdital=" + filtro_numeroEdital,"_self");
     });
 
     $('#btnExportarPDF').on('click', function(){

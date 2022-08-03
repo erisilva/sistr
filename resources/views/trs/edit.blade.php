@@ -22,14 +22,17 @@
     </button>
   </div>
   @endif
+  @if(Session::has('create_tr'))
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Info!</strong>  {{ session('create_tr') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  @endif
   <form method="POST" action="{{ route('trs.update', $tr->id) }}">
     @csrf
     @method('PUT')
-
-
-
-
-
     <div class="form-row">
       <div class="form-group col-md-4">
           <div class="p-3 bg-primary text-white text-right h2">Nº {{ $tr->numero }}/{{ $tr->ano }}</div>    
@@ -216,7 +219,7 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inicioMinutas">Início MINUTAS (contrato/ARP) <strong  class="text-warning">(opcional)</strong></label>  
-        <input type="text" class="form-control" name="inicioMinutas" id="inicioMinutas" value="{{ isset($tr->autinicioMinutasuacao) ?  $tr->inicioMinutas->format('d/m/Y') : '' }}" autocomplete="off">
+        <input type="text" class="form-control" name="inicioMinutas" id="inicioMinutas" value="{{ isset($tr->inicioMinutas) ?  $tr->inicioMinutas->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
         <label for="teminoMinutas">Término MINUTAS (contrato/ARP) <strong  class="text-warning">(opcional)</strong></label>  
