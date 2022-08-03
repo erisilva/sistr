@@ -35,11 +35,16 @@
         <thead>
             <tr>
                 <th scope="col"></th>
-                <th scope="col">TR nº/Ano</th>
-                <th scope="col">Descrição</th>
                 <th scope="col">Status</th>
+                <th scope="col">TR nº/Ano</th>
                 <th scope="col">Origem</th>
+                <th scope="col">Descrição</th>               
                 <th scope="col">Tipo</th>
+                <th scope="col">Requisição</th>
+                <th scope="col">SISPROT</th>
+                <th scope="col">Modalidade</th>
+                <th scope="col">Nº Modalidade</th>
+                <th scope="col">Nº EDITAL</th>
                 
             </tr>
         </thead>
@@ -52,12 +57,20 @@
                     <a href="{{route('trs.show', $tr->id)}}" class="btn btn-secondary btn-sm" role="button"><i class="bi bi-eye"></i></a>
                   </div>
                 </td>
-                <td class="text-nowrap"><strong>TR nº{{$tr->numero}}/{{$tr->ano}}</strong></td>
-                <td>{{$tr->descricao}}</td>
                 <td>{{$tr->situacao->descricao}}</td>
+                <td class="text-nowrap"><strong>TR nº{{$tr->numero}}/{{$tr->ano}}</strong></td>
                 <td>{{$tr->origem->descricao}}</td>
-                <td>{{$tr->tipo->descricao}}</td>
-                
+                @if (strlen($tr->descricao) > 50 )
+                  <td>{{substr($tr->descricao, 0, 47) . "..."}}</td>
+                @else
+                  <td>{{$tr->descricao}}</td>
+                @endif          
+                <td>{{$tr->situacao->descricao}}</td>
+                <td>{{$tr->requisicaoCompras}}</td>
+                <td>{{$tr->protocoloSisprot}}</td>
+                <td>{{$tr->modalidade->descricao}}</td>
+                <td>{{$tr->numeroModalidade}}</td>
+                <td>{{$tr->numeroEdital}}</td>
             </tr>    
             @endforeach                                                 
         </tbody>
