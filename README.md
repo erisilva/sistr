@@ -1,8 +1,7 @@
 ## Sobre
 
-Sistema de ACL. Uso como base para criar meus projetos. Constuído com a framework [Laravel](https://laravel.com/), na versão 8.x e usa como front-end [Bootstrap 4.6](https://getbootstrap.com/).
+Sistema de controle de TRs (termos de Referência para Compras). Constuído com a framework [Laravel](https://laravel.com/), na versão 8.x e usa como front-end [Bootstrap 4.6](https://getbootstrap.com/).
 
-**Esse é um projeto pessoal**, existem alternativos como sugerido na documentação oficial de [instalação do Laravel](https://laravel.com/docs/8.x/installation).
 
 ## Requisitos
 

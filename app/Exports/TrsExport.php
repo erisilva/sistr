@@ -136,7 +136,7 @@ class TrsExport implements FromQuery, WithHeadings
                 "Término minuta EDITAL",
                 "Envio PGM",
                 "Retorno PGM",
-                "Pendêcnias PGM",
+                "Pendências PGM",
                 "Nº EDITAL",
                 "Data PREGÃO",
                 "Observação da Licitação",
