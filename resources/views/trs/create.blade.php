@@ -22,7 +22,7 @@
         <select class="form-control" id="situacao_id" name="situacao_id">
             <option value="" selected="true">Clique para escolher...</option> 
             @foreach($situacaos as $situacao)
-            <option value="{{$situacao->id}}">{{$situacao->descricao}}</option>
+            <option value="{{$situacao->id}}" {{ old("situacao_id") == $situacao->id ? "selected":"" }}>{{$situacao->descricao}}</option>
             @endforeach
         </select>
         @if ($errors->has('situacao_id'))
@@ -36,7 +36,7 @@
         <select class="form-control" id="origem_id" name="origem_id">
             <option value="" selected="true">Clique para escolher...</option> 
             @foreach($origems as $origem)
-            <option value="{{$origem->id}}">{{$origem->descricao}}</option>
+            <option value="{{$origem->id}}" {{ old("origem_id") == $origem->id ? "selected":"" }}>{{$origem->descricao}}</option>
             @endforeach
         </select>
         @if ($errors->has('origem_id'))
@@ -64,7 +64,7 @@
         <select class="form-control" id="tipo_id" name="tipo_id">
             <option value="" selected="true">Clique para escolher...</option> 
             @foreach($tipos as $tipo)
-            <option value="{{$tipo->id}}">{{$tipo->descricao}}</option>
+            <option value="{{$tipo->id}}" {{ old("tipo_id") == $tipo->id ? "selected":"" }}>{{$tipo->descricao}}</option>
             @endforeach
         </select>
         @if ($errors->has('tipo_id'))
@@ -90,7 +90,7 @@
         <select class="form-control" id="responsavel_id" name="responsavel_id">
             <option value="" selected="true">Clique para escolher...</option> 
             @foreach($responsavels as $responsavel)
-            <option value="{{$responsavel->id}}">{{$responsavel->nome}}</option>
+            <option value="{{$responsavel->id}}" {{ old("responsavel_id") == $responsavel->id ? "selected":"" }}>{{$responsavel->nome}}</option>
             @endforeach
         </select>
         @if ($errors->has('responsavel_id'))
@@ -155,7 +155,7 @@
         <select class="form-control" id="deliberacao_id" name="deliberacao_id">
             <option value="1" selected="true">Não Definindo</option> 
             @foreach($deliberacaos as $deliberacao)
-            <option value="{{$deliberacao->id}}">{{$deliberacao->descricao}}</option>
+            <option value="{{$deliberacao->id}}" {{ old("deliberacao_id") == $deliberacao->id ? "selected":"" }}>{{$deliberacao->descricao}}</option>
             @endforeach
         </select>
         @if ($errors->has('deliberacao_id'))
@@ -176,7 +176,7 @@
         <select class="form-control" id="modalidade_id" name="modalidade_id">
             <option value="1" selected="true">Não Definindo</option> 
             @foreach($modalidades as $modalidade)
-            <option value="{{$modalidade->id}}">{{$modalidade->descricao}}</option>
+            <option value="{{$modalidade->id}}" {{ old("modalidade_id") == $modalidade->id ? "selected":"" }}>{{$modalidade->descricao}}</option>
             @endforeach
         </select>
         @if ($errors->has('modalidade_id'))

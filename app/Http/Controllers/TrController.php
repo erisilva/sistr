@@ -317,4 +317,38 @@ class TrController extends Controller
 
         return Excel::download(new TrsExport($lista_de_filtros_ajustada), 'Trs_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
+
+
+    public function exportpdf()
+    {
+        if (Gate::denies('tr-export')) {
+            abort(403, 'Acesso negado.');
+        }
+
+        $trs = new Tr;
+
+        // fitros
+        $lista_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital'];
+
+        foreach ($lista_de_filtros as $filtro) {
+            if (request()->has($filtro) && !empty(request($filtro))){
+                if (is_int(request($filtro))) {
+                    $trs = $trs->where($filtro, '=', request($filtro));
+                } else {
+                    $trs = $trs->where($filtro, 'like', '%' . request($filtro) . '%');
+                }
+            }   
+        }
+
+        // ordena
+        $trs = $trs->orderBy('ano', 'desc')->orderBy('numero', 'asc');
+
+        $trs = $trs->get();
+
+        $pdf = PDF::loadView('trs.report', compact('trs'))->setPaper('a4', 'landscape');
+        
+        return $pdf->download('Permissoes_' .  date("Y-m-d H:i:s") . '.pdf');
+
+    }
+
 }

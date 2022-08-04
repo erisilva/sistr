@@ -7,10 +7,10 @@
             }
 
             body {
-                margin-top: 2cm;
+                margin-top: 1cm;
                 margin-left: 1cm;
                 margin-right: 1cm;
-                margin-bottom: 2cm;
+                margin-bottom: 1cm;
             }
 
             header {
@@ -18,11 +18,11 @@
                 top: 0cm;
                 left: 0cm;
                 right: 0cm;
-                height: 2cm;
+                height: 1cm;
                 background-color: rgb(179, 179, 179);
                 color: white;
                 text-align: center;
-                line-height: 1.5cm;
+                line-height: 0.5cm;
                 font-family: Helvetica, Arial, sans-serif;
             }
 
@@ -32,11 +32,11 @@
                 bottom: 0cm; 
                 left: 0cm; 
                 right: 0cm;
-                height: 2cm;
+                height: 1cm;
                 background-color: rgb(179, 179, 179);
                 color: white;
                 text-align: center;
-                line-height: 1.5cm;
+                line-height: 0.5cm;
             }
 
             footer .page-number:after { content: counter(page); }
@@ -50,6 +50,10 @@
             table {
                 border-collapse: collapse;
             }
+
+             .page-break {
+                  page-break-after: always;
+                }
     </style>
 </head>
     <body>
@@ -62,20 +66,18 @@
         </footer>
 
         <main>
+            @foreach($trs as $tr)
             <table  class="bordered" width="100%">
-              <thead>
-                <th style="text-align:left;">Nome</th>
-                <th style="text-align:left;">Descrição</th>
-              </thead>
               <tbody>
-                @foreach($dataset as $row)
                 <tr>
-                  <td>{{$row->name}}</td>
-                  <td>{{$row->description}}</td>
+                  <td>{{$tr->numero}}</td>
+                  <td>{{$tr->ano}}</td>
                 </tr>
-                @endforeach
               </tbody>
             </table>
+            <div class="page-break"></div>
+            @endforeach
+
         </main>
     </body>
 </html>
