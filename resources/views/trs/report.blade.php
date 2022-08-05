@@ -19,10 +19,10 @@
                 left: 0cm;
                 right: 0cm;
                 height: 1cm;
-                background-color: rgb(179, 179, 179);
-                color: white;
+                background-color: rgb(200, 200, 200);
+                color: black;
                 text-align: center;
-                line-height: 0.5cm;
+                line-height: 0.8cm;
                 font-family: Helvetica, Arial, sans-serif;
             }
 
@@ -33,8 +33,8 @@
                 left: 0cm; 
                 right: 0cm;
                 height: 1cm;
-                background-color: rgb(179, 179, 179);
-                color: white;
+                background-color: rgb(200, 200, 200);
+                color: black;
                 text-align: center;
                 line-height: 0.5cm;
             }
@@ -257,7 +257,9 @@
 
               </tbody>
             </table>
+            @if(!$loop->last)
             <div class="page-break"></div>
+            @endif            
             @endforeach
 
         </main>

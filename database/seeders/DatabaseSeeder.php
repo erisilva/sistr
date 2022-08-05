@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+use App\Models\Tr;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -28,5 +30,8 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call(acl::class);
+
+        $trs = Tr::factory()->count(6)->create();
+
     }
 }
