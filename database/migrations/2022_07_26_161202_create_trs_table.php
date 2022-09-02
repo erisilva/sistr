@@ -64,15 +64,28 @@ class CreateTrsTable extends Migration
             $table->date('inicioMinutas')->nullable(); // Início MINUTAS (contrato/ARP)
             $table->date('teminoMinutas')->nullable(); // Término MINUTAS (contrato/ARP)
 
+            // novo campo
+            $table->unsignedBigInteger('pregoeiro_id'); // status
+
             $table->date('inicioMinutasEdital')->nullable(); // Início minuta EDITAL
             $table->date('terminoMinutasEdital')->nullable(); // Término minuta EDITAL
 
             $table->date('envioPgm')->nullable(); // Envio PGM
             $table->date('retornoPgm')->nullable(); // Retorno PGM
-            $table->date('pendenciasPgm')->nullable(); // Pendêcnias PGM
+
+            // modificações aqui, adição e alteração de campo - era pendenciasPgm
+            $table->date('inicioSaneamentoPendencias')->nullable(); // INÍCIO SANEAMENTO PENDÊNCIAS
+            $table->date('terminoSaneamentoPendencias')->nullable(); // TÉRMINO SANEAMENTO PENDÊNCIAS
 
             $table->string('numeroEdital', 80)->nullable(); // Nº EDITAL
-            $table->date('dataPregao')->nullable(); // Data PREGÃO
+            $table->date('dataPregao')->nullable(); // Data PREGÃO            
+            // modificações, adicionado campo novo
+            $table->date('impugnacao')->nullable(); // IMPUGNAÇÃO / SUSPENSÃO
+
+            // dois novos campos
+            $table->date('inicioAnaliseTecnica')->nullable(); // INÍCIO ANÁLISE TÉCNICA
+            $table->date('terminoAnaliseTecnica')->nullable(); // TÉRMINO ANÁLISE TÉCNICA
+
 
             $table->text('observacaoLicitacao')->nullable(); // Observação da Licitação (IMPULGUINAÇÃO,RECURSO E ANÁLISE TÉCNICA, ETC.)
 
@@ -80,10 +93,13 @@ class CreateTrsTable extends Migration
             $table->date('dataRatificacao')->nullable(); // Data Ratificação
             
             $table->date('formalizacaoContratoArp')->nullable(); // Formalização Contrato/ARP
-            $table->date('dataContratoArp')->nullable(); // Data Contrato/ARP
+            $table->date('dataContratoArp')->nullable(); // Data Contrato/ARP           
             
             $table->date('solicitacaoEmpenho')->nullable(); // Solicitação Empenho
 
+            //novo campo
+            $table->text('publicacao')->nullable(); // PUBLICAÇÃO DOC
+ 
             $table->text('observacao')->nullable(); // Observações
 
             $table->timestamps();
@@ -96,6 +112,7 @@ class CreateTrsTable extends Migration
             $table->foreign('responsavel_id')->references('id')->on('responsavels')->onDelete('cascade');
             $table->foreign('deliberacao_id')->references('id')->on('deliberacaos')->onDelete('cascade');
             $table->foreign('modalidade_id')->references('id')->on('modalidades')->onDelete('cascade');
+            $table->foreign('pregoeiro_id')->references('id')->on('pregoeiros')->onDelete('cascade');
         });
     }
 
@@ -114,6 +131,7 @@ class CreateTrsTable extends Migration
             $table->dropForeign('trs_responsavel_id_foreign');
             $table->dropForeign('trs_deliberacao_id_foreign');
             $table->dropForeign('trs_modalidade_id_foreign');
+            $table->dropForeign('trs_pregoeiro_id_foreign');
         });
 
         Schema::dropIfExists('trs');

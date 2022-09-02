@@ -18,5 +18,6 @@ class DeliberacaosTableSeeder extends Seeder
         DB::table('deliberacaos')->insert(['descricao' => 'Não definido']);
         DB::table('deliberacaos')->insert(['descricao' => 'APROVADO']);
         DB::table('deliberacaos')->insert(['descricao' => 'DEVOLVIDO']);
+        DB::table('deliberacaos')->insert(['descricao' => 'SUSPENSO']);
     }
 }

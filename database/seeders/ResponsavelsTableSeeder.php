@@ -16,18 +16,19 @@ class ResponsavelsTableSeeder extends Seeder
     public function run()
     {
 
-        DB::table('responsavels')->insert(['nome' => 'Não Definido']);
-        DB::table('responsavels')->insert(['nome' => 'SANDRA']);
-        DB::table('responsavels')->insert(['nome' => 'LUIZ ADOLFO']);
-        DB::table('responsavels')->insert(['nome' => 'JOÃO PEDRO']);
-        DB::table('responsavels')->insert(['nome' => 'CLEONICE']);
-        DB::table('responsavels')->insert(['nome' => 'CECÍLIA']);
-        DB::table('responsavels')->insert(['nome' => 'MATHEUS']);
-        DB::table('responsavels')->insert(['nome' => 'ORIGEM']);
-        DB::table('responsavels')->insert(['nome' => 'ANA PAULA']);
-        DB::table('responsavels')->insert(['nome' => 'ELIANE']);
-        DB::table('responsavels')->insert(['nome' => 'MICHELE']);
-        DB::table('responsavels')->insert(['nome' => 'LUIS ADOLFO']);
+        DB::table('responsavels')->insert(['nome' => 'ANA PAULA MARIANI']);
+        DB::table('responsavels')->insert(['nome' => 'BARBARA PEREIRA']);
+        DB::table('responsavels')->insert(['nome' => 'CECILIA BOAVENTURA']);
+        DB::table('responsavels')->insert(['nome' => 'CLEONICE NEVES']);
+        DB::table('responsavels')->insert(['nome' => 'ELIANE FERNANDES']);
+        DB::table('responsavels')->insert(['nome' => 'GRAZIELY EDUARDO']);
+        DB::table('responsavels')->insert(['nome' => 'LUIZ ADOLFO BELEM']);
+        DB::table('responsavels')->insert(['nome' => 'MARCOS COSTA']);
+        DB::table('responsavels')->insert(['nome' => 'MATHEUS SILVEIRA']);
+        DB::table('responsavels')->insert(['nome' => 'MICHELE SOUZA']);
+        DB::table('responsavels')->insert(['nome' => 'MILTON CARVALHO']);
+        DB::table('responsavels')->insert(['nome' => 'SANDRA ZARAMELA']);
+        DB::table('responsavels')->insert(['nome' => 'SOLICITANTE']);
 
     }
 }

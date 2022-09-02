@@ -15,23 +15,39 @@ class SituacaosTableSeeder extends Seeder
      */
     public function run()
     {
-
-        DB::table('situacaos')->insert(['descricao' => 'Não Definido']);
-        DB::table('situacaos')->insert(['descricao' => 'CONCLUÍDO']);
-        DB::table('situacaos')->insert(['descricao' => 'HOMOLOGAÇÃO']);
-        DB::table('situacaos')->insert(['descricao' => 'MINUTA ARP']);
-        DB::table('situacaos')->insert(['descricao' => 'PREGÃO AGENDADO']);
-        DB::table('situacaos')->insert(['descricao' => 'DEVOLVIDO']);
-        DB::table('situacaos')->insert(['descricao' => 'ANÁLISE TÉCNICA']);
-        DB::table('situacaos')->insert(['descricao' => 'PGM']);
-        DB::table('situacaos')->insert(['descricao' => 'COTAÇÃO']);        
+        DB::table('situacaos')->insert(['descricao' => 'ANALISE TECNICA']);
+        DB::table('situacaos')->insert(['descricao' => 'CANCELADO']);
         DB::table('situacaos')->insert(['descricao' => 'CCOAF']);
-        DB::table('situacaos')->insert(['descricao' => 'ORIGEM']);
-        DB::table('situacaos')->insert(['descricao' => 'MINUTA CONTRATO']);
+        DB::table('situacaos')->insert(['descricao' => 'COMISSAO CREDENCIAMENTO']);
+        DB::table('situacaos')->insert(['descricao' => 'COMISSAO LICITACAO']);
+        DB::table('situacaos')->insert(['descricao' => 'COMPRAS']);
+        DB::table('situacaos')->insert(['descricao' => 'CONCLUIDO']);
+        DB::table('situacaos')->insert(['descricao' => 'CONTRATOS']);
+        DB::table('situacaos')->insert(['descricao' => 'COTACAO']);
+        DB::table('situacaos')->insert(['descricao' => 'DEVOLVIDO']);
         DB::table('situacaos')->insert(['descricao' => 'EMPENHADO']);
-        DB::table('situacaos')->insert(['descricao' => 'SANEANDO PEND}ENCIAS']);
+        DB::table('situacaos')->insert(['descricao' => 'FORMALIZACAO']);
+        DB::table('situacaos')->insert(['descricao' => 'GABINETE SMS']);
+        DB::table('situacaos')->insert(['descricao' => 'HOMOLOGACAO']);
+        DB::table('situacaos')->insert(['descricao' => 'INSTRUCAO PROCESSO']);
         DB::table('situacaos')->insert(['descricao' => 'MINUTA ADITIVO']);
-        DB::table('situacaos')->insert(['descricao' => 'PRO']);
+        DB::table('situacaos')->insert(['descricao' => 'MINUTA ARP']);
+        DB::table('situacaos')->insert(['descricao' => 'MINUTA CONTRATO']);
+        DB::table('situacaos')->insert(['descricao' => 'MINUTA EDITAL']);
+        DB::table('situacaos')->insert(['descricao' => 'PARECER TI']);
+        DB::table('situacaos')->insert(['descricao' => 'PGM']);
+        DB::table('situacaos')->insert(['descricao' => 'PRAZO RECURSOS']);
+        DB::table('situacaos')->insert(['descricao' => 'PREGAO AGENDADO']);
+        DB::table('situacaos')->insert(['descricao' => 'PREGAO DESERTO']);
+        DB::table('situacaos')->insert(['descricao' => 'PREGAO FRACASSADO']);
+        DB::table('situacaos')->insert(['descricao' => 'PREGAO REAGENDADO']);
+        DB::table('situacaos')->insert(['descricao' => 'RATIFICACAO']);
+        DB::table('situacaos')->insert(['descricao' => 'REVOGADO']);
+        DB::table('situacaos')->insert(['descricao' => 'SECRETARIA ADMINISTRACAO']);
+        DB::table('situacaos')->insert(['descricao' => 'SOLICITANTE']);
+        DB::table('situacaos')->insert(['descricao' => 'SUPLAN']);
+        DB::table('situacaos')->insert(['descricao' => 'SUSPENSO']);
+        DB::table('situacaos')->insert(['descricao' => 'VISTORIA IMOVEL']);
 
     }
 }

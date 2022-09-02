@@ -10,7 +10,7 @@ class Tr extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'situacao_id', 'numero', 'ano', 'origem_id', 'descricao', 'tipo_id', 'entregueSupAdm', 'entregueComprasContrato', 'responsavel_id', 'inicioCotacao', 'terminoCotacao', 'requisicaoCompras', 'valor', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'protocoloSisprot', 'envioCCOAF', 'retornoCCOAF', 'deliberacao_id', 'numeroPAC', 'modalidade_id', 'numeroModalidade', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'pendenciasPgm', 'numeroEdital', 'dataPregao', 'observacaoLicitacao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'solicitacaoEmpenho', 'observacao',
+        'user_id', 'situacao_id', 'numero', 'ano', 'origem_id', 'descricao', 'tipo_id', 'entregueSupAdm', 'entregueComprasContrato', 'responsavel_id', 'inicioCotacao', 'terminoCotacao', 'requisicaoCompras', 'valor', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'protocoloSisprot', 'envioCCOAF', 'retornoCCOAF', 'deliberacao_id', 'numeroPAC', 'modalidade_id', 'numeroModalidade', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'pregoeiro_id', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'numeroEdital', 'dataPregao', 'impugnacao', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'observacaoLicitacao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'solicitacaoEmpenho', 'publicacao', 'observacao',
     ];
 
     public function user()
@@ -48,5 +48,10 @@ class Tr extends Model
         return $this->belongsTo(Modalidade::class);
     }
 
-    protected $dates = ['deleted_at', 'entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'pendenciasPgm', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'solicitacaoEmpenho'];
+    public function pregoeiro()
+    {
+        return $this->belongsTo(Pregoeiro::class);
+    }
+
+    protected $dates = ['deleted_at', 'entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'pendenciasPgm', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'solicitacaoEmpenho', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'impugnacao', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica'];
 }

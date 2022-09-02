@@ -26,12 +26,13 @@ class DatabaseSeeder extends Seeder
         $this->call(OrigensTableSeeder::class);
         $this->call(DeliberacaosTableSeeder::class);
         $this->call(ModalidadesTableSeeder::class);
+        $this->call(PregoeiroSeeder::class);
         
 
 
         $this->call(acl::class);
 
-        $trs = Tr::factory()->count(6)->create();
+        $trs = Tr::factory()->count(50)->create();
 
     }
 }
