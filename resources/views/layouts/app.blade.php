@@ -51,6 +51,7 @@
                           <a class="dropdown-item" href="{{ route('tipos.index') }}"><i class="bi bi-table"></i> Tipos do TR</a>
                           <a class="dropdown-item" href="{{ route('deliberacaos.index') }}"><i class="bi bi-table"></i> Deliberações CCOAF do TR</a>
                           <a class="dropdown-item" href="{{ route('modalidades.index') }}"><i class="bi bi-table"></i> Modalidades do TR</a>
+                          <a class="dropdown-item" href="{{ route('pregoeiros.index') }}"><i class="bi bi-table"></i> Pregoeiros do TR</a>
                         </div>
                     </li>                    
                 </ul>

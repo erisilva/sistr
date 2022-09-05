@@ -110,6 +110,13 @@ class acl extends Seeder
         $modalidade_delete = Permission::where('name', '=', 'modalidade-delete')->get()->first();
         $modalidade_show = Permission::where('name', '=', 'modalidade-show')->get()->first();  
         $modalidade_export = Permission::where('name', '=', 'modalidade-export')->get()->first();
+        // para pregoeiro
+        $pregoeiro_index = Permission::where('name', '=', 'pregoeiro-index')->get()->first(); 
+        $pregoeiro_create = Permission::where('name', '=', 'pregoeiro-create')->get()->first();
+        $pregoeiro_edit = Permission::where('name', '=', 'pregoeiro-edit')->get()->first();  
+        $pregoeiro_delete = Permission::where('name', '=', 'pregoeiro-delete')->get()->first();
+        $pregoeiro_show = Permission::where('name', '=', 'pregoeiro-show')->get()->first();  
+        $pregoeiro_export = Permission::where('name', '=', 'pregoeiro-export')->get()->first();
         // para TRs -------
         $tr_index = Permission::where('name', '=', 'tr-index')->get()->first(); 
         $tr_create = Permission::where('name', '=', 'tr-create')->get()->first();
@@ -185,6 +192,13 @@ class acl extends Seeder
         $administrador_perfil->permissions()->attach($modalidade_delete);
         $administrador_perfil->permissions()->attach($modalidade_show);
         $administrador_perfil->permissions()->attach($modalidade_export);
+        #pregoeiro
+        $administrador_perfil->permissions()->attach($pregoeiro_index);
+        $administrador_perfil->permissions()->attach($pregoeiro_create);
+        $administrador_perfil->permissions()->attach($pregoeiro_edit);
+        $administrador_perfil->permissions()->attach($pregoeiro_delete);
+        $administrador_perfil->permissions()->attach($pregoeiro_show);
+        $administrador_perfil->permissions()->attach($pregoeiro_export);
         #tr
         $administrador_perfil->permissions()->attach($tr_index);
         $administrador_perfil->permissions()->attach($tr_create);
@@ -236,6 +250,12 @@ class acl extends Seeder
         $gerente_perfil->permissions()->attach($modalidade_edit);
         $gerente_perfil->permissions()->attach($modalidade_show);
         $gerente_perfil->permissions()->attach($modalidade_export);
+        #pregoeiro
+        $gerente_perfil->permissions()->attach($pregoeiro_index);
+        $gerente_perfil->permissions()->attach($pregoeiro_create);
+        $gerente_perfil->permissions()->attach($pregoeiro_edit);
+        $gerente_perfil->permissions()->attach($pregoeiro_show);
+        $gerente_perfil->permissions()->attach($pregoeiro_export);
         #modalidade
         $gerente_perfil->permissions()->attach($tr_index);
         $gerente_perfil->permissions()->attach($tr_create);
@@ -273,6 +293,10 @@ class acl extends Seeder
         $operador_perfil->permissions()->attach($modalidade_index);
         $operador_perfil->permissions()->attach($modalidade_show);
         $operador_perfil->permissions()->attach($modalidade_export);
+        #pregoeiro
+        $operador_perfil->permissions()->attach($pregoeiro_index);
+        $operador_perfil->permissions()->attach($pregoeiro_show);
+        $operador_perfil->permissions()->attach($pregoeiro_export);
         #tr
         $operador_perfil->permissions()->attach($tr_index);
         $operador_perfil->permissions()->attach($tr_show);
@@ -301,6 +325,9 @@ class acl extends Seeder
         #modalidade
         $leitor_perfil->permissions()->attach($modalidade_index);
         $leitor_perfil->permissions()->attach($modalidade_show);
+        #pregoeiro
+        $leitor_perfil->permissions()->attach($pregoeiro_index);
+        $leitor_perfil->permissions()->attach($pregoeiro_show);
         #tr
         $leitor_perfil->permissions()->attach($tr_index);
         $leitor_perfil->permissions()->attach($tr_show);

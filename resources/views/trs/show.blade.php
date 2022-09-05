@@ -129,13 +129,17 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="inicioMinutas">Início MINUTAS (contrato/ARP)</label>
         <input type="text" class="form-control" name="inicioMinutas" value="{{ isset($tr->autinicioMinutasuacao) ?  $tr->inicioMinutas->format('d/m/Y') : '-' }}" readonly>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="teminoMinutas">Término MINUTAS (contrato/ARP)</label>
         <input type="text" class="form-control" name="teminoMinutas" value="{{ isset($tr->teminoMinutas) ?  $tr->teminoMinutas->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="pregoeiro">Pregoeiro</label>
+        <input type="text" class="form-control" name="pregoeiro" value="{{ $tr->pregoeiro->nome }}" readonly>
       </div>
     </div> 
 
@@ -151,30 +155,52 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="envioPgm">Envio PGM </label>
         <input type="text" class="form-control" name="envioPgm" value="{{ isset($tr->envioPgm) ?  $tr->envioPgm->format('d/m/Y') : '-' }}" readonly>
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="retornoPgm">Retorno PGM</label>
         <input type="text" class="form-control" name="retornoPgm" value="{{ isset($tr->retornoPgm) ?  $tr->retornoPgm->format('d/m/Y') : '-' }}" readonly>
+      </div>      
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inicioSaneamentoPendencias">Início Saneamento Pendênias </label>
+        <input type="text" class="form-control" name="inicioSaneamentoPendencias" value="{{ isset($tr->inicioSaneamentoPendencias) ?  $tr->inicioSaneamentoPendencias->format('d/m/Y') : '-' }}" readonly>
       </div>
-      <div class="form-group col-md-4">
-        <label for="pendenciasPgm">Pendências PGM </label>
-        <input type="text" class="form-control" name="pendenciasPgm" value="{{ isset($tr->pendenciasPgm) ?  $tr->pendenciasPgm->format('d/m/Y') : '-' }}" readonly>
+      <div class="form-group col-md-6">
+        <label for="terminoSaneamentoPendencias">Término Saneamento Pendências </label>
+        <input type="text" class="form-control" name="terminoSaneamentoPendencias" value="{{ isset($tr->terminoSaneamentoPendencias) ?  $tr->terminoSaneamentoPendencias->format('d/m/Y') : '-' }}" readonly>
       </div>
     </div>  
 
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="numeroEdital">Nº EDITAL </label>
         <input type="text" class="form-control" name="numeroEdital" value="{{ $tr->numeroEdital }}" readonly>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="dataPregao">Data PREGÃO </label>
         <input type="text" class="form-control" name="dataPregao" value="{{ isset($tr->dataPregao) ?  $tr->dataPregao->format('d/m/Y') : '-' }}" readonly>
       </div>
+      <div class="form-group col-md-4">
+        <label for="impugnacao">Impugnação / Suspensão </label>
+        <input type="text" class="form-control" name="impugnacao" value="{{ isset($tr->impugnacao) ?  $tr->impugnacao->format('d/m/Y') : '-' }}" readonly>
+      </div>
     </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inicioAnaliseTecnica">Início Análise Técnica </label>
+        <input type="text" class="form-control" name="inicioAnaliseTecnica" value="{{ isset($tr->inicioAnaliseTecnica) ?  $tr->inicioAnaliseTecnica->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="terminoAnaliseTecnica">Término Análise Técnica  </label>
+        <input type="text" class="form-control" name="terminoAnaliseTecnica" value="{{ isset($tr->terminoAnaliseTecnica) ?  $tr->terminoAnaliseTecnica->format('d/m/Y') : '-' }}" readonly>
+      </div>
+    </div>  
 
     <div class="form-group">
       <label for="observacaoLicitacao">Observação da Licitação</label>
@@ -205,6 +231,11 @@
         <label for="solicitacaoEmpenho">Solicitação Empenho</label>
         <input type="text" class="form-control" name="solicitacaoEmpenho" value="{{ isset($tr->solicitacaoEmpenho) ?  $tr->solicitacaoEmpenho->format('d/m/Y') : '-' }}" readonly>
       </div>
+    </div>
+
+    <div class="form-group">
+      <label for="publicacao">PUBLICAÇÃO DOC</label>
+      <textarea class="form-control" name="publicacao" id="publicacao" rows="3" readonly>{{ $tr->publicacao }}</textarea>
     </div>
 
     <div class="form-group">

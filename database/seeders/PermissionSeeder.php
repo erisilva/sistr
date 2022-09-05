@@ -252,6 +252,31 @@ class PermissionSeeder extends Seeder
             'description' => 'Exportação de dados das modalidades',
         ]);
 
+        DB::table('permissions')->insert([
+            'name' => 'pregoeiro-index',
+            'description' => 'Lista de pregoeiros',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pregoeiro-create',
+            'description' => 'Registrar novo pregoeiro',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pregoeiro-edit',
+            'description' => 'Alterar dados do pregoeiro',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pregoeiro-delete',
+            'description' => 'Excluir pregoeiro',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pregoeiro-show',
+            'description' => 'Mostrar dados da pregoeiro',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pregoeiro-export',
+            'description' => 'Exportação de dados dos pregoeiros',
+        ]);
+
 
         # TRS ------------------
 

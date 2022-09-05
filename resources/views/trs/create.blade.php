@@ -196,14 +196,28 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="inicioMinutas">Início MINUTAS (contrato/ARP) <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="inicioMinutas" id="inicioMinutas" value="{{ old('inicioMinutas') ?? '' }}" autocomplete="off">
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="teminoMinutas">Término MINUTAS (contrato/ARP) <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="teminoMinutas" id="teminoMinutas" value="{{ old('teminoMinutas') ?? '' }}" autocomplete="off">
       </div>
+      <div class="form-group col-md-4">
+        <label for="pregoeiro_id">Pregoeiro <strong  class="text-danger">(*)</strong></label>
+        <select class="form-control" id="pregoeiro_id" name="pregoeiro_id">
+            <option value="1" selected="true">Não Definindo</option> 
+            @foreach($pregoeiros as $pregoeiro)
+            <option value="{{$pregoeiro->id}}" {{ old("pregoeiro_id") == $pregoeiro->id ? "selected":"" }}>{{$pregoeiro->nome}}</option>
+            @endforeach
+        </select>
+        @if ($errors->has('pregoeiro_id'))
+        <div class="text-danger">
+        {{ $errors->first('pregoeiro_id') }}
+        </div>
+        @endif
+      </div>  
     </div> 
 
     <div class="form-row">
@@ -218,28 +232,50 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="envioPgm">Envio PGM <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="envioPgm" id="envioPgm" value="{{ old('envioPgm') ?? '' }}" autocomplete="off">
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="retornoPgm">Retorno PGM <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="retornoPgm" id="retornoPgm" value="{{ old('retornoPgm') ?? '' }}" autocomplete="off">
       </div>
-      <div class="form-group col-md-4">
-        <label for="pendenciasPgm">Pendências PGM <strong  class="text-warning">(opcional)</strong></label>  
-        <input type="text" class="form-control" name="pendenciasPgm" id="pendenciasPgm" value="{{ old('pendenciasPgm') ?? '' }}" autocomplete="off">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inicioSaneamentoPendencias">Início Saneamento Pendênias <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="inicioSaneamentoPendencias" id="inicioSaneamentoPendencias" value="{{ old('inicioSaneamentoPendencias') ?? '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="terminoSaneamentoPendencias">Término Saneamento Pendências <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="terminoSaneamentoPendencias" id="terminoSaneamentoPendencias" value="{{ old('terminoSaneamentoPendencias') ?? '' }}" autocomplete="off">
       </div>
     </div>  
 
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="numeroEdital">Nº EDITAL <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="numeroEdital" id="numeroEdital" value="{{ old('numeroEdital') ?? '' }}">
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="dataPregao">Data PREGÃO <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="dataPregao" id="dataPregao" value="{{ old('dataPregao') ?? '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="impugnacao">Impugnação / Suspensão <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="impugnacao" id="impugnacao" value="{{ old('impugnacao') ?? '' }}" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inicioAnaliseTecnica">Início Análise Técnica <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="inicioAnaliseTecnica" id="inicioAnaliseTecnica" value="{{ old('inicioAnaliseTecnica') ?? '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="terminoAnaliseTecnica">Término Análise Técnica <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="terminoAnaliseTecnica" id="terminoAnaliseTecnica" value="{{ old('terminoAnaliseTecnica') ?? '' }}" autocomplete="off">
       </div>
     </div>
 
@@ -272,7 +308,12 @@
         <label for="solicitacaoEmpenho">Solicitação Empenho <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="solicitacaoEmpenho" id="solicitacaoEmpenho" value="{{ old('solicitacaoEmpenho') ?? '' }}" autocomplete="off">
       </div>
-    </div>  
+    </div>
+
+    <div class="form-group">
+      <label for="publicacao">PUBLICAÇÃO DOC <strong  class="text-warning">(opcional)</strong></label>
+      <textarea class="form-control" name="publicacao" id="publicacao" rows="3">{{ old('publicacao') ?? '' }}</textarea>
+    </div>
 
     <div class="form-group">
       <label for="observacao">Observações <strong  class="text-warning">(opcional)</strong></label>
@@ -294,7 +335,7 @@
 <script>
   $(document).ready(function(){
 
-      $('#entregueSupAdm, #entregueComprasContrato, #inicioCotacao, #terminoCotacao, #envioSuplanPro, #retornoSuplanPro, #assinaturasGabinete, #envioCCOAF, #retornoCCOAF, #autuacao, #inicioMinutas, #teminoMinutas, #inicioMinutasEdital, #terminoMinutasEdital, #envioPgm, #retornoPgm, #pendenciasPgm, #dataPregao, #dataHomologacao, #dataRatificacao, #formalizacaoContratoArp, #dataContratoArp, #solicitacaoEmpenho').datepicker({
+      $('#entregueSupAdm, #entregueComprasContrato, #inicioCotacao, #terminoCotacao, #envioSuplanPro, #retornoSuplanPro, #assinaturasGabinete, #envioCCOAF, #retornoCCOAF, #autuacao, #inicioMinutas, #teminoMinutas, #inicioMinutasEdital, #terminoMinutasEdital, #envioPgm, #retornoPgm, #inicioSaneamentoPendencias, #terminoSaneamentoPendencias, #dataPregao, #impugnacao, #inicioAnaliseTecnica, #terminoAnaliseTecnica, #dataHomologacao, #dataRatificacao, #formalizacaoContratoArp, #dataContratoArp, #solicitacaoEmpenho').datepicker({
           format: "dd/mm/yyyy",
           todayBtn: "linked",
           clearBtn: true,

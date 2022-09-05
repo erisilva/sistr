@@ -217,14 +217,28 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="inicioMinutas">Início MINUTAS (contrato/ARP) <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="inicioMinutas" id="inicioMinutas" value="{{ isset($tr->inicioMinutas) ?  $tr->inicioMinutas->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="teminoMinutas">Término MINUTAS (contrato/ARP) <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="teminoMinutas" id="teminoMinutas" value="{{ isset($tr->teminoMinutas) ?  $tr->teminoMinutas->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
+      <div class="form-group col-md-4">
+        <label for="pregoeiro_id">Pregoeiro <strong  class="text-danger">(*)</strong></label>
+        <select class="form-control" id="pregoeiro_id" name="pregoeiro_id">
+            <option value="{{$tr->pregoeiro_id}}" selected="true">&rarr; {{ $tr->pregoeiro->nome }}</option> 
+            @foreach($pregoeiros as $pregoeiro)
+            <option value="{{$pregoeiro->id}}">{{$pregoeiro->nome}}</option>
+            @endforeach
+        </select>
+        @if ($errors->has('pregoeiro_id'))
+        <div class="text-danger">
+        {{ $errors->first('pregoeiro_id') }}
+        </div>
+        @endif
+      </div>  
     </div> 
 
     <div class="form-row">
@@ -239,30 +253,53 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="envioPgm">Envio PGM <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="envioPgm" id="envioPgm" value="{{ isset($tr->envioPgm) ?  $tr->envioPgm->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="retornoPgm">Retorno PGM <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="retornoPgm" id="retornoPgm" value="{{ isset($tr->retornoPgm) ?  $tr->retornoPgm->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
-      <div class="form-group col-md-4">
-        <label for="pendenciasPgm">Pendências PGM <strong  class="text-warning">(opcional)</strong></label>  
-        <input type="text" class="form-control" name="pendenciasPgm" id="pendenciasPgm" value="{{ isset($tr->pendenciasPgm) ?  $tr->pendenciasPgm->format('d/m/Y') : '' }}" autocomplete="off">
-      </div>
-    </div>  
+    </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
+        <label for="inicioSaneamentoPendencias">Início Saneamento Pendênias <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="inicioSaneamentoPendencias" id="inicioSaneamentoPendencias" value="{{ isset($tr->inicioSaneamentoPendencias) ?  $tr->inicioSaneamentoPendencias->format('d/m/Y') : '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="terminoSaneamentoPendencias">Término Saneamento Pendências <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="terminoSaneamentoPendencias" id="terminoSaneamentoPendencias" value="{{ isset($tr->terminoSaneamentoPendencias) ?  $tr->terminoSaneamentoPendencias->format('d/m/Y') : '' }}" autocomplete="off">
+      </div>
+    </div>  
+
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
         <label for="numeroEdital">Nº EDITAL <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="numeroEdital" id="numeroEdital" value="{{ $tr->numeroEdital }}">
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="dataPregao">Data PREGÃO <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="dataPregao" id="dataPregao" value="{{ isset($tr->dataPregao) ?  $tr->dataPregao->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
+      <div class="form-group col-md-4">
+        <label for="impugnacao">Impugnação / Suspensão <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="impugnacao" id="impugnacao" value="{{ isset($tr->impugnacao) ?  $tr->impugnacao->format('d/m/Y') : '' }}" autocomplete="off">
+      </div>
     </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inicioAnaliseTecnica">Início Análise Técnica <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="inicioAnaliseTecnica" id="inicioAnaliseTecnica" value="{{ isset($tr->inicioAnaliseTecnica) ?  $tr->inicioAnaliseTecnica->format('d/m/Y') : '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="terminoAnaliseTecnica">Término Análise Técnica  <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="terminoAnaliseTecnica" id="terminoAnaliseTecnica" value="{{ isset($tr->terminoAnaliseTecnica) ?  $tr->terminoAnaliseTecnica->format('d/m/Y') : '' }}" autocomplete="off">
+      </div>
+    </div>  
 
     <div class="form-group">
       <label for="observacaoLicitacao">Observação da Licitação <strong  class="text-warning">(opcional)</strong></label>
@@ -293,7 +330,12 @@
         <label for="solicitacaoEmpenho">Solicitação Empenho <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="solicitacaoEmpenho" id="solicitacaoEmpenho" value="{{ isset($tr->solicitacaoEmpenho) ?  $tr->solicitacaoEmpenho->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
-    </div>  
+    </div>
+
+    <div class="form-group">
+      <label for="publicacao">PUBLICAÇÃO DOC <strong  class="text-warning">(opcional)</strong></label>
+      <textarea class="form-control" name="publicacao" id="publicacao" rows="3">{{ $tr->publicacao }}</textarea>
+    </div>
 
     <div class="form-group">
       <label for="observacao">Observações <strong  class="text-warning">(opcional)</strong></label>
@@ -332,7 +374,7 @@
 <script>
   $(document).ready(function(){
 
-      $('#entregueSupAdm, #entregueComprasContrato, #inicioCotacao, #terminoCotacao, #envioSuplanPro, #retornoSuplanPro, #assinaturasGabinete, #envioCCOAF, #retornoCCOAF, #autuacao, #inicioMinutas, #teminoMinutas, #inicioMinutasEdital, #terminoMinutasEdital, #envioPgm, #retornoPgm, #pendenciasPgm, #dataPregao, #dataHomologacao, #dataRatificacao, #formalizacaoContratoArp, #dataContratoArp, #solicitacaoEmpenho').datepicker({
+      $('#entregueSupAdm, #entregueComprasContrato, #inicioCotacao, #terminoCotacao, #envioSuplanPro, #retornoSuplanPro, #assinaturasGabinete, #envioCCOAF, #retornoCCOAF, #autuacao, #inicioMinutas, #teminoMinutas, #inicioMinutasEdital, #terminoMinutasEdital, #envioPgm, #retornoPgm, #inicioSaneamentoPendencias, #terminoSaneamentoPendencias, #dataPregao, #impugnacao, #inicioAnaliseTecnica, #terminoAnaliseTecnica, #dataHomologacao, #dataRatificacao, #formalizacaoContratoArp, #dataContratoArp, #solicitacaoEmpenho').datepicker({
           format: "dd/mm/yyyy",
           todayBtn: "linked",
           clearBtn: true,

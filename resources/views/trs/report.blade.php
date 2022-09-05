@@ -173,26 +173,33 @@
                 </tr>
 
                 <tr>
-                    <td colspan="2" style = "text-align: center;">
+                    <td colspan="3" style = "text-align: center;">
                         <label for="autuacao"><strong>Autuação / Ordenador Despesa</strong></label>
                         <div id="autuacao">{{ (isset($tr->autuacao)) ? $tr->autuacao->format('d/m/Y') : '-'}}</div>
                     </td>
-                    <td colspan="2" style = "text-align: center;">
+                    <td colspan="3" style = "text-align: center;">
                         <label for="inicioMinutas"><strong>Início MINUTAS (contrato/ARP)</strong></label>
                         <div id="inicioMinutas">{{ (isset($tr->inicioMinutas)) ? $tr->inicioMinutas->format('d/m/Y') : '-'}}</div>
                     </td>
-                    <td colspan="2" style = "text-align: center;">
+                    <td colspan="3" style = "text-align: center;">
                         <label for="teminoMinutas"><strong>Término MINUTAS (contrato/ARP)</strong></label>
                         <div id="teminoMinutas">{{ (isset($tr->teminoMinutas)) ? $tr->teminoMinutas->format('d/m/Y') : '-'}}</div>
+                    </td>                    
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <label for="pregoeiro"><strong>Pregoeiro</strong></label>
+                        <div id="pregoeiro">{{$tr->pregoeiro->nome}}</div>
                     </td>
-                    <td colspan="1" style = "text-align: center;">
+                    <td colspan="3" style = "text-align: center;">
                         <label for="inicioMinutasEdital"><strong>Início minuta EDITAL</strong></label>
                         <div id="inicioMinutasEdital">{{ (isset($tr->inicioMinutasEdital)) ? $tr->inicioMinutasEdital->format('d/m/Y') : '-'}}</div>
                     </td>
-                    <td colspan="2" style = "text-align: center;">
+                    <td colspan="3" style = "text-align: center;">
                         <label for="terminoMinutasEdital"><strong>Término minuta EDITAL</strong></label>
                         <div id="terminoMinutasEdital">{{ (isset($tr->terminoMinutasEdital)) ? $tr->terminoMinutasEdital->format('d/m/Y') : '-'}}</div>
-                    </td>
+                    </td>           
                 </tr>
 
                 <tr>
@@ -205,16 +212,35 @@
                         <div id="retornoPgm">{{ (isset($tr->retornoPgm)) ? $tr->retornoPgm->format('d/m/Y') : '-'}}</div>
                     </td>
                     <td colspan="2" style = "text-align: center;">
-                        <label for="pendenciasPgm"><strong>Pendências PGM</strong></label>
-                        <div id="pendenciasPgm">{{ (isset($tr->pendenciasPgm)) ? $tr->pendenciasPgm->format('d/m/Y') : '-'}}</div>
-                    </td>   
-                    <td colspan="2">
+                        <label for="inicioSaneamentoPendencias"><strong>Início Saneamento Pendênias</strong></label>
+                        <div id="inicioSaneamentoPendencias">{{ (isset($tr->inicioSaneamentoPendencias)) ? $tr->inicioSaneamentoPendencias->format('d/m/Y') : '-'}}</div>
+                    </td>
+                    <td colspan="3" style = "text-align: center;">
+                        <label for="terminoSaneamentoPendencias"><strong>Término Saneamento Pendências</strong></label>
+                        <div id="terminoSaneamentoPendencias">{{ (isset($tr->terminoSaneamentoPendencias)) ? $tr->terminoSaneamentoPendencias->format('d/m/Y') : '-'}}</div>
+                    </td>
+                </tr>
+                
+                <tr>       
+                    <td colspan="1">
                         <label for="numeroEdital"><strong>Nº EDITAL</strong></label>
                         <div id="numeroEdital">{{ (isset($tr->numeroEdital)) ? $tr->numeroEdital : '-'}}</div>
                     </td>
-                    <td colspan="1" style = "text-align: center;">
+                    <td colspan="2" style = "text-align: center;">
                         <label for="dataPregao"><strong>Data PREGÃO</strong></label>
                         <div id="dataPregao">{{ (isset($tr->dataPregao)) ? $tr->dataPregao->format('d/m/Y') : '-'}}</div>
+                    </td>
+                    <td colspan="2" style = "text-align: center;">
+                        <label for="impugnacao"><strong>Impugnação / Suspensão</strong></label>
+                        <div id="impugnacao">{{ (isset($tr->impugnacao)) ? $tr->impugnacao->format('d/m/Y') : '-'}}</div>
+                    </td>
+                    <td colspan="2" style = "text-align: center;">
+                        <label for="inicioAnaliseTecnica"><strong>Início Análise Técnica</strong></label>
+                        <div id="inicioAnaliseTecnica">{{ (isset($tr->inicioAnaliseTecnica)) ? $tr->inicioAnaliseTecnica->format('d/m/Y') : '-'}}</div>
+                    </td>
+                    <td colspan="2" style = "text-align: center;">
+                        <label for="terminoAnaliseTecnica"><strong>Término Análise Técnica</strong></label>
+                        <div id="terminoAnaliseTecnica">{{ (isset($tr->terminoAnaliseTecnica)) ? $tr->terminoAnaliseTecnica->format('d/m/Y') : '-'}}</div>
                     </td>
                 </tr>
 
@@ -245,6 +271,13 @@
                     <td colspan="1" style = "text-align: center;">
                         <label for="solicitacaoEmpenho"><strong>Solicitação Empenho</strong></label>
                         <div id="solicitacaoEmpenho">{{ (isset($tr->solicitacaoEmpenho)) ? $tr->solicitacaoEmpenho->format('d/m/Y') : '-'}}</div>
+                    </td>    
+                </tr>
+
+                <tr>
+                    <td colspan="9">
+                        <label for="publicacao"><strong>PUBLICAÇÃO DOC</strong></label>
+                        <div id="publicacao">{{$tr->publicacao}}</div>
                     </td>    
                 </tr>
 

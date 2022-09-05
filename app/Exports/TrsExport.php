@@ -58,19 +58,37 @@ class TrsExport implements FromQuery, WithHeadings
                                       DB::raw('DATE_FORMAT(trs.autuacao, \'%d/%m/%Y\') AS data_autuacao'),
                                       DB::raw('DATE_FORMAT(trs.inicioMinutas, \'%d/%m/%Y\') AS data_inicioMinutas'),
                                       DB::raw('DATE_FORMAT(trs.teminoMinutas, \'%d/%m/%Y\') AS data_teminoMinutas'),
+
+                                      'pregoeiros.nome as pregoeiro',
+                                      
                                       DB::raw('DATE_FORMAT(trs.inicioMinutasEdital, \'%d/%m/%Y\') AS data_inicioMinutasEdital'),
                                       DB::raw('DATE_FORMAT(trs.terminoMinutasEdital, \'%d/%m/%Y\') AS data_terminoMinutasEdital'),
                                       DB::raw('DATE_FORMAT(trs.envioPgm, \'%d/%m/%Y\') AS data_envioPgm'),
                                       DB::raw('DATE_FORMAT(trs.retornoPgm, \'%d/%m/%Y\') AS data_retornoPgm'),
-                                      DB::raw('DATE_FORMAT(trs.pendenciasPgm, \'%d/%m/%Y\') AS data_pendenciasPgm'),
+
+                                      DB::raw('DATE_FORMAT(trs.inicioSaneamentoPendencias, \'%d/%m/%Y\') AS data_inicioSaneamentoPendencias'),
+                                      DB::raw('DATE_FORMAT(trs.terminoSaneamentoPendencias, \'%d/%m/%Y\') AS data_terminoSaneamentoPendencias'),
+
                                       'trs.numeroEdital',
+
                                       DB::raw('DATE_FORMAT(trs.dataPregao, \'%d/%m/%Y\') AS data_Pregao'),
+
+                                      DB::raw('DATE_FORMAT(trs.impugnacao, \'%d/%m/%Y\') AS data_impugnacao'),
+
                                       'trs.observacaoLicitacao',
+                                      
+                                      DB::raw('DATE_FORMAT(trs.inicioAnaliseTecnica, \'%d/%m/%Y\') AS data_inicioAnaliseTecnica'),
+                                      DB::raw('DATE_FORMAT(trs.terminoAnaliseTecnica, \'%d/%m/%Y\') AS data_terminoAnaliseTecnica'),
+                                      
+
+                                      
+
                                       DB::raw('DATE_FORMAT(trs.dataHomologacao, \'%d/%m/%Y\') AS data_dataHomologacao'),
                                       DB::raw('DATE_FORMAT(trs.dataRatificacao, \'%d/%m/%Y\') AS data_dataRatificacao'),
                                       DB::raw('DATE_FORMAT(trs.formalizacaoContratoArp, \'%d/%m/%Y\') AS data_formalizacaoContratoArp'),
                                       DB::raw('DATE_FORMAT(trs.dataContratoArp, \'%d/%m/%Y\') AS data_dataContratoArp'),
                                       DB::raw('DATE_FORMAT(trs.solicitacaoEmpenho, \'%d/%m/%Y\') AS data_solicitacaoEmpenho'),
+                                      'trs.publicacao',
                                       'trs.observacao',
                                       'users.name as operador',
                                       DB::raw('DATE_FORMAT(trs.created_at, \'%d/%m/%Y\') AS data'),
@@ -83,6 +101,7 @@ class TrsExport implements FromQuery, WithHeadings
         $result = $result->join('deliberacaos', 'deliberacaos.id', '=', 'trs.deliberacao_id');
         $result = $result->join('modalidades', 'modalidades.id', '=', 'trs.modalidade_id');
         $result = $result->join('responsavels', 'responsavels.id', '=', 'trs.responsavel_id');
+        $result = $result->join('pregoeiros', 'pregoeiros.id', '=', 'trs.pregoeiro_id');
         $result = $result->join('tipos', 'tipos.id', '=', 'trs.tipo_id');
         $result = $result->join('users', 'users.id', '=', 'trs.user_id');
 
@@ -132,19 +151,25 @@ class TrsExport implements FromQuery, WithHeadings
                 "Autuação / Ordenador Despesa",
                 "Início MINUTAS (contrato/ARP)",
                 "Término MINUTAS (contrato/ARP)",
+                "Pregoeiro",
                 "Início minuta EDITAL",
-                "Término minuta EDITAL",
+                "Término minuta EDITAL",                
                 "Envio PGM",
                 "Retorno PGM",
-                "Pendências PGM",
+                "Início Saneamento Pendênias",
+                "Término Saneamento Pendências",
                 "Nº EDITAL",
                 "Data PREGÃO",
+                'Impugnação / Suspensão',
+                'Início Análise Técnica',
+                'Término Análise Técnica',                
                 "Observação da Licitação",
                 "Data Homologação",
                 "Data Ratificação",
                 "Formalização Contrato/ARP",
                 "Data Contrato/ARP",
                 "Solicitação Empenho",
+                'PUBLICAÇÃO DOC',
                 "Observações",
                 "Funcionario Responsável",
                 "Data do Cadastro",

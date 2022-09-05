@@ -68,42 +68,40 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 Route::get('/situacaos/export/csv', 'SituacaoController@exportcsv')->name('situacaos.export.csv');
 Route::get('/situacaos/export/xls', 'SituacaoController@exportxls')->name('situacaos.export.xls');
 Route::get('/situacaos/export/pdf', 'SituacaoController@exportpdf')->name('situacaos.export.pdf');
-Route::get('/situacaos/autocomplete', 'SituacaoController@autocomplete')->name('situacaos.autocomplete');
 Route::resource('/situacaos', 'SituacaoController');
 
 
 Route::get('/tipos/export/csv', 'TipoController@exportcsv')->name('tipos.export.csv');
 Route::get('/tipos/export/xls', 'TipoController@exportxls')->name('tipos.export.xls');
 Route::get('/tipos/export/pdf', 'TipoController@exportpdf')->name('tipos.export.pdf');
-Route::get('/tipos/autocomplete', 'TipoController@autocomplete')->name('tipos.autocomplete');
 Route::resource('/tipos', 'TipoController');
 
 Route::get('/responsavels/export/csv', 'ResponsavelController@exportcsv')->name('responsavels.export.csv');
 Route::get('/responsavels/export/xls', 'ResponsavelController@exportxls')->name('responsavels.export.xls');
 Route::get('/responsavels/export/pdf', 'ResponsavelController@exportpdf')->name('responsavels.export.pdf');
-Route::get('/responsavels/autocomplete', 'ResponsavelController@autocomplete')->name('responsavels.autocomplete');
 Route::resource('/responsavels', 'ResponsavelController');
 
 Route::get('/origems/export/csv', 'OrigemController@exportcsv')->name('origems.export.csv');
 Route::get('/origems/export/xls', 'OrigemController@exportxls')->name('origems.export.xls');
 Route::get('/origems/export/pdf', 'OrigemController@exportpdf')->name('origems.export.pdf');
-Route::get('/origems/autocomplete', 'OrigemController@autocomplete')->name('origems.autocomplete');
 Route::resource('/origems', 'OrigemController');
 
 Route::get('/deliberacaos/export/csv', 'DeliberacaoController@exportcsv')->name('deliberacaos.export.csv');
 Route::get('/deliberacaos/export/xls', 'DeliberacaoController@exportxls')->name('deliberacaos.export.xls');
 Route::get('/deliberacaos/export/pdf', 'DeliberacaoController@exportpdf')->name('deliberacaos.export.pdf');
-Route::get('/deliberacaos/autocomplete', 'DeliberacaoController@autocomplete')->name('deliberacaos.autocomplete');
 Route::resource('/deliberacaos', 'DeliberacaoController');
 
 Route::get('/modalidades/export/csv', 'ModalidadeController@exportcsv')->name('modalidades.export.csv');
 Route::get('/modalidades/export/xls', 'ModalidadeController@exportxls')->name('modalidades.export.xls');
 Route::get('/modalidades/export/pdf', 'ModalidadeController@exportpdf')->name('modalidades.export.pdf');
-Route::get('/modalidades/autocomplete', 'ModalidadeController@autocomplete')->name('modalidades.autocomplete');
 Route::resource('/modalidades', 'ModalidadeController');
+
+Route::get('/pregoeiros/export/csv', 'PregoeiroController@exportcsv')->name('pregoeiros.export.csv');
+Route::get('/pregoeiros/export/xls', 'PregoeiroController@exportxls')->name('pregoeiros.export.xls');
+Route::get('/pregoeiros/export/pdf', 'PregoeiroController@exportpdf')->name('pregoeiros.export.pdf');
+Route::resource('/pregoeiros', 'PregoeiroController');
 
 Route::get('/trs/export/csv', 'TrController@exportcsv')->name('trs.export.csv');
 Route::get('/trs/export/xls', 'TrController@exportxls')->name('trs.export.xls');
 Route::get('/trs/export/pdf', 'TrController@exportpdf')->name('trs.export.pdf');
-Route::get('/trs/autocomplete', 'TrController@autocomplete')->name('trs.autocomplete');
 Route::resource('/trs', 'TrController');

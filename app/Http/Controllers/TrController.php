@@ -10,6 +10,7 @@ use App\Models\Tipo;
 use App\Models\Responsavel;
 use App\Models\Deliberacao;
 use App\Models\Modalidade;
+use App\Models\Pregoeiro;
 
 use App\Models\Perpage;
 
@@ -118,8 +119,9 @@ class TrController extends Controller
         $responsavels = Responsavel::orderBy('nome', 'asc')->get();
         $deliberacaos = Deliberacao::orderBy('descricao', 'asc')->get();
         $modalidades = Modalidade::orderBy('descricao', 'asc')->get();
+        $pregoeiros = Pregoeiro::orderBy('nome', 'asc')->get();
 
-        return view('trs.create', compact('situacaos', 'origems', 'tipos', 'responsavels','deliberacaos', 'modalidades'));
+        return view('trs.create', compact('situacaos', 'origems', 'tipos', 'responsavels','deliberacaos', 'modalidades', 'pregoeiros'));
     }
 
     /**
@@ -138,6 +140,7 @@ class TrController extends Controller
           'responsavel_id' => 'required',
           'deliberacao_id' => 'required',
           'modalidade_id' => 'required',
+          'pregoeiro_id' => 'required',
         ],
         [
             'situacao_id.required' => 'Selecione o status do TR na lista',
@@ -147,6 +150,7 @@ class TrController extends Controller
             'responsavel_id.required' => 'Selecione o responsável do TR na lista',
             'deliberacao_id.required' => 'Selecione a deliberação do TR na lista',
             'modalidade_id.required' => 'Selecione a modalidade do TR na lista',
+            'pregoeiro_id.required' => 'Selecione o pregoeiro do TR na lista',
         ]);
 
         $tr = $request->all();
@@ -156,7 +160,7 @@ class TrController extends Controller
         $tr['user_id'] = $user->id; // sava o id d user logado no sistema
 
         // conversão dos formatos dos campos de data em formato do banco
-        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'pendenciasPgm', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'solicitacaoEmpenho'];
+        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'solicitacaoEmpenho', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'impugnacao'];
 
         foreach ($datas_a_ajustar as $formatacao_de_data) {
             if(isset($tr[$formatacao_de_data]) && !empty($tr[$formatacao_de_data])) {
@@ -210,8 +214,9 @@ class TrController extends Controller
         $responsavels = Responsavel::orderBy('nome', 'asc')->get();
         $deliberacaos = Deliberacao::orderBy('descricao', 'asc')->get();
         $modalidades = Modalidade::orderBy('descricao', 'asc')->get();
+        $pregoeiros = Pregoeiro::orderBy('nome', 'asc')->get();
 
-        return view('trs.edit', compact('tr','situacaos', 'origems', 'tipos', 'responsavels','deliberacaos', 'modalidades'));
+        return view('trs.edit', compact('tr','situacaos', 'origems', 'tipos', 'responsavels','deliberacaos', 'modalidades', 'pregoeiros'));
     }
 
     /**
@@ -231,6 +236,7 @@ class TrController extends Controller
           'responsavel_id' => 'required',
           'deliberacao_id' => 'required',
           'modalidade_id' => 'required',
+          'pregoeiro_id' => 'required',
         ],
         [
             'situacao_id.required' => 'Selecione o status do TR na lista',
@@ -240,12 +246,13 @@ class TrController extends Controller
             'responsavel_id.required' => 'Selecione o responsável do TR na lista',
             'deliberacao_id.required' => 'Selecione a deliberação do TR na lista',
             'modalidade_id.required' => 'Selecione a modalidade do TR na lista',
+            'pregoeiro_id.required' => 'Selecione o pregoeiro do TR na lista',
         ]);
 
         $tr = $request->all();
 
         // conversão dos formatos dos campos de data em formato do banco
-        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'pendenciasPgm', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'solicitacaoEmpenho'];
+        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'solicitacaoEmpenho', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'impugnacao'];
 
         foreach ($datas_a_ajustar as $formatacao_de_data) {
             if(isset($tr[$formatacao_de_data]) && !empty($tr[$formatacao_de_data])) {
@@ -347,7 +354,7 @@ class TrController extends Controller
 
         $pdf = PDF::loadView('trs.report', compact('trs'))->setPaper('a4', 'landscape');
         
-        return $pdf->download('Permissoes_' .  date("Y-m-d H:i:s") . '.pdf');
+        return $pdf->download('TRs_' .  date("Y-m-d H:i:s") . '.pdf');
 
     }
 
