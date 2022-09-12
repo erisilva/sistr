@@ -74,8 +74,6 @@ class TrsExport implements FromQuery, WithHeadings
                                       DB::raw('DATE_FORMAT(trs.dataPregao, \'%d/%m/%Y\') AS data_Pregao'),
 
                                       DB::raw('DATE_FORMAT(trs.impugnacao, \'%d/%m/%Y\') AS data_impugnacao'),
-
-                                      'trs.observacaoLicitacao',
                                       
                                       DB::raw('DATE_FORMAT(trs.inicioAnaliseTecnica, \'%d/%m/%Y\') AS data_inicioAnaliseTecnica'),
                                       DB::raw('DATE_FORMAT(trs.terminoAnaliseTecnica, \'%d/%m/%Y\') AS data_terminoAnaliseTecnica'),
@@ -87,7 +85,7 @@ class TrsExport implements FromQuery, WithHeadings
                                       DB::raw('DATE_FORMAT(trs.dataRatificacao, \'%d/%m/%Y\') AS data_dataRatificacao'),
                                       DB::raw('DATE_FORMAT(trs.formalizacaoContratoArp, \'%d/%m/%Y\') AS data_formalizacaoContratoArp'),
                                       DB::raw('DATE_FORMAT(trs.dataContratoArp, \'%d/%m/%Y\') AS data_dataContratoArp'),
-                                      DB::raw('DATE_FORMAT(trs.solicitacaoEmpenho, \'%d/%m/%Y\') AS data_solicitacaoEmpenho'),
+
                                       'trs.publicacao',
                                       'trs.observacao',
                                       'users.name as operador',
@@ -162,13 +160,11 @@ class TrsExport implements FromQuery, WithHeadings
                 "Data PREGÃO",
                 'Impugnação / Suspensão',
                 'Início Análise Técnica',
-                'Término Análise Técnica',                
-                "Observação da Licitação",
+                'Término Análise Técnica',
                 "Data Homologação",
                 "Data Ratificação",
                 "Formalização Contrato/ARP",
                 "Data Contrato/ARP",
-                "Solicitação Empenho",
                 'PUBLICAÇÃO DOC',
                 "Observações",
                 "Funcionario Responsável",

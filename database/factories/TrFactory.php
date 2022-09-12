@@ -54,12 +54,10 @@ class TrFactory extends Factory
             'impugnacao' => $this->faker->date($format = 'Y-m-d', $max = 'now'), 
             'inicioAnaliseTecnica' => $this->faker->date($format = 'Y-m-d', $max = 'now'), 
             'terminoAnaliseTecnica' => $this->faker->date($format = 'Y-m-d', $max = 'now'), 
-            'observacaoLicitacao' => $this->faker->text($maxNbChars = 100), 
             'dataHomologacao' => $this->faker->date($format = 'Y-m-d', $max = 'now'), 
             'dataRatificacao' => $this->faker->date($format = 'Y-m-d', $max = 'now'), 
             'formalizacaoContratoArp' => $this->faker->date($format = 'Y-m-d', $max = 'now'), 
             'dataContratoArp' => $this->faker->date($format = 'Y-m-d', $max = 'now'), 
-            'solicitacaoEmpenho' => $this->faker->date($format = 'Y-m-d', $max = 'now'), 
             'publicacao' => $this->faker->text($maxNbChars = 120),
             'observacao' => $this->faker->text($maxNbChars = 100)
         ];

@@ -279,11 +279,6 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="observacaoLicitacao">Observação da Licitação <strong  class="text-warning">(opcional)</strong></label>
-      <textarea class="form-control" name="observacaoLicitacao" id="observacaoLicitacao" rows="2">{{ old('observacaoLicitacao') ?? '' }}</textarea>
-    </div>
-
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="dataHomologacao">Data Homologação <strong  class="text-warning">(opcional)</strong></label>  
@@ -296,17 +291,13 @@
     </div>  
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="formalizacaoContratoArp">Formalização Contrato/ARP <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="formalizacaoContratoArp" id="formalizacaoContratoArp" value="{{ old('formalizacaoContratoArp') ?? '' }}" autocomplete="off">
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="dataContratoArp">Data Contrato/ARP <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="dataContratoArp" id="dataContratoArp" value="{{ old('dataContratoArp') ?? '' }}" autocomplete="off">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="solicitacaoEmpenho">Solicitação Empenho <strong  class="text-warning">(opcional)</strong></label>  
-        <input type="text" class="form-control" name="solicitacaoEmpenho" id="solicitacaoEmpenho" value="{{ old('solicitacaoEmpenho') ?? '' }}" autocomplete="off">
       </div>
     </div>
 

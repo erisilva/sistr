@@ -200,11 +200,6 @@
         <label for="terminoAnaliseTecnica">Término Análise Técnica  </label>
         <input type="text" class="form-control" name="terminoAnaliseTecnica" value="{{ isset($tr->terminoAnaliseTecnica) ?  $tr->terminoAnaliseTecnica->format('d/m/Y') : '-' }}" readonly>
       </div>
-    </div>  
-
-    <div class="form-group">
-      <label for="observacaoLicitacao">Observação da Licitação</label>
-      <textarea class="form-control" name="observacaoLicitacao" id="observacaoLicitacao" rows="3" readonly>{{ $tr->observacaoLicitacao }}</textarea>
     </div>
 
     <div class="form-row">
@@ -219,17 +214,13 @@
     </div>  
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="formalizacaoContratoArp">Formalização Contrato/ARP </label>
         <input type="text" class="form-control" name="formalizacaoContratoArp" value="{{ isset($tr->formalizacaoContratoArp) ?  $tr->formalizacaoContratoArp->format('d/m/Y') : '-' }}" readonly>
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="dataContratoArp">Data Contrato/ARP  </label>
         <input type="text" class="form-control" name="dataContratoArp" value="{{ isset($tr->dataContratoArp) ?  $tr->dataContratoArp->format('d/m/Y') : '-' }}" readonly>
-      </div>
-      <div class="form-group col-md-4">
-        <label for="solicitacaoEmpenho">Solicitação Empenho</label>
-        <input type="text" class="form-control" name="solicitacaoEmpenho" value="{{ isset($tr->solicitacaoEmpenho) ?  $tr->solicitacaoEmpenho->format('d/m/Y') : '-' }}" readonly>
       </div>
     </div>
 

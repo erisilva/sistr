@@ -245,13 +245,6 @@
                 </tr>
 
                 <tr>
-                    <td colspan="9">
-                        <label for="observacaoLicitacao"><strong>Observação da Licitação</strong></label>
-                        <div id="observacaoLicitacao">{{$tr->observacaoLicitacao}}</div>
-                    </td>    
-                </tr>
-
-                <tr>
                     <td colspan="2" style = "text-align: center;">
                         <label for="dataHomologacao"><strong>Data Homologação</strong></label>
                         <div id="dataHomologacao">{{ (isset($tr->dataHomologacao)) ? $tr->dataHomologacao->format('d/m/Y') : '-'}}</div>
@@ -264,14 +257,10 @@
                         <label for="formalizacaoContratoArp"><strong>Formalização Contrato/ARP</strong></label>
                         <div id="formalizacaoContratoArp">{{ (isset($tr->formalizacaoContratoArp)) ? $tr->formalizacaoContratoArp->format('d/m/Y') : '-'}}</div>
                     </td> 
-                    <td colspan="2" style = "text-align: center;">
+                    <td colspan="3" style = "text-align: center;">
                         <label for="dataContratoArp"><strong>Data Contrato/ARP</strong></label>
                         <div id="dataContratoArp">{{ (isset($tr->dataContratoArp)) ? $tr->dataContratoArp->format('d/m/Y') : '-'}}</div>
-                    </td> 
-                    <td colspan="1" style = "text-align: center;">
-                        <label for="solicitacaoEmpenho"><strong>Solicitação Empenho</strong></label>
-                        <div id="solicitacaoEmpenho">{{ (isset($tr->solicitacaoEmpenho)) ? $tr->solicitacaoEmpenho->format('d/m/Y') : '-'}}</div>
-                    </td>    
+                    </td>   
                 </tr>
 
                 <tr>

@@ -23,9 +23,13 @@ class CreateTrsTable extends Migration
             $table->unsignedInteger('numero'); // TR nº
             $table->unsignedInteger('ano'); // Ano
 
-            $table->unsignedBigInteger('origem_id'); // Origem
+            $table->unsignedBigInteger('origem_id'); // Origem - Mudou para Solicitante
             
             $table->text('descricao'); // Descrição básica do Objeto
+                                       // Chamado de objeto
+
+            // planilha-2 Novo campo
+            $table->string('quantidadeItens', 80)->nullable(); // QTDE.ITENS - Qtde. Itens
 
             $table->unsignedBigInteger('tipo_id'); // Tipo
 
@@ -60,6 +64,7 @@ class CreateTrsTable extends Migration
             $table->string('numeroModalidade', 80)->nullable(); // Nº modalidade
 
             $table->date('autuacao')->nullable(); // Autuação / Ordenador Despesa
+                                                    // mudou o nome: 
 
             $table->date('inicioMinutas')->nullable(); // Início MINUTAS (contrato/ARP)
             $table->date('teminoMinutas')->nullable(); // Término MINUTAS (contrato/ARP)
@@ -87,15 +92,18 @@ class CreateTrsTable extends Migration
             $table->date('terminoAnaliseTecnica')->nullable(); // TÉRMINO ANÁLISE TÉCNICA
 
 
-            $table->text('observacaoLicitacao')->nullable(); // Observação da Licitação (IMPULGUINAÇÃO,RECURSO E ANÁLISE TÉCNICA, ETC.)
+            // foi removido na nova planilha
+            //$table->text('observacaoLicitacao')->nullable(); // Observação da Licitação (IMPULGUINAÇÃO,RECURSO E ANÁLISE TÉCNICA, ETC.)
 
             $table->date('dataHomologacao')->nullable(); // Data Homologação
             $table->date('dataRatificacao')->nullable(); // Data Ratificação
+                                                         // Mudou nome Ratificação
             
             $table->date('formalizacaoContratoArp')->nullable(); // Formalização Contrato/ARP
             $table->date('dataContratoArp')->nullable(); // Data Contrato/ARP           
             
-            $table->date('solicitacaoEmpenho')->nullable(); // Solicitação Empenho
+            // foi removido na nova planilha
+            // $table->date('solicitacaoEmpenho')->nullable(); // Solicitação Empenho
 
             //novo campo
             $table->text('publicacao')->nullable(); // PUBLICAÇÃO DOC

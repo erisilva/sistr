@@ -628,21 +628,6 @@
 										},
 										{
 											"_type": "ERDColumnView",
-											"_id": "AAAAAAGCIfCvpKGCBfM=",
-											"_parent": {
-												"$ref": "AAAAAAGBOeSE/BNK+ew="
-											},
-											"model": {
-												"$ref": "AAAAAAGCIfCvn6F/wmI="
-											},
-											"font": "Arial;13;0",
-											"left": 357,
-											"top": 975,
-											"width": 267.50146484375,
-											"height": 13
-										},
-										{
-											"_type": "ERDColumnView",
 											"_id": "AAAAAAGCIfCxp6GI1ec=",
 											"_parent": {
 												"$ref": "AAAAAAGBOeSE/BNK+ew="
@@ -652,7 +637,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 357,
-											"top": 990,
+											"top": 975,
 											"width": 267.50146484375,
 											"height": 13
 										},
@@ -667,7 +652,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 357,
-											"top": 1005,
+											"top": 990,
 											"width": 267.50146484375,
 											"height": 13
 										},
@@ -682,7 +667,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 357,
-											"top": 1020,
+											"top": 1005,
 											"width": 267.50146484375,
 											"height": 13
 										},
@@ -697,22 +682,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 357,
-											"top": 1035,
-											"width": 267.50146484375,
-											"height": 13
-										},
-										{
-											"_type": "ERDColumnView",
-											"_id": "AAAAAAGCIkIQ/qG0Wpc=",
-											"_parent": {
-												"$ref": "AAAAAAGBOeSE/BNK+ew="
-											},
-											"model": {
-												"$ref": "AAAAAAGCIkIQ+aGxIdk="
-											},
-											"font": "Arial;13;0",
-											"left": 357,
-											"top": 1050,
+											"top": 1020,
 											"width": 267.50146484375,
 											"height": 13
 										}
@@ -721,7 +691,7 @@
 									"left": 352,
 									"top": 415,
 									"width": 277.50146484375,
-									"height": 653
+									"height": 623
 								}
 							],
 							"font": "Arial;13;0",
@@ -2723,17 +2693,6 @@
 						},
 						{
 							"_type": "ERDColumn",
-							"_id": "AAAAAAGCIfCvn6F/wmI=",
-							"_parent": {
-								"$ref": "AAAAAAGBOeSE+xNGWqQ="
-							},
-							"name": "observacaoLicitacao",
-							"type": "VARCHAR",
-							"length": 0,
-							"nullable": true
-						},
-						{
-							"_type": "ERDColumn",
 							"_id": "AAAAAAGCIfCxoqGFaMw=",
 							"_parent": {
 								"$ref": "AAAAAAGBOeSE+xNGWqQ="
@@ -2772,17 +2731,6 @@
 								"$ref": "AAAAAAGBOeSE+xNGWqQ="
 							},
 							"name": "dataContratoArp",
-							"type": "DATE",
-							"length": 0,
-							"nullable": true
-						},
-						{
-							"_type": "ERDColumn",
-							"_id": "AAAAAAGCIkIQ+aGxIdk=",
-							"_parent": {
-								"$ref": "AAAAAAGBOeSE+xNGWqQ="
-							},
-							"name": "solicitacaoEmpenho",
 							"type": "DATE",
 							"length": 0,
 							"nullable": true

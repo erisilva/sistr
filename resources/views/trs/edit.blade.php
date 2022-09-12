@@ -301,10 +301,6 @@
       </div>
     </div>  
 
-    <div class="form-group">
-      <label for="observacaoLicitacao">Observação da Licitação <strong  class="text-warning">(opcional)</strong></label>
-      <textarea class="form-control" name="observacaoLicitacao" id="observacaoLicitacao" rows="2">{{ $tr->observacaoLicitacao }}</textarea>
-    </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
@@ -318,17 +314,13 @@
     </div>  
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="formalizacaoContratoArp">Formalização Contrato/ARP <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="formalizacaoContratoArp" id="formalizacaoContratoArp" value="{{ isset($tr->formalizacaoContratoArp) ?  $tr->formalizacaoContratoArp->format('d/m/Y') : ''  }}" autocomplete="off">
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="dataContratoArp">Data Contrato/ARP <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="dataContratoArp" id="dataContratoArp" value="{{ isset($tr->dataContratoArp) ?  $tr->dataContratoArp->format('d/m/Y') : '' }}" autocomplete="off">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="solicitacaoEmpenho">Solicitação Empenho <strong  class="text-warning">(opcional)</strong></label>  
-        <input type="text" class="form-control" name="solicitacaoEmpenho" id="solicitacaoEmpenho" value="{{ isset($tr->solicitacaoEmpenho) ?  $tr->solicitacaoEmpenho->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
     </div>
 
