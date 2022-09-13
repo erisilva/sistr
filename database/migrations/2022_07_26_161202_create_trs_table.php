@@ -64,7 +64,7 @@ class CreateTrsTable extends Migration
             $table->string('numeroModalidade', 80)->nullable(); // Nº modalidade
 
             $table->date('autuacao')->nullable(); // Autuação / Ordenador Despesa
-                                                    // mudou o nome: 
+                                                    // mudou o nome: DATA AUTUAÇÃO PAC, Autuação PAC
 
             $table->date('inicioMinutas')->nullable(); // Início MINUTAS (contrato/ARP)
             $table->date('teminoMinutas')->nullable(); // Término MINUTAS (contrato/ARP)

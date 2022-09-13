@@ -30,6 +30,38 @@
     </button>
   </div>
   @endif
+  @if ($errors->has('numero_edit'))
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Info!</strong>  {{ $errors->first('numero_edit') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  @endif
+  @if ($errors->has('ano_edit'))
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Info!</strong>  {{ $errors->first('ano_edit') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  @endif
+  @if (Session::has('ano_edit_existe'))
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Info!</strong>  {{ session('ano_edit_existe') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  @endif
+  @if (Session::has('ano_edit_alteradp'))
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Info!</strong>  {{ session('ano_edit_alteradp') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  @endif 
   <form method="POST" action="{{ route('trs.update', $tr->id) }}">
     @csrf
     @method('PUT')
@@ -52,7 +84,7 @@
         @endif 
       </div>
       <div class="form-group col-md-4">
-        <label for="origem_id">Origem <strong  class="text-danger">(*)</strong></label>
+        <label for="origem_id">Solicitante <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="origem_id" name="origem_id">
             <option value="" selected="true">Clique para escolher...</option>
             <option value="{{$tr->origem_id}}" selected="true">&rarr; {{ $tr->origem->descricao }}</option>  
@@ -80,7 +112,11 @@
 
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-2">
+        <label for="quantidadeItens">Qtde. Itens <strong  class="text-warning">(opcional)</strong></label>  
+        <input type="text" class="form-control" name="quantidadeItens" id="quantidadeItens" value="{{ $tr->quantidadeItens }}">
+      </div>
+      <div class="form-group col-md-2">
         <label for="tipo_id">Tipo <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="tipo_id" name="tipo_id">
             <option value="{{$tr->tipo_id}}" selected="true">&rarr; {{ $tr->tipo->descricao }}</option>   
@@ -211,7 +247,7 @@
         <input type="text" class="form-control" name="numeroModalidade" id="numeroModalidade" value="{{ $tr->numeroModalidade }}">
       </div>
       <div class="form-group col-md-4">
-        <label for="autuacao">Autuação / Ordenador Despesa <strong  class="text-warning">(opcional)</strong></label>  
+        <label for="autuacao">Autuação PAC <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="autuacao" id="autuacao" value="{{ isset($tr->autuacao) ?  $tr->autuacao->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
     </div>
@@ -304,11 +340,11 @@
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="dataHomologacao">Data Homologação <strong  class="text-warning">(opcional)</strong></label>  
+        <label for="dataHomologacao">Homologação <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="dataHomologacao" id="dataHomologacao" value="{{ isset($tr->dataHomologacao) ?  $tr->dataHomologacao->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
-        <label for="dataRatificacao">Data Ratificação <strong  class="text-warning">(opcional)</strong></label>  
+        <label for="dataRatificacao">Ratificação <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="dataRatificacao" id="dataRatificacao" value="{{ isset($tr->dataRatificacao) ?  $tr->dataRatificacao->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
     </div>  
@@ -352,11 +388,63 @@
     <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Alterar Dados do TR</button>
   </form>
 </div>
+
+
+@can('tr-edit-numero-ano')
+<div class="container py-3">
+  <div class="container bg-warning text-dark">
+    <p class="text-center"><strong>+ Opçoes</strong></p>
+  </div>
+
+  <div class="container py-2 text-center">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTrocarNumero">
+      <i class="bi bi-pen"></i> Alterar Número e Ano do TR
+    </button>    
+  </div>
+</div>
+@endcan
+
 <div class="container">
   <div class="float-right">
     <a href="{{ route('trs.index') }}" class="btn btn-secondary btn-sm" role="button"><i class="bi bi-arrow-left-square"></i> Voltar</i></a>
   </div>
 </div>
+
+@can('tr-edit-numero-ano')
+<!-- Janela para alterar a numeração do TR-->
+<div class="modal fade" id="modalTrocarNumero" tabindex="-1" role="dialog" aria-labelledby="JanelaFiltro" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-pen"></i> Alterar Número e Ano do TR</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{{ route('trs.editnumber', $tr) }}">
+          @csrf
+          @method('PUT')
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="numero_edit">TR nº</label>
+                <input type="text" class="form-control" id="numero_edit" name="numero_edit" value="{{ $tr->numero }}">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="ano_edit">Ano</label>
+                <input type="text" class="form-control" id="ano_edit" name="ano_edit" value="{{ $tr->ano }}">
+              </div>
+          </div>    
+          <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-pen"></i> Alterar</button>
+        </form>  
+      </div>     
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endcan
 @endsection
 
 @section('script-footer')

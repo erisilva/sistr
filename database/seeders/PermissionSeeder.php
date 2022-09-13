@@ -305,6 +305,10 @@ class PermissionSeeder extends Seeder
             'name' => 'tr-export',
             'description' => 'Exportação de dados das TRs',
         ]);
+        DB::table('permissions')->insert([
+            'name' => 'tr-edit-numero-ano',
+            'description' => 'Alteração do número/ano do TR',
+        ]);
 
 
 

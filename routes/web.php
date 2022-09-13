@@ -101,6 +101,7 @@ Route::get('/pregoeiros/export/xls', 'PregoeiroController@exportxls')->name('pre
 Route::get('/pregoeiros/export/pdf', 'PregoeiroController@exportpdf')->name('pregoeiros.export.pdf');
 Route::resource('/pregoeiros', 'PregoeiroController');
 
+Route::put('/trs/editnumber/{tr}', 'TrController@editnumber')->name('trs.editnumber');
 Route::get('/trs/export/csv', 'TrController@exportcsv')->name('trs.export.csv');
 Route::get('/trs/export/xls', 'TrController@exportxls')->name('trs.export.xls');
 Route::get('/trs/export/pdf', 'TrController@exportpdf')->name('trs.export.pdf');

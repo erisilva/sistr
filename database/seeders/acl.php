@@ -124,6 +124,7 @@ class acl extends Seeder
         $tr_delete = Permission::where('name', '=', 'tr-delete')->get()->first();
         $tr_show = Permission::where('name', '=', 'tr-show')->get()->first();  
         $tr_export = Permission::where('name', '=', 'tr-export')->get()->first();
+        $tr_edit_numero_ano = Permission::where('name', '=', 'tr-edit-numero-ano')->get()->first();
 
 
 
@@ -206,6 +207,7 @@ class acl extends Seeder
         $administrador_perfil->permissions()->attach($tr_delete);
         $administrador_perfil->permissions()->attach($tr_show);
         $administrador_perfil->permissions()->attach($tr_export);
+        $administrador_perfil->permissions()->attach($tr_edit_numero_ano);
 
 
         // o gerente (diretor) pode gerenciar os operadores do sistema
@@ -256,12 +258,15 @@ class acl extends Seeder
         $gerente_perfil->permissions()->attach($pregoeiro_edit);
         $gerente_perfil->permissions()->attach($pregoeiro_show);
         $gerente_perfil->permissions()->attach($pregoeiro_export);
-        #modalidade
+        #tr
         $gerente_perfil->permissions()->attach($tr_index);
         $gerente_perfil->permissions()->attach($tr_create);
         $gerente_perfil->permissions()->attach($tr_edit);
+        $gerente_perfil->permissions()->attach($tr_delete);
         $gerente_perfil->permissions()->attach($tr_show);
         $gerente_perfil->permissions()->attach($tr_export);
+        $gerente_perfil->permissions()->attach($tr_edit_numero_ano);
+
 
 
         // o operador é o nível de operação do sistema não pode criar

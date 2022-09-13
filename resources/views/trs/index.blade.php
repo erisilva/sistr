@@ -37,7 +37,7 @@
                 <th scope="col"></th>
                 <th scope="col">Status</th>
                 <th scope="col">TR nº/Ano</th>
-                <th scope="col">Origem</th>
+                <th scope="col">Solicitante</th>
                 <th scope="col">Descrição</th>               
                 <th scope="col">Tipo</th>
                 <th scope="col">Requisição</th>

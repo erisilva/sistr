@@ -307,6 +307,34 @@ class TrController extends Controller
         return Excel::download(new TrsExport($lista_de_filtros_ajustada), 'Trs_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
+    public function editnumber(Request $request, Tr $tr) {
+        if (Gate::denies('tr-edit-numero-ano')) {
+            abort(403, 'Acesso negado.');
+        }
+        
+        $formFields = $request->validate([
+            'ano_edit' => 'required|numeric',
+            'numero_edit' => 'required|numeric',
+            ],
+            [
+                'ano_edit.required' => 'É obrigatório preencher o campo ano',
+                'ano_edit.numeric' => 'O campo ano precia ser numérico',
+                'numero_edit.required' => 'O campo número precia ser numérico',
+                'numero_edit.numeric' => 'É obrigatório preencher o campo número',
+            ]
+        );
+
+        if(Tr::where('ano', '=', $formFields['ano_edit'])->where('numero', '=', $formFields['numero_edit'])->exists()){
+            return redirect(route('trs.edit', $tr))->with('ano_edit_existe', 'O TR nº e ano já estão sendo usados no sistema!');    
+        } else {
+            $tr->update([
+                'ano' => $formFields['ano_edit'], 
+                'numero' => $formFields['numero_edit'] 
+            ]);
+            return redirect(route('trs.edit', $tr))->with('ano_edit_alteradp', 'O TR nº e ano foram alterados!');    
+        }
+    }    
+
     public function exportxls()
     {
         if (Gate::denies('tr-export')) {

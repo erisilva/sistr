@@ -20,6 +20,7 @@ class TrFactory extends Factory
             'ano' => 1, 
             'origem_id' => $this->faker->numberBetween(1, 30), 
             'descricao' => $this->faker->text($maxNbChars = 50), 
+            'quantidadeItens' => $this->faker->numberBetween(1, 499),
             'tipo_id' => $this->faker->numberBetween(1, 4), 
             'entregueSupAdm' => $this->faker->date($format = 'Y-m-d', $max = 'now'), 
             'entregueComprasContrato' => $this->faker->date($format = 'Y-m-d', $max = 'now'), 

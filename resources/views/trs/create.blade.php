@@ -32,7 +32,7 @@
         @endif 
       </div>
       <div class="form-group col-md-6">
-        <label for="origem_id">Origem <strong  class="text-danger">(*)</strong></label>
+        <label for="origem_id">Solicitante <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="origem_id" name="origem_id">
             <option value="" selected="true">Clique para escolher...</option> 
             @foreach($origems as $origem)
@@ -59,10 +59,14 @@
 
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-2">
+        <label for="quantidadeItens">Qtde. Itens <strong  class="text-warning">(opcional)</strong></label>
+        <input type="text" class="form-control" name="quantidadeItens" id="quantidadeItens" value="{{ old('quantidadeItens') ?? '' }}">
+      </div>
+      <div class="form-group col-md-2">
         <label for="tipo_id">Tipo <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="tipo_id" name="tipo_id">
-            <option value="" selected="true">Clique para escolher...</option> 
+            <option value="" selected="true">Clique ...</option> 
             @foreach($tipos as $tipo)
             <option value="{{$tipo->id}}" {{ old("tipo_id") == $tipo->id ? "selected":"" }}>{{$tipo->descricao}}</option>
             @endforeach
@@ -135,7 +139,7 @@
         <input type="text" class="form-control" name="assinaturasGabinete" id="assinaturasGabinete" value="{{ old('assinaturasGabinete') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
-        <label for="protocoloSisprot">Protocolo SISPROT <strong  class="text-warning">(opcional)</strong></label>  
+        <label for="protocoloSisprot">Protocolo SISPROT <strong  class="text-warning">(opcional)</strong></label>
         <input type="text" class="form-control" name="protocoloSisprot" id="protocoloSisprot" value="{{ old('protocoloSisprot') ?? '' }}">
       </div>
     </div>  
@@ -153,7 +157,7 @@
       <div class="form-group col-md-4">
         <label for="deliberacao_id">Deliberação CCOAF <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="deliberacao_id" name="deliberacao_id">
-            <option value="1" selected="true">Não Definindo</option> 
+            <option value="" selected="true">Clique para escolher...</option>
             @foreach($deliberacaos as $deliberacao)
             <option value="{{$deliberacao->id}}" {{ old("deliberacao_id") == $deliberacao->id ? "selected":"" }}>{{$deliberacao->descricao}}</option>
             @endforeach
@@ -174,7 +178,7 @@
       <div class="form-group col-md-3">
         <label for="modalidade_id">MODALIDADE <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="modalidade_id" name="modalidade_id">
-            <option value="1" selected="true">Não Definindo</option> 
+            <option value="" selected="true">Clique para escolher...</option>
             @foreach($modalidades as $modalidade)
             <option value="{{$modalidade->id}}" {{ old("modalidade_id") == $modalidade->id ? "selected":"" }}>{{$modalidade->descricao}}</option>
             @endforeach
@@ -190,7 +194,7 @@
         <input type="text" class="form-control" name="numeroModalidade" id="numeroModalidade" value="{{ old('numeroModalidade') ?? '' }}">
       </div>
       <div class="form-group col-md-4">
-        <label for="autuacao">Autuação / Ordenador Despesa <strong  class="text-warning">(opcional)</strong></label>  
+        <label for="autuacao">Autuação PAC <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="autuacao" id="autuacao" value="{{ old('autuacao') ?? '' }}" autocomplete="off">
       </div>
     </div>
@@ -207,7 +211,7 @@
       <div class="form-group col-md-4">
         <label for="pregoeiro_id">Pregoeiro <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="pregoeiro_id" name="pregoeiro_id">
-            <option value="1" selected="true">Não Definindo</option> 
+            <option value="" selected="true">Clique para escolher...</option> 
             @foreach($pregoeiros as $pregoeiro)
             <option value="{{$pregoeiro->id}}" {{ old("pregoeiro_id") == $pregoeiro->id ? "selected":"" }}>{{$pregoeiro->nome}}</option>
             @endforeach
@@ -285,7 +289,7 @@
         <input type="text" class="form-control" name="dataHomologacao" id="dataHomologacao" value="{{ old('dataHomologacao') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
-        <label for="dataRatificacao">Data Ratificação <strong  class="text-warning">(opcional)</strong></label>  
+        <label for="dataRatificacao">Ratificação <strong  class="text-warning">(opcional)</strong></label>  
         <input type="text" class="form-control" name="dataRatificacao" id="dataRatificacao" value="{{ old('dataRatificacao') ?? '' }}" autocomplete="off">
       </div>
     </div>  

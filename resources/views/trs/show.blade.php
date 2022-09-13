@@ -21,7 +21,7 @@
         <input type="text" class="form-control" name="situacao" value="{{ $tr->situacao->descricao }}" readonly>
       </div>
       <div class="form-group col-md-4">
-        <label for="origem">Origem</label>
+        <label for="origem">Solicitante</label>
         <input type="text" class="form-control" name="origem" value="{{ $tr->origem->descricao }}" readonly>
       </div>
     </div>
@@ -48,7 +48,11 @@
 
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-2">
+        <label for="quantidadeItens">Qtde. Itens </label>
+        <input type="text" class="form-control" name="quantidadeItens" value="{{ $tr->quantidadeItens }}" readonly>
+      </div>
+      <div class="form-group col-md-2">
         <label for="responsavel">Responsável cotação</label>
         <input type="text" class="form-control" name="responsavel" value="{{ $tr->responsavel->nome }}" readonly>
       </div>
@@ -123,7 +127,7 @@
         <input type="text" class="form-control" name="numeroModalidade" value="{{ $tr->numeroModalidade }}" readonly>
       </div>
       <div class="form-group col-md-4">
-        <label for="autuacao">Autuação / Ordenador Despesa</label>
+        <label for="autuacao">Autuação PAC</label>
         <input type="text" class="form-control" name="autuacao" value="{{ isset($tr->autuacao) ?  $tr->autuacao->format('d/m/Y') : '-' }}" readonly>
       </div>
     </div>
@@ -204,11 +208,11 @@
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="dataHomologacao">Data Homologação </label>
+        <label for="dataHomologacao">Homologação </label>
         <input type="text" class="form-control" name="dataHomologacao" value="{{ isset($tr->dataHomologacao) ?  $tr->dataHomologacao->format('d/m/Y') : '-' }}" readonly>
       </div>
       <div class="form-group col-md-6">
-        <label for="dataRatificacao">Data Ratificação </label>
+        <label for="dataRatificacao">Ratificação </label>
         <input type="text" class="form-control" name="dataRatificacao" value="{{ isset($tr->dataRatificacao) ?  $tr->dataRatificacao->format('d/m/Y') : '-' }}" readonly>
       </div>
     </div>  

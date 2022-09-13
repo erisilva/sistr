@@ -81,7 +81,7 @@
                         <strong>Nº {{ $tr->numero }}/{{ $tr->ano }}</strong>
                     </td>
                     <td colspan="3">
-                        <label for="origem"><strong>Origem</strong></label>
+                        <label for="origem"><strong>Solicitante</strong></label>
                         <div id="origem">{{$tr->origem->descricao}}</div>
                     </td>
                 </tr>
@@ -93,6 +93,10 @@
                 </tr>
 
                 <tr>
+                    <td colspan="1"  style = "text-align: right;">
+                        <label for="tipo"><strong>Qtde. Itens</strong></label>
+                        <div id="tipo">{{$tr->quantidadeItens}}</div>
+                    </td> 
                     <td colspan="2">
                         <label for="tipo"><strong>Tipo</strong></label>
                         <div id="tipo">{{$tr->tipo->descricao}}</div>
@@ -101,7 +105,7 @@
                         <label for="entregueSupAdm"><strong>Entregue SUP.ADM.</strong></label>
                         <div id="entregueSupAdm">{{ (isset($tr->entregueSupAdm)) ? $tr->entregueSupAdm->format('d/m/Y') : '-'}}</div>
                     </td>
-                    <td colspan="3" style = "text-align: center;">
+                    <td colspan="2" style = "text-align: center;">
                         <label for="entregueComprasContrato"><strong>Entregue COMPRAS / CONTRATOS</strong></label>
                         <div id="entregueComprasContrato">{{ (isset($tr->entregueComprasContrato)) ? $tr->entregueComprasContrato->format('d/m/Y') : "-"}}</div>
                     </td>
@@ -174,7 +178,7 @@
 
                 <tr>
                     <td colspan="3" style = "text-align: center;">
-                        <label for="autuacao"><strong>Autuação / Ordenador Despesa</strong></label>
+                        <label for="autuacao"><strong>Autuação PAC</strong></label>
                         <div id="autuacao">{{ (isset($tr->autuacao)) ? $tr->autuacao->format('d/m/Y') : '-'}}</div>
                     </td>
                     <td colspan="3" style = "text-align: center;">
@@ -246,11 +250,11 @@
 
                 <tr>
                     <td colspan="2" style = "text-align: center;">
-                        <label for="dataHomologacao"><strong>Data Homologação</strong></label>
+                        <label for="dataHomologacao"><strong>Homologação</strong></label>
                         <div id="dataHomologacao">{{ (isset($tr->dataHomologacao)) ? $tr->dataHomologacao->format('d/m/Y') : '-'}}</div>
                     </td>
                     <td colspan="2" style = "text-align: center;">
-                        <label for="dataRatificacao"><strong>Data Ratificação</strong></label>
+                        <label for="dataRatificacao"><strong>Ratificação</strong></label>
                         <div id="dataRatificacao">{{ (isset($tr->dataRatificacao)) ? $tr->dataRatificacao->format('d/m/Y') : '-'}}</div>
                     </td> 
                     <td colspan="2" style = "text-align: center;">
