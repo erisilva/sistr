@@ -45,7 +45,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarConfig">
                           <a class="dropdown-item" href="{{ route('users.index') }}"><i class="bi bi-person-lines-fill"></i> Operadores do Sistema</a>
-                          <a class="dropdown-item" href="{{ route('origems.index') }}"><i class="bi bi-table"></i> Origens do TR</a>
+                          <a class="dropdown-item" href="{{ route('origems.index') }}"><i class="bi bi-table"></i> Solicitante do TR</a>
                           <a class="dropdown-item" href="{{ route('responsavels.index') }}"><i class="bi bi-table"></i> Responsáveis do TR</a>
                           <a class="dropdown-item" href="{{ route('situacaos.index') }}"><i class="bi bi-table"></i> Situações do TR</a>
                           <a class="dropdown-item" href="{{ route('tipos.index') }}"><i class="bi bi-table"></i> Tipos do TR</a>

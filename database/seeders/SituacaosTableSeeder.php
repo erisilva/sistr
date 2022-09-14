@@ -15,7 +15,7 @@ class SituacaosTableSeeder extends Seeder
      */
     public function run()
     {
-
+DB::table('situacaos')->insert(['descricao' => 'Não definido']); 
 DB::table('situacaos')->insert(['descricao' => 'ANALISE TECNICA']);
 DB::table('situacaos')->insert(['descricao' => 'CANCELADO']);
 DB::table('situacaos')->insert(['descricao' => 'CCOAF']);

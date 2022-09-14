@@ -4,7 +4,7 @@
 <div class="container-fluid">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ route('origems.index') }}">Lista de Origens do TR</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('origems.index') }}">Lista de Solicitantes do TR</a></li>
       <li class="breadcrumb-item active" aria-current="page">Alterar Registro</li>
     </ol>
   </nav>
@@ -32,7 +32,7 @@
         @endif
       </div>
     </div>
-    <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i> Alterar Dados do Tipo do TR</button>
+    <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i> Alterar Dados do Solicitante do TR</button>
   </form>
 </div>
 <div class="container">

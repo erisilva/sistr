@@ -4,7 +4,7 @@
 <div class="container-fluid">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ route('origems.index') }}">Lista de Origens do TR</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('origems.index') }}">Lista de Solicitantes do TR</a></li>
       <li class="breadcrumb-item active" aria-current="page">Exibir Registro</li>
     </ol>
   </nav>
@@ -13,7 +13,7 @@
 
   <div class="card">
     <div class="card-header">
-      Origens do TR
+      Solicitantes do TR
     </div>
     <div class="card-body">
       <ul class="list-group list-group-flush">

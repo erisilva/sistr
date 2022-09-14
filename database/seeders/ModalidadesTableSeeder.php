@@ -15,6 +15,7 @@ class ModalidadesTableSeeder extends Seeder
      */
     public function run()
     {
+DB::table('modalidades')->insert(['descricao' => 'Não definido']);        
 DB::table('modalidades')->insert(['descricao' => 'ADESAO ARP']);
 DB::table('modalidades')->insert(['descricao' => 'CONCORRENCIA']);
 DB::table('modalidades')->insert(['descricao' => 'CONCURSO']);

@@ -36,10 +36,10 @@
             <tr>
                 <th scope="col"></th>
                 <th scope="col">Status</th>
-                <th scope="col">TR nº/Ano</th>
+                <th scope="col">TR Nº/Ano</th>
                 <th scope="col">Solicitante</th>
-                <th scope="col">Descrição</th>               
-                <th scope="col">Tipo</th>
+                <th scope="col">Tipo TR</th>
+                <th scope="col">Objeto</th>                               
                 <th scope="col">Requisição</th>
                 <th scope="col">SISPROT</th>
                 <th scope="col">Modalidade</th>
@@ -58,14 +58,14 @@
                   </div>
                 </td>
                 <td>{{$tr->situacao->descricao}}</td>
-                <td class="text-nowrap"><strong>TR nº{{$tr->numero}}/{{$tr->ano}}</strong></td>
+                <td class="text-nowrap"><strong>TR Nº{{$tr->numero}}/{{$tr->ano}}</strong></td>
                 <td>{{$tr->origem->descricao}}</td>
+                <td>{{$tr->tipo->descricao}}</td>
                 @if (strlen($tr->descricao) > 50 )
                   <td>{{substr($tr->descricao, 0, 47) . "..."}}</td>
                 @else
                   <td>{{$tr->descricao}}</td>
-                @endif          
-                <td>{{$tr->situacao->descricao}}</td>
+                @endif                          
                 <td>{{$tr->requisicaoCompras}}</td>
                 <td>{{$tr->protocoloSisprot}}</td>
                 <td>{{$tr->modalidade->descricao}}</td>
@@ -96,7 +96,7 @@
 
             <div class="form-row">
               <div class="form-group col-md-2">
-                <label for="numero">TR nº</label>
+                <label for="numero">TR Nº</label>
                 <input type="text" class="form-control" id="numero" name="numero" value="{{request()->input('numero')}}">
               </div>
               <div class="form-group col-md-2">

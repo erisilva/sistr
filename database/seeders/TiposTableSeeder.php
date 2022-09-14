@@ -16,6 +16,7 @@ class TiposTableSeeder extends Seeder
     public function run()
     {
 
+    DB::table('situacaos')->insert(['descricao' => 'Não definido']);    
     DB::table('tipos')->insert(['descricao' => 'ADITIVO']);
     DB::table('tipos')->insert(['descricao' => 'AQUISICAO']);
     DB::table('tipos')->insert(['descricao' => 'CREDENCIAMENTO']);

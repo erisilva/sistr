@@ -4,7 +4,7 @@
 <div class="container-fluid">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ route('origems.index') }}">Lista de Origens do TR</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('origems.index') }}">Lista de Solicitantes do TR</a></li>
       <li class="breadcrumb-item active" aria-current="page">Novo Registro</li>
     </ol>
   </nav>
@@ -23,7 +23,7 @@
         @endif
       </div>
     </div>
-    <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Incluir Origem do TR</button>
+    <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> Incluir Solicitante do TR</button>
   </form>
   <div class="float-right">
     <a href="{{ route('origems.index') }}" class="btn btn-secondary btn-sm" role="button"><i class="bi bi-arrow-left"></i> Voltar</i></a>

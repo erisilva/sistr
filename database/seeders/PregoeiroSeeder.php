@@ -15,6 +15,7 @@ class PregoeiroSeeder extends Seeder
      */
     public function run()
     {
+    DB::table('pregoeiros')->insert(['nome' => 'Não definido']);      
     DB::table('pregoeiros')->insert(['nome' => 'FABIANA SILVA']);
     DB::table('pregoeiros')->insert(['nome' => 'MARCIO EUSTAQUIO']);
     DB::table('pregoeiros')->insert(['nome' => 'TASSIA RAFAELA']);

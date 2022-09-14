@@ -13,45 +13,46 @@
   <form>
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
           <div class="p-3 bg-primary text-white text-right h2">Nº {{ $tr->numero }}/{{ $tr->ano }}</div>    
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="situacao">STATUS</label>
         <input type="text" class="form-control" name="situacao" value="{{ $tr->situacao->descricao }}" readonly>
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="origem">Solicitante</label>
         <input type="text" class="form-control" name="origem" value="{{ $tr->origem->descricao }}" readonly>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="tipo">Tipo</label>
+        <input type="text" class="form-control" name="tipo" value="{{ $tr->tipo->descricao }}" readonly>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="descricao">Descrição básica do Objeto</label>
+      <label for="descricao">Objeto</label>
       <textarea class="form-control" name="descricao" id="descricao" rows="3" readonly>{{ $tr->descricao }}</textarea>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="tipo">Tipo</label>
-        <input type="text" class="form-control" name="tipo" value="{{ $tr->tipo->descricao }}" readonly>
+        <label for="quantidadeItens">Qtde. Itens </label>
+        <input type="text" class="form-control" name="quantidadeItens" value="{{ $tr->quantidadeItens }}" readonly>
       </div>
       <div class="form-group col-md-4">
-        <label for="entregueSupAdm">Entregue SUP.ADM.</label>
+        <label for="entregueSupAdm">Entrada na S.A.</label>
         <input type="text" class="form-control" name="entregueSupAdm" value="{{ isset($tr->entregueSupAdm) ?  $tr->entregueSupAdm->format('d/m/Y') : '-' }}" readonly>
       </div>
       <div class="form-group col-md-4">
-        <label for="entregueComprasContrato">Entregue COMPRAS / CONTRATOS</label>
+        <label for="entregueComprasContrato">Entrada DCC</label>
         <input type="text" class="form-control" name="entregueComprasContrato" value="{{ isset($tr->entregueComprasContrato) ?  $tr->entregueComprasContrato->format('d/m/Y') : '-' }}" readonly>
       </div>
     </div>
 
 
     <div class="form-row">
-      <div class="form-group col-md-2">
-        <label for="quantidadeItens">Qtde. Itens </label>
-        <input type="text" class="form-control" name="quantidadeItens" value="{{ $tr->quantidadeItens }}" readonly>
-      </div>
+      
       <div class="form-group col-md-2">
         <label for="responsavel">Responsável cotação</label>
         <input type="text" class="form-control" name="responsavel" value="{{ $tr->responsavel->nome }}" readonly>
@@ -69,7 +70,7 @@
 
     <div class="form-row">
       <div class="form-group col-md-3">
-        <label for="requisicaoCompras">Requisição Compras</label>
+        <label for="requisicaoCompras">Requisição Compras Nº</label>
         <input type="text" class="form-control" name="requisicaoCompras" value="{{ $tr->requisicaoCompras }}" readonly>
       </div>
       <div class="form-group col-md-3">
@@ -77,37 +78,30 @@
         <input type="text" class="form-control" name="valor" value="{{ $tr->valor }}" readonly>
       </div>
       <div class="form-group col-md-3">
-        <label for="envioSuplanPro">Envio SUPLAN_PRO  </label>
+        <label for="envioSuplanPro">Envio SUPLAN  </label>
         <input type="text" class="form-control" name="envioSuplanPro" value="{{ isset($tr->envioSuplanPro) ?  $tr->envioSuplanPro->format('d/m/Y') : '-' }}" readonly>
       </div>
       <div class="form-group col-md-3">
-        <label for="retornoSuplanPro">Retorno SUPLAN_PRO</label>
+        <label for="retornoSuplanPro">Retorno SUPLAN</label>
         <input type="text" class="form-control" name="retornoSuplanPro" value="{{ isset($tr->retornoSuplanPro) ?  $tr->retornoSuplanPro->format('d/m/Y') : '-' }}" readonly>
       </div>
     </div>  
 
     <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="assinaturasGabinete">Assinaturas GABINETE</label>
-        <input type="text" class="form-control" name="assinaturasGabinete" value="{{ isset($tr->assinaturasGabinete) ?  $tr->assinaturasGabinete->format('d/m/Y') : '-' }}" readonly>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="protocoloSisprot">Protocolo SISPROT </label>
+      <div class="form-group col-md-3">
+        <label for="protocoloSisprot">SISPROT Nº </label>
         <input type="text" class="form-control" name="protocoloSisprot" value="{{ $tr->protocoloSisprot }}" readonly>
       </div>
-    </div>  
 
-
-    <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="envioCCOAF">Envio CCOAF</label>
         <input type="text" class="form-control" name="envioCCOAF" value="{{ isset($tr->envioCCOAF) ?  $tr->envioCCOAF->format('d/m/Y') : '-' }}" readonly>
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="retornoCCOAF">Retorno CCOAF</label>
         <input type="text" class="form-control" name="retornoCCOAF" value="{{ isset($tr->retornoCCOAF) ?  $tr->retornoCCOAF->format('d/m/Y') : '-' }}" readonly>
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="deliberacao">Deliberação CCOAF</label>
         <input type="text" class="form-control" name="deliberacao" value="{{ $tr->deliberacao->descricao }}" readonly>
       </div>
@@ -119,11 +113,11 @@
         <input type="text" class="form-control" name="numeroPAC" value="{{ $tr->numeroPAC }}" readonly>
       </div>
       <div class="form-group col-md-3">
-        <label for="modalidade">MODALIDADE</label>
+        <label for="modalidade">Modalidade</label>
         <input type="text" class="form-control" name="modalidade" value="{{ $tr->modalidade->descricao }}" readonly>
       </div>
       <div class="form-group col-md-3">
-        <label for="numeroModalidade">Nº modalidade </label>
+        <label for="numeroModalidade">Nº Modalidade </label>
         <input type="text" class="form-control" name="numeroModalidade" value="{{ $tr->numeroModalidade }}" readonly>
       </div>
       <div class="form-group col-md-4">
@@ -134,26 +128,26 @@
 
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="inicioMinutas">Início MINUTAS (contrato/ARP)</label>
+        <label for="inicioMinutas">Início minuta (contrato/aditivo)</label>
         <input type="text" class="form-control" name="inicioMinutas" value="{{ isset($tr->autinicioMinutasuacao) ?  $tr->inicioMinutas->format('d/m/Y') : '-' }}" readonly>
       </div>
       <div class="form-group col-md-4">
-        <label for="teminoMinutas">Término MINUTAS (contrato/ARP)</label>
+        <label for="teminoMinutas">Término minuta (contrato/aditivo)</label>
         <input type="text" class="form-control" name="teminoMinutas" value="{{ isset($tr->teminoMinutas) ?  $tr->teminoMinutas->format('d/m/Y') : '-' }}" readonly>
       </div>
       <div class="form-group col-md-4">
-        <label for="pregoeiro">Pregoeiro</label>
+        <label for="pregoeiro">Pregoeiro (a)</label>
         <input type="text" class="form-control" name="pregoeiro" value="{{ $tr->pregoeiro->nome }}" readonly>
       </div>
     </div> 
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="inicioMinutasEdital">Início minuta EDITAL</label>
+        <label for="inicioMinutasEdital">Início minuta ARP</label>
         <input type="text" class="form-control" name="inicioMinutasEdital" value="{{ isset($tr->inicioMinutasEdital) ?  $tr->inicioMinutasEdital->format('d/m/Y') : '-' }}" readonly>
       </div>
       <div class="form-group col-md-6">
-        <label for="terminoMinutasEdital">Término minuta EDITAL</label>
+        <label for="terminoMinutasEdital">Término minuta ARP</label>
         <input type="text" class="form-control" name="terminoMinutasEdital" value="{{ isset($tr->terminoMinutasEdital) ?  $tr->terminoMinutasEdital->format('d/m/Y') : '-' }}" readonly>
       </div>
     </div>
@@ -214,16 +208,20 @@
       <div class="form-group col-md-6">
         <label for="dataRatificacao">Ratificação </label>
         <input type="text" class="form-control" name="dataRatificacao" value="{{ isset($tr->dataRatificacao) ?  $tr->dataRatificacao->format('d/m/Y') : '-' }}" readonly>
+      </div>      
+      <div class="form-group col-md-6">
+        <label for="dataReratificacao">Reratificação </label>
+        <input type="text" class="form-control" name="dataReratificacao" value="{{ isset($tr->dataReratificacao) ?  $tr->dataReratificacao->format('d/m/Y') : '-' }}" readonly>
       </div>
     </div>  
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="formalizacaoContratoArp">Formalização Contrato/ARP </label>
+        <label for="formalizacaoContratoArp">Formalização (contrato/aditivo/ARP) </label>
         <input type="text" class="form-control" name="formalizacaoContratoArp" value="{{ isset($tr->formalizacaoContratoArp) ?  $tr->formalizacaoContratoArp->format('d/m/Y') : '-' }}" readonly>
       </div>
       <div class="form-group col-md-6">
-        <label for="dataContratoArp">Data Contrato/ARP  </label>
+        <label for="dataContratoArp">Data (contrato/aditivo/ARP)  </label>
         <input type="text" class="form-control" name="dataContratoArp" value="{{ isset($tr->dataContratoArp) ?  $tr->dataContratoArp->format('d/m/Y') : '-' }}" readonly>
       </div>
     </div>

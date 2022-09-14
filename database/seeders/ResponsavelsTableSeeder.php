@@ -15,6 +15,7 @@ class ResponsavelsTableSeeder extends Seeder
      */
     public function run()
     {
+DB::table('responsavels')->insert(['nome' => 'Não definido']);        
 DB::table('responsavels')->insert(['nome' => 'ANA PAULA MARIANI']);
 DB::table('responsavels')->insert(['nome' => 'BARBARA PEREIRA']);
 DB::table('responsavels')->insert(['nome' => 'CECILIA BOAVENTURA']);

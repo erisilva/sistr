@@ -48,7 +48,8 @@ class CreateTrsTable extends Migration
             $table->date('envioSuplanPro')->nullable(); // Envio SUPLAN_PRO
             $table->date('retornoSuplanPro')->nullable(); // Retorno SUPLAN_PRO
 
-            $table->date('assinaturasGabinete')->nullable(); // Assinaturas GABINETE
+            // removido = planilha 3
+            //$table->date('assinaturasGabinete')->nullable(); // Assinaturas GABINETE
 
             $table->string('protocoloSisprot', 80)->nullable(); // Protocolo SISPROT
 
@@ -66,14 +67,14 @@ class CreateTrsTable extends Migration
             $table->date('autuacao')->nullable(); // Autuação / Ordenador Despesa
                                                     // mudou o nome: DATA AUTUAÇÃO PAC, Autuação PAC
 
-            $table->date('inicioMinutas')->nullable(); // Início MINUTAS (contrato/ARP)
-            $table->date('teminoMinutas')->nullable(); // Término MINUTAS (contrato/ARP)
+            $table->date('inicioMinutas')->nullable(); // Início MINUTAS (contrato/ARP) - Início minuta (contrato/aditivo)
+            $table->date('teminoMinutas')->nullable(); // Término MINUTAS (contrato/ARP) - Término minuta (contrato/aditivo)
 
             // novo campo
-            $table->unsignedBigInteger('pregoeiro_id'); // status
+            $table->unsignedBigInteger('pregoeiro_id'); // Pregoeiro (a)
 
-            $table->date('inicioMinutasEdital')->nullable(); // Início minuta EDITAL
-            $table->date('terminoMinutasEdital')->nullable(); // Término minuta EDITAL
+            $table->date('inicioMinutasEdital')->nullable(); // Início minuta EDITAL - Início minuta ARP
+            $table->date('terminoMinutasEdital')->nullable(); // Término minuta EDITAL - Término minuta ARP
 
             $table->date('envioPgm')->nullable(); // Envio PGM
             $table->date('retornoPgm')->nullable(); // Retorno PGM
@@ -98,9 +99,13 @@ class CreateTrsTable extends Migration
             $table->date('dataHomologacao')->nullable(); // Data Homologação
             $table->date('dataRatificacao')->nullable(); // Data Ratificação
                                                          // Mudou nome Ratificação
+            // novo campo - terceira planilha Reratificação
+            $table->date('dataReratificacao')->nullable();
             
             $table->date('formalizacaoContratoArp')->nullable(); // Formalização Contrato/ARP
-            $table->date('dataContratoArp')->nullable(); // Data Contrato/ARP           
+                                                                 // novo - Formalização (contrato/aditivo/ARP)
+            $table->date('dataContratoArp')->nullable(); // Data Contrato/ARP 
+                                                         // novo planilha 3 - Data (contrato/aditivo/ARP)          
             
             // foi removido na nova planilha
             // $table->date('solicitacaoEmpenho')->nullable(); // Solicitação Empenho

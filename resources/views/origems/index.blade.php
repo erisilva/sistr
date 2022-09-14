@@ -4,7 +4,7 @@
 <div class="container-fluid">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('origems.index') }}">Lista de Origens do TR</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('origems.index') }}">Lista de Solicitantes do TR</a></li>
     </ol>
   </nav>
   @if(Session::has('deleted_origem'))

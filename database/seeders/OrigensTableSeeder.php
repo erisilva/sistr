@@ -17,7 +17,7 @@ class OrigensTableSeeder extends Seeder
     {
             // mudou o título para solicitante
 
-
+DB::table('origems')->insert(['descricao' => 'Não definido']);   
 DB::table('origems')->insert(['descricao' => 'ALMOXARIFADO']);
 DB::table('origems')->insert(['descricao' => 'CAE IRIA DINIZ']);
 DB::table('origems')->insert(['descricao' => 'CAPS']);

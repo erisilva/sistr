@@ -89,7 +89,7 @@ class OrigemController extends Controller
 
         Origem::create($origem); //salva
 
-        Session::flash('create_origem', 'Origem cadastrada com sucesso!');
+        Session::flash('create_origem', 'Solicitante cadastrado com sucesso!');
 
         return redirect(route('origems.index'));
     }
@@ -145,7 +145,7 @@ class OrigemController extends Controller
             
         $origem->update($request->all());
         
-        Session::flash('edited_origem', 'Origem do TR alterada com sucesso!');
+        Session::flash('edited_origem', 'Solicitante do TR alterado com sucesso!');
 
         return redirect(route('origems.edit', $id));
     }
@@ -164,7 +164,7 @@ class OrigemController extends Controller
 
         Origem::findOrFail($id)->delete();
 
-        Session::flash('deleted_origem', 'Origem do TR excluído com sucesso!');
+        Session::flash('deleted_origem', 'Solicitante do TR excluído com sucesso!');
 
         return redirect(route('origems.index'));
     }
@@ -175,7 +175,7 @@ class OrigemController extends Controller
             abort(403, 'Acesso negado.');
         }
 
-        return Excel::download(new OrigemsExport(), 'Origens_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
+        return Excel::download(new OrigemsExport(), 'Solicitantes_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
     public function exportxls()
@@ -184,7 +184,7 @@ class OrigemController extends Controller
             abort(403, 'Acesso negado.');
         }
 
-        return Excel::download(new OrigemsExport(), 'Origens_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        return Excel::download(new OrigemsExport(), 'Solicitantes_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function exportpdf()
@@ -202,7 +202,7 @@ class OrigemController extends Controller
 
         $pdf = PDF::loadView('origems.report', compact('dataset'));
         
-        return $pdf->download('Origens_' .  date("Y-m-d H:i:s") . '.pdf');
+        return $pdf->download('Solicitantes_' .  date("Y-m-d H:i:s") . '.pdf');
 
     }         
 }

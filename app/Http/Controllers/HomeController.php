@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tr;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', [
+            'criadas' => Tr::orderBy('ano', 'desc')->orderBy('numero', 'desc')->limit(5)->get(),
+            'alteradas' => Tr::orderBy('updated_at', 'desc')->limit(5)->get()
+        ]);
     }
 }

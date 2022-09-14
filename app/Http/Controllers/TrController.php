@@ -160,7 +160,7 @@ class TrController extends Controller
         $tr['user_id'] = $user->id; // sava o id d user logado no sistema
 
         // conversão dos formatos dos campos de data em formato do banco
-        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'impugnacao'];
+        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'dataReratificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'impugnacao'];
 
         foreach ($datas_a_ajustar as $formatacao_de_data) {
             if(isset($tr[$formatacao_de_data]) && !empty($tr[$formatacao_de_data])) {
@@ -252,7 +252,7 @@ class TrController extends Controller
         $tr = $request->all();
 
         // conversão dos formatos dos campos de data em formato do banco
-        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'assinaturasGabinete', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'impugnacao'];
+        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'dataReratificacao','formalizacaoContratoArp', 'dataContratoArp', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'impugnacao'];
 
         foreach ($datas_a_ajustar as $formatacao_de_data) {
             if(isset($tr[$formatacao_de_data]) && !empty($tr[$formatacao_de_data])) {
