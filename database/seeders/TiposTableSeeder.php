@@ -16,15 +16,16 @@ class TiposTableSeeder extends Seeder
     public function run()
     {
 
-    DB::table('situacaos')->insert(['descricao' => 'Não definido']);    
-    DB::table('tipos')->insert(['descricao' => 'ADITIVO']);
-    DB::table('tipos')->insert(['descricao' => 'AQUISICAO']);
-    DB::table('tipos')->insert(['descricao' => 'CREDENCIAMENTO']);
-    DB::table('tipos')->insert(['descricao' => 'EMPENHO']);
-    DB::table('tipos')->insert(['descricao' => 'LOCACAO MOVEL']);
-    DB::table('tipos')->insert(['descricao' => 'RATEIO']);
-    DB::table('tipos')->insert(['descricao' => 'REGISTRO PRECOS']);
-    DB::table('tipos')->insert(['descricao' => 'SERVICO']);
+            DB::table('tipos')->insert(['descricao' => 'Não definido']); 
+            DB::table('tipos')->insert(['descricao' => 'Aditivo']);
+            DB::table('tipos')->insert(['descricao' => 'Aquisição']);
+            DB::table('tipos')->insert(['descricao' => 'Credenciamento']);
+            DB::table('tipos')->insert(['descricao' => 'Empenho']);
+            DB::table('tipos')->insert(['descricao' => 'Locação de imóvel']);
+            DB::table('tipos')->insert(['descricao' => 'Rateio']);
+            DB::table('tipos')->insert(['descricao' => 'Registro de Preços']);
+            DB::table('tipos')->insert(['descricao' => 'Serviços']);
+
 
     }
 }

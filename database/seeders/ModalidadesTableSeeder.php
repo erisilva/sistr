@@ -15,17 +15,13 @@ class ModalidadesTableSeeder extends Seeder
      */
     public function run()
     {
-DB::table('modalidades')->insert(['descricao' => 'Não definido']);        
-DB::table('modalidades')->insert(['descricao' => 'ADESAO ARP']);
-DB::table('modalidades')->insert(['descricao' => 'CONCORRENCIA']);
-DB::table('modalidades')->insert(['descricao' => 'CONCURSO']);
-DB::table('modalidades')->insert(['descricao' => 'DIALOGO COMPETITIVO']);
-DB::table('modalidades')->insert(['descricao' => 'DISPENSA LICITAÇÃO']);
-DB::table('modalidades')->insert(['descricao' => 'INEXIGIBILIDADE']);
-DB::table('modalidades')->insert(['descricao' => 'LEILAO']);
-DB::table('modalidades')->insert(['descricao' => 'PREGAO ELETRONICO']);
-DB::table('modalidades')->insert(['descricao' => 'PREGAO PRESENCIAL']);
-
+        DB::table('modalidades')->insert(['descricao' => 'Não definido']);  
+        DB::table('modalidades')->insert(['descricao' => 'Adesão a ARP']);
+        DB::table('modalidades')->insert(['descricao' => 'Credenciamento']);
+        DB::table('modalidades')->insert(['descricao' => 'Dispensa de Licitação']);
+        DB::table('modalidades')->insert(['descricao' => 'Inexigibilidade']);
+        DB::table('modalidades')->insert(['descricao' => 'Leilão']);
+        DB::table('modalidades')->insert(['descricao' => 'Pregão Eletrônico']);
 
     }
 }
