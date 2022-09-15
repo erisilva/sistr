@@ -43,7 +43,6 @@
                 <th scope="col">Requisição</th>
                 <th scope="col">SISPROT</th>
                 <th scope="col">Modalidade</th>
-                <th scope="col">Nº Modalidade</th>
                 <th scope="col">Nº EDITAL</th>
                 
             </tr>
@@ -55,6 +54,7 @@
                   <div class="btn-group" role="group">
                     <a href="{{route('trs.edit', $tr->id)}}" class="btn btn-primary btn-sm" role="button"><i class="bi bi-pencil-square"></i></a>
                     <a href="{{route('trs.show', $tr->id)}}" class="btn btn-secondary btn-sm" role="button"><i class="bi bi-eye"></i></a>
+                    <a href="{{route('trs.export.single.pdf', $tr)}}" class="btn btn-info btn-sm" role="button"><i class="bi bi-printer"></i></a>
                   </div>
                 </td>
                 <td>{{$tr->situacao->descricao}}</td>
@@ -69,7 +69,6 @@
                 <td>{{$tr->requisicaoCompras}}</td>
                 <td>{{$tr->protocoloSisprot}}</td>
                 <td>{{$tr->modalidade->descricao}}</td>
-                <td>{{$tr->numeroModalidade}}</td>
                 <td>{{$tr->numeroEdital}}</td>
             </tr>    
             @endforeach                                                 

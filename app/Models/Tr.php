@@ -10,7 +10,7 @@ class Tr extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'situacao_id', 'numero', 'ano', 'origem_id', 'descricao', 'quantidadeItens', 'tipo_id', 'entregueSupAdm', 'entregueComprasContrato', 'responsavel_id', 'inicioCotacao', 'terminoCotacao', 'requisicaoCompras', 'valor', 'envioSuplanPro', 'retornoSuplanPro', 'protocoloSisprot', 'envioCCOAF', 'retornoCCOAF', 'deliberacao_id', 'numeroPAC', 'modalidade_id', 'numeroModalidade', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'pregoeiro_id', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'numeroEdital', 'dataPregao', 'impugnacao', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'dataHomologacao', 'dataRatificacao', 'dataReratificacao', 'formalizacaoContratoArp', 'dataContratoArp',  'publicacao', 'observacao',
+        'user_id', 'situacao_id', 'numero', 'ano', 'origem_id', 'descricao', 'quantidadeItens', 'tipo_id', 'entregueSupAdm', 'entregueComprasContrato', 'responsavel_id', 'inicioCotacao', 'terminoCotacao', 'requisicaoCompras', 'valor', 'envioSuplanPro', 'retornoSuplanPro', 'protocoloSisprot', 'envioCCOAF', 'retornoCCOAF', 'deliberacao_id', 'numeroPAC', 'modalidade_id', 'numeroModalidade', 'autuacao', 'inicioMinutas', 'terminoMinutas', 'inicioMinutasARP', 'terminoMinutasARP', 'pregoeiro_id', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'numeroEdital', 'dataPregao', 'impugnacao', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'dataHomologacao', 'dataRatificacao', 'dataReratificacao', 'formalizacaoContratoArp', 'dataContratoArp',  'publicacao', 'observacao',
     ];
 
     public function user()
@@ -53,5 +53,5 @@ class Tr extends Model
         return $this->belongsTo(Pregoeiro::class);
     }
 
-    protected $dates = ['deleted_at', 'entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'pendenciasPgm', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'impugnacao', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'dataReratificacao'];
+    protected $dates = ['deleted_at', 'entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'terminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'pendenciasPgm', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'impugnacao', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'dataReratificacao', 'terminoMinutasARP', 'inicioMinutasARP' ];
 }

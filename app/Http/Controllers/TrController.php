@@ -160,7 +160,7 @@ class TrController extends Controller
         $tr['user_id'] = $user->id; // sava o id d user logado no sistema
 
         // conversão dos formatos dos campos de data em formato do banco
-        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'dataReratificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'impugnacao'];
+        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'terminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'dataReratificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'impugnacao', 'inicioMinutasARP', 'terminoMinutasARP'];
 
         foreach ($datas_a_ajustar as $formatacao_de_data) {
             if(isset($tr[$formatacao_de_data]) && !empty($tr[$formatacao_de_data])) {
@@ -252,7 +252,7 @@ class TrController extends Controller
         $tr = $request->all();
 
         // conversão dos formatos dos campos de data em formato do banco
-        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'teminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'dataReratificacao','formalizacaoContratoArp', 'dataContratoArp', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'impugnacao'];
+        $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'terminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'dataReratificacao','formalizacaoContratoArp', 'dataContratoArp', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'impugnacao', 'inicioMinutasARP', 'terminoMinutasARP'];
 
         foreach ($datas_a_ajustar as $formatacao_de_data) {
             if(isset($tr[$formatacao_de_data]) && !empty($tr[$formatacao_de_data])) {
@@ -289,23 +289,6 @@ class TrController extends Controller
         return redirect(route('trs.index'));
     }
 
-    public function exportcsv()
-    {
-        if (Gate::denies('tr-export')) {
-            abort(403, 'Acesso negado.');
-        }
-
-        # filtragem
-        $lista_de_campos_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital'];
-
-        $lista_de_filtros_ajustada = [];
-
-        foreach ($lista_de_campos_de_filtros as $filtro) {
-            $lista_de_filtros_ajustada[$filtro] =(request()->has($filtro) ? request($filtro) : '');
-        }
-
-        return Excel::download(new TrsExport($lista_de_filtros_ajustada), 'Trs_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
-    }
 
     public function editnumber(Request $request, Tr $tr) {
         if (Gate::denies('tr-edit-numero-ano')) {
@@ -333,7 +316,27 @@ class TrController extends Controller
             ]);
             return redirect(route('trs.edit', $tr))->with('ano_edit_alteradp', 'O TR nº e ano foram alterados!');    
         }
-    }    
+    }  
+
+
+    public function exportcsv()
+    {
+        if (Gate::denies('tr-export')) {
+            abort(403, 'Acesso negado.');
+        }
+
+        # filtragem
+        $lista_de_campos_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital'];
+
+        $lista_de_filtros_ajustada = [];
+
+        foreach ($lista_de_campos_de_filtros as $filtro) {
+            $lista_de_filtros_ajustada[$filtro] =(request()->has($filtro) ? request($filtro) : '');
+        }
+
+        return Excel::download(new TrsExport($lista_de_filtros_ajustada), 'Trs_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
 
     public function exportxls()
     {
@@ -381,6 +384,18 @@ class TrController extends Controller
         $trs = $trs->get();
 
         $pdf = PDF::loadView('trs.report', compact('trs'))->setPaper('a4', 'landscape');
+        
+        return $pdf->download('TRs_' .  date("Y-m-d H:i:s") . '.pdf');
+
+    }
+
+    public function exportsinglepdf(Tr $tr)
+    {
+        if (Gate::denies('tr-export')) {
+            abort(403, 'Acesso negado.');
+        }
+
+        $pdf = PDF::loadView('trs.reportsingle', compact('tr'))->setPaper('a4', 'landscape');
         
         return $pdf->download('TRs_' .  date("Y-m-d H:i:s") . '.pdf');
 

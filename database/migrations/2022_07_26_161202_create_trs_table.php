@@ -68,13 +68,17 @@ class CreateTrsTable extends Migration
                                                     // mudou o nome: DATA AUTUAÇÃO PAC, Autuação PAC
 
             $table->date('inicioMinutas')->nullable(); // Início MINUTAS (contrato/ARP) - Início minuta (contrato/aditivo)
-            $table->date('teminoMinutas')->nullable(); // Término MINUTAS (contrato/ARP) - Término minuta (contrato/aditivo)
+            $table->date('terminoMinutas')->nullable(); // Término MINUTAS (contrato/ARP) - Término minuta (contrato/aditivo)
+
+            // novo campo planilha 3
+            $table->date('inicioMinutasARP')->nullable(); //  Início minuta ARP
+            $table->date('terminoMinutasARP')->nullable(); //  Término minuta ARP
 
             // novo campo
             $table->unsignedBigInteger('pregoeiro_id'); // Pregoeiro (a)
 
-            $table->date('inicioMinutasEdital')->nullable(); // Início minuta EDITAL - Início minuta ARP
-            $table->date('terminoMinutasEdital')->nullable(); // Término minuta EDITAL - Término minuta ARP
+            $table->date('inicioMinutasEdital')->nullable(); // Início minuta EDITAL
+            $table->date('terminoMinutasEdital')->nullable(); // Término minuta EDITAL
 
             $table->date('envioPgm')->nullable(); // Envio PGM
             $table->date('retornoPgm')->nullable(); // Retorno PGM

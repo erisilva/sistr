@@ -192,13 +192,24 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="inicioMinutas">Início minuta (contrato/aditivo) </label>  
         <input type="text" class="form-control" name="inicioMinutas" id="inicioMinutas" value="{{ old('inicioMinutas') ?? '' }}" autocomplete="off">
       </div>
+      <div class="form-group col-md-6">
+        <label for="terminoMinutas">Término minuta (contrato/aditivo) </label>  
+        <input type="text" class="form-control" name="terminoMinutas" id="terminoMinutas" value="{{ old('terminoMinutas') ?? '' }}" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="teminoMinutas">Término minuta (contrato/aditivo) </label>  
-        <input type="text" class="form-control" name="teminoMinutas" id="teminoMinutas" value="{{ old('teminoMinutas') ?? '' }}" autocomplete="off">
+        <label for="inicioMinutasARP">Início minuta ARP </label>  
+        <input type="text" class="form-control" name="inicioMinutasARP" id="inicioMinutasARP" value="{{ old('inicioMinutasARP') ?? '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="terminoMinutasARP">Término minuta ARP </label>  
+        <input type="text" class="form-control" name="terminoMinutasARP" id="terminoMinutasARP" value="{{ old('terminoMinutasARP') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-4">
         <label for="pregoeiro_id">Pregoeiro (a) <strong  class="text-danger">(*)</strong></label>
@@ -214,15 +225,15 @@
         </div>
         @endif
       </div>  
-    </div> 
+    </div>      
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="inicioMinutasEdital">Início minuta ARP </label>  
+        <label for="inicioMinutasEdital">Início minuta Edital </label>  
         <input type="text" class="form-control" name="inicioMinutasEdital" id="inicioMinutasEdital" value="{{ old('inicioMinutasEdital') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
-        <label for="terminoMinutasEdital">Término minuta ARP </label>  
+        <label for="terminoMinutasEdital">Término minuta Edital </label>  
         <input type="text" class="form-control" name="terminoMinutasEdital" id="terminoMinutasEdital" value="{{ old('terminoMinutasEdital') ?? '' }}" autocomplete="off">
       </div>
     </div>
@@ -326,7 +337,7 @@
 <script>
   $(document).ready(function(){
 
-      $('#entregueSupAdm, #entregueComprasContrato, #inicioCotacao, #terminoCotacao, #envioSuplanPro, #retornoSuplanPro, #assinaturasGabinete, #envioCCOAF, #retornoCCOAF, #autuacao, #inicioMinutas, #teminoMinutas, #inicioMinutasEdital, #terminoMinutasEdital, #envioPgm, #retornoPgm, #inicioSaneamentoPendencias, #terminoSaneamentoPendencias, #dataPregao, #impugnacao, #inicioAnaliseTecnica, #terminoAnaliseTecnica, #dataHomologacao, #dataRatificacao, #formalizacaoContratoArp, #dataContratoArp, #solicitacaoEmpenho, #dataReratificacao').datepicker({
+      $('#entregueSupAdm, #entregueComprasContrato, #inicioCotacao, #terminoCotacao, #envioSuplanPro, #retornoSuplanPro, #assinaturasGabinete, #envioCCOAF, #retornoCCOAF, #autuacao, #inicioMinutas, #teminoMinutas, #inicioMinutasEdital, #terminoMinutasEdital, #envioPgm, #retornoPgm, #inicioSaneamentoPendencias, #terminoSaneamentoPendencias, #dataPregao, #impugnacao, #inicioAnaliseTecnica, #terminoAnaliseTecnica, #dataHomologacao, #dataRatificacao, #formalizacaoContratoArp, #dataContratoArp, #solicitacaoEmpenho, #dataReratificacao, #inicioMinutasARP, #terminoMinutasARP').datepicker({
           format: "dd/mm/yyyy",
           todayBtn: "linked",
           clearBtn: true,

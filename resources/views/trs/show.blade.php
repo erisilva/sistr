@@ -127,27 +127,38 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="inicioMinutas">Início minuta (contrato/aditivo)</label>
         <input type="text" class="form-control" name="inicioMinutas" value="{{ isset($tr->autinicioMinutasuacao) ?  $tr->inicioMinutas->format('d/m/Y') : '-' }}" readonly>
       </div>
+      <div class="form-group col-md-6">
+        <label for="terminoMinutas">Término minuta (contrato/aditivo)</label>
+        <input type="text" class="form-control" name="terminoMinutas" value="{{ isset($tr->terminoMinutas) ?  $tr->terminoMinutas->format('d/m/Y') : '-' }}" readonly>
+      </div>
+    </div>
+
+    <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="teminoMinutas">Término minuta (contrato/aditivo)</label>
-        <input type="text" class="form-control" name="teminoMinutas" value="{{ isset($tr->teminoMinutas) ?  $tr->teminoMinutas->format('d/m/Y') : '-' }}" readonly>
+        <label for="inicioMinutasARP">Início minuta ARP</label>
+        <input type="text" class="form-control" name="inicioMinutasARP" value="{{ isset($tr->autinicioMinutasuacao) ?  $tr->inicioMinutasARP->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="terminoMinutasARP">Término minuta ARP</label>
+        <input type="text" class="form-control" name="terminoMinutasARP" value="{{ isset($tr->terminoMinutasARP) ?  $tr->terminoMinutasARP->format('d/m/Y') : '-' }}" readonly>
       </div>
       <div class="form-group col-md-4">
         <label for="pregoeiro">Pregoeiro (a)</label>
         <input type="text" class="form-control" name="pregoeiro" value="{{ $tr->pregoeiro->nome }}" readonly>
       </div>
-    </div> 
+    </div>  
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="inicioMinutasEdital">Início minuta ARP</label>
+        <label for="inicioMinutasEdital">Início minuta Edital</label>
         <input type="text" class="form-control" name="inicioMinutasEdital" value="{{ isset($tr->inicioMinutasEdital) ?  $tr->inicioMinutasEdital->format('d/m/Y') : '-' }}" readonly>
       </div>
       <div class="form-group col-md-6">
-        <label for="terminoMinutasEdital">Término minuta ARP</label>
+        <label for="terminoMinutasEdital">Término minuta Edital</label>
         <input type="text" class="form-control" name="terminoMinutasEdital" value="{{ isset($tr->terminoMinutasEdital) ?  $tr->terminoMinutasEdital->format('d/m/Y') : '-' }}" readonly>
       </div>
     </div>
@@ -201,15 +212,15 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="dataHomologacao">Homologação </label>
         <input type="text" class="form-control" name="dataHomologacao" value="{{ isset($tr->dataHomologacao) ?  $tr->dataHomologacao->format('d/m/Y') : '-' }}" readonly>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="dataRatificacao">Ratificação </label>
         <input type="text" class="form-control" name="dataRatificacao" value="{{ isset($tr->dataRatificacao) ?  $tr->dataRatificacao->format('d/m/Y') : '-' }}" readonly>
       </div>      
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="dataReratificacao">Reratificação </label>
         <input type="text" class="form-control" name="dataReratificacao" value="{{ isset($tr->dataReratificacao) ?  $tr->dataReratificacao->format('d/m/Y') : '-' }}" readonly>
       </div>

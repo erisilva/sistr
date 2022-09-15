@@ -105,4 +105,5 @@ Route::put('/trs/editnumber/{tr}', 'TrController@editnumber')->name('trs.editnum
 Route::get('/trs/export/csv', 'TrController@exportcsv')->name('trs.export.csv');
 Route::get('/trs/export/xls', 'TrController@exportxls')->name('trs.export.xls');
 Route::get('/trs/export/pdf', 'TrController@exportpdf')->name('trs.export.pdf');
+Route::get('/trs/export/single/pdf/{tr}', 'TrController@exportsinglepdf')->name('trs.export.single.pdf');
 Route::resource('/trs', 'TrController');

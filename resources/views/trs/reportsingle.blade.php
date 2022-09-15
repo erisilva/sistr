@@ -50,15 +50,11 @@
             table {
                 border-collapse: collapse;
             }
-
-             .page-break {
-                  page-break-after: always;
-                }
     </style>
 </head>
     <body>
         <header>
-            Termo de Referência
+            Termo de Referência Nº {{ $tr->numero }}/{{ $tr->ano }}
         </header>
 
         <footer>
@@ -66,11 +62,9 @@
         </footer>
 
         <main>
-            @foreach($trs as $tr)
-            <table  class="bordered" width="100%">
+
+            <table  class="bordered">
               <tbody>
-
-
                 <tr>
                     <td colspan="3">
                         <label for="situacao"><strong>STATUS</strong></label>
@@ -295,11 +289,6 @@
 
               </tbody>
             </table>
-            @if(!$loop->last)
-            <div class="page-break"></div>
-            @endif            
-            @endforeach
-
         </main>
     </body>
 </html>

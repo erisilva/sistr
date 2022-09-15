@@ -244,13 +244,24 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="inicioMinutas">Início minuta (contrato/aditivo) </label>  
         <input type="text" class="form-control" name="inicioMinutas" id="inicioMinutas" value="{{ isset($tr->inicioMinutas) ?  $tr->inicioMinutas->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
+      <div class="form-group col-md-6">
+        <label for="terminoMinutas">Término minuta (contrato/aditivo) </label>  
+        <input type="text" class="form-control" name="terminoMinutas" id="terminoMinutas" value="{{ isset($tr->terminoMinutas) ?  $tr->terminoMinutas->format('d/m/Y') : '' }}" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="teminoMinutas">Término minuta (contrato/aditivo) </label>  
-        <input type="text" class="form-control" name="teminoMinutas" id="teminoMinutas" value="{{ isset($tr->teminoMinutas) ?  $tr->teminoMinutas->format('d/m/Y') : '' }}" autocomplete="off">
+        <label for="inicioMinutasARP">Início minuta ARP </label>  
+        <input type="text" class="form-control" name="inicioMinutasARP" id="inicioMinutasARP" value="{{ isset($tr->inicioMinutasARP) ?  $tr->inicioMinutasARP->format('d/m/Y') : '' }}" autocomplete="off">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="terminoMinutasARP">Término minuta ARP </label>  
+        <input type="text" class="form-control" name="terminoMinutasARP" id="terminoMinutasARP" value="{{ isset($tr->terminoMinutasARP) ?  $tr->terminoMinutasARP->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-4">
         <label for="pregoeiro_id">Pregoeiro (a) <strong  class="text-danger">(*)</strong></label>
@@ -270,11 +281,11 @@
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="inicioMinutasEdital">Início minuta ARP </label>
+        <label for="inicioMinutasEdital">Início minuta Edital </label>
         <input type="text" class="form-control" name="inicioMinutasEdital" id="inicioMinutasEdital" value="{{ isset($tr->inicioMinutasEdital) ?  $tr->inicioMinutasEdital->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
-        <label for="terminoMinutasEdital">Término minuta ARP </label>  
+        <label for="terminoMinutasEdital">Término minuta Edital </label>  
         <input type="text" class="form-control" name="terminoMinutasEdital" id="terminoMinutasEdital" value="{{ isset($tr->terminoMinutasEdital) ?  $tr->terminoMinutasEdital->format('d/m/Y') : '' }}" autocomplete="off">
       </div>
     </div>
@@ -449,7 +460,7 @@
 <script>
   $(document).ready(function(){
 
-      $('#entregueSupAdm, #entregueComprasContrato, #inicioCotacao, #terminoCotacao, #envioSuplanPro, #retornoSuplanPro, #assinaturasGabinete, #envioCCOAF, #retornoCCOAF, #autuacao, #inicioMinutas, #teminoMinutas, #inicioMinutasEdital, #terminoMinutasEdital, #envioPgm, #retornoPgm, #inicioSaneamentoPendencias, #terminoSaneamentoPendencias, #dataPregao, #impugnacao, #inicioAnaliseTecnica, #terminoAnaliseTecnica, #dataHomologacao, #dataRatificacao, #formalizacaoContratoArp, #dataContratoArp, #solicitacaoEmpenho, #dataReratificacao').datepicker({
+      $('#entregueSupAdm, #entregueComprasContrato, #inicioCotacao, #terminoCotacao, #envioSuplanPro, #retornoSuplanPro, #assinaturasGabinete, #envioCCOAF, #retornoCCOAF, #autuacao, #inicioMinutas, #teminoMinutas, #inicioMinutasEdital, #terminoMinutasEdital, #envioPgm, #retornoPgm, #inicioSaneamentoPendencias, #terminoSaneamentoPendencias, #dataPregao, #impugnacao, #inicioAnaliseTecnica, #terminoAnaliseTecnica, #dataHomologacao, #dataRatificacao, #formalizacaoContratoArp, #dataContratoArp, #solicitacaoEmpenho, #dataReratificacao, #inicioMinutasARP, #terminoMinutasARP').datepicker({
           format: "dd/mm/yyyy",
           todayBtn: "linked",
           clearBtn: true,
