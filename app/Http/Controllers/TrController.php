@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Tr;
 
+use App\Models\Trlog;
+
 use App\Models\Situacao;
 use App\Models\Origem;
 use App\Models\Tipo;
@@ -67,7 +69,7 @@ class TrController extends Controller
         }
 
         // ordena
-        $trs = $trs->orderBy('ano', 'desc')->orderBy('numero', 'asc');
+        $trs = $trs->orderBy('ano', 'desc')->orderBy('numero', 'desc');
 
         // se a requisição tiver um novo valor para a quantidade
         // de páginas por visualização ele altera aqui
@@ -249,21 +251,27 @@ class TrController extends Controller
             'pregoeiro_id.required' => 'Selecione o pregoeiro do TR na lista',
         ]);
 
-        $tr = $request->all();
+        $new_tr = $request->all();
 
         // conversão dos formatos dos campos de data em formato do banco
         $datas_a_ajustar = ['entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'terminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'dataReratificacao','formalizacaoContratoArp', 'dataContratoArp', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'impugnacao', 'inicioMinutasARP', 'terminoMinutasARP'];
 
         foreach ($datas_a_ajustar as $formatacao_de_data) {
-            if(isset($tr[$formatacao_de_data]) && !empty($tr[$formatacao_de_data])) {
-                $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', $tr[$formatacao_de_data])->format('Y-m-d');
-                $tr[$formatacao_de_data] =  $dataFormatadaMysql;
+            if(isset($new_tr[$formatacao_de_data]) && !empty($new_tr[$formatacao_de_data])) {
+                $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', $new_tr[$formatacao_de_data])->format('Y-m-d');
+                $new_tr[$formatacao_de_data] =  $dataFormatadaMysql;
             }
         }
 
-        $new_tr = Tr::findOrFail($id);
+        $tr = Tr::findOrFail($id);
             
-        $new_tr->update($tr);
+        $tr->update($new_tr);
+        
+        Trlog::create([
+            'tr_id' => $tr->id,
+            'user_id' => Auth::user()->id,
+            'changes' => json_encode($tr->getchanges()),
+        ]);
         
         Session::flash('edited_tr', 'TR alterado com sucesso!');
 

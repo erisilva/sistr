@@ -17,9 +17,7 @@ class CreateTrlogsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id'); 
             $table->unsignedBigInteger('tr_id'); 
-            $table->string('field');
-            $table->string('oldvalue');
-            $table->string('newvalue');
+            $table->string('changes');            
             $table->timestamps();
 
             //fk
@@ -37,6 +35,7 @@ class CreateTrlogsTable extends Migration
     {
         Schema::table('trlogs', function (Blueprint $table) {
             $table->dropForeign('trlogs_user_id_foreign');
+            $table->dropForeign('trlogs_tr_id_foreign');
         });
         Schema::dropIfExists('trlogs');
     }

@@ -10,7 +10,7 @@ class Trlog extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tr_id', 'user_id', 'field', 'oldvalue', 'newvalue'
+        'tr_id', 'user_id', 'changes'
     ];
 
     public function user()

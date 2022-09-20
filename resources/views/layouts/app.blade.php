@@ -52,6 +52,9 @@
                           <a class="dropdown-item" href="{{ route('deliberacaos.index') }}"><i class="bi bi-table"></i> Deliberações CCOAF do TR</a>
                           <a class="dropdown-item" href="{{ route('modalidades.index') }}"><i class="bi bi-table"></i> Modalidades do TR</a>
                           <a class="dropdown-item" href="{{ route('pregoeiros.index') }}"><i class="bi bi-table"></i> Pregoeiros do TR</a>
+                          @can('trlog-index')
+                          <a class="dropdown-item" href="{{ route('trlogs.index') }}"><i class="bi bi-code-square"></i> Log dos Trs</a>                                
+                          @endcan
                         </div>
                     </li>                    
                 </ul>

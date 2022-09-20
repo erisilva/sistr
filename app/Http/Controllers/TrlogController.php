@@ -5,14 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Trlog;
 use App\Models\Perpage;
 
-use Response;
-
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Gate;
-
-use Illuminate\Support\Facades\DB;
 
 class TrlogController extends Controller
 {
@@ -46,7 +39,7 @@ class TrlogController extends Controller
         }
 
         // ordena
-        $trlogs = $trlogs->orderBy('numero', 'asc');
+        $trlogs = $trlogs->orderBy('id', 'desc');
 
         // se a requisição tiver um novo valor para a quantidade
         // de páginas por visualização ele altera aqui
