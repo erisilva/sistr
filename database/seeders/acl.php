@@ -125,7 +125,8 @@ class acl extends Seeder
         $tr_show = Permission::where('name', '=', 'tr-show')->get()->first();  
         $tr_export = Permission::where('name', '=', 'tr-export')->get()->first();
         $tr_edit_numero_ano = Permission::where('name', '=', 'tr-edit-numero-ano')->get()->first();
-
+        // para TRs -------
+        $trlog_index = Permission::where('name', '=', 'trlog-index')->get()->first();
 
 
 
@@ -208,6 +209,8 @@ class acl extends Seeder
         $administrador_perfil->permissions()->attach($tr_show);
         $administrador_perfil->permissions()->attach($tr_export);
         $administrador_perfil->permissions()->attach($tr_edit_numero_ano);
+        #trlog
+        $administrador_perfil->permissions()->attach($trlog_index);
 
 
         // o gerente (diretor) pode gerenciar os operadores do sistema
@@ -266,6 +269,8 @@ class acl extends Seeder
         $gerente_perfil->permissions()->attach($tr_show);
         $gerente_perfil->permissions()->attach($tr_export);
         $gerente_perfil->permissions()->attach($tr_edit_numero_ano);
+        #trlog
+        $gerente_perfil->permissions()->attach($trlog_index);
 
 
 

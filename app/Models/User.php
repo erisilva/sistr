@@ -90,5 +90,10 @@ class User extends Authenticatable
     public function trs()
     {
         return $this->hasMany(Tr::class);
-    }  
+    }
+
+    public function trlogs()
+    {
+        return $this->hasMany(Trlog::class);
+    } 
 }

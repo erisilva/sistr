@@ -53,5 +53,11 @@ class Tr extends Model
         return $this->belongsTo(Pregoeiro::class);
     }
 
+    public function trlogs()
+    {
+        return $this->hasMany(Trlog::class);
+    }
+
+
     protected $dates = ['deleted_at', 'entregueSupAdm', 'entregueComprasContrato', 'inicioCotacao', 'terminoCotacao', 'envioSuplanPro', 'retornoSuplanPro', 'envioCCOAF', 'retornoCCOAF', 'autuacao', 'inicioMinutas', 'terminoMinutas', 'inicioMinutasEdital', 'terminoMinutasEdital', 'envioPgm', 'retornoPgm', 'pendenciasPgm', 'dataPregao', 'dataHomologacao', 'dataRatificacao', 'formalizacaoContratoArp', 'dataContratoArp', 'inicioSaneamentoPendencias', 'terminoSaneamentoPendencias', 'impugnacao', 'inicioAnaliseTecnica', 'terminoAnaliseTecnica', 'dataReratificacao', 'terminoMinutasARP', 'inicioMinutasARP' ];
 }

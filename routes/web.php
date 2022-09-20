@@ -107,3 +107,8 @@ Route::get('/trs/export/xls', 'TrController@exportxls')->name('trs.export.xls');
 Route::get('/trs/export/pdf', 'TrController@exportpdf')->name('trs.export.pdf');
 Route::get('/trs/export/single/pdf/{tr}', 'TrController@exportsinglepdf')->name('trs.export.single.pdf');
 Route::resource('/trs', 'TrController');
+
+Route::get('/trlogs/export/csv', 'TrlogController@exportcsv')->name('trlogs.export.csv');
+Route::get('/trlogs/export/xls', 'TrlogController@exportxls')->name('trlogs.export.xls');
+Route::get('/trlogs/export/pdf', 'TrlogController@exportpdf')->name('trlogs.export.pdf');
+Route::resource('/trlogs', 'TrlogController')->only(['index']);

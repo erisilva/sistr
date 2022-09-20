@@ -310,7 +310,13 @@ class PermissionSeeder extends Seeder
             'description' => 'Alteração do número/ano do TR',
         ]);
 
+        # TR LOGS ------------------
 
+
+        DB::table('permissions')->insert([
+            'name' => 'trlog-index',
+            'description' => 'Lista de Logs das TRs',
+        ]);
 
     }
 }

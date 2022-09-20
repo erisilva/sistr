@@ -476,7 +476,7 @@
             digits: 2,
             digitsOptional: false,
             placeholder: '0',
-            rightAlign: false,
+            rightAlign: true,
             onBeforeMask: function (value, opts) {
               return value;
             }
