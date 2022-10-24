@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('css-header')
+<link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css') }}">
+@endsection
 
 @section('content')
 <div class="container-fluid">
@@ -44,6 +47,8 @@
                 <th scope="col">SISPROT</th>
                 <th scope="col">Modalidade</th>
                 <th scope="col">Nº EDITAL</th>
+                <th scope="col">Data Pregão</th>
+                <th scope="col">Responsável</th>
                 
             </tr>
         </thead>
@@ -70,6 +75,8 @@
                 <td>{{$tr->protocoloSisprot}}</td>
                 <td>{{$tr->modalidade->descricao}}</td>
                 <td>{{$tr->numeroEdital}}</td>
+                <td>{{isset($tr->dataPregao) ? $tr->dataPregao->format('d/m/Y') : '-'}}</td>
+                <td>{{$tr->responsavel->nome}}</td>
             </tr>    
             @endforeach                                                 
         </tbody>
@@ -116,11 +123,9 @@
                 </select>
               </div>
             </div>
-
-
             <div class="form-row">
               <div class="form-group col-md-3">
-                <label for="origem_id">Origem</label>
+                <label for="origem_id">Solicitante</label>
                 <select class="form-control" name="origem_id" id="origem_id">
                   <option value="">Mostrar todos</option>    
                   @foreach($origems as $origem)
@@ -167,6 +172,26 @@
               </div>
             </div>
 
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="responsavel_id">Responsável cotação</label>
+                <select class="form-control" name="responsavel_id" id="responsavel_id">
+                  <option value="">Mostrar todos</option>    
+                  @foreach($responsavels as $responsavel)
+                  <option value="{{$responsavel->id}}" {{ ($responsavel->id == request()->input('responsavel_id')) ? ' selected' : '' }} >{{ $responsavel->nome }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="dtainicio">Data Pregão Início</label>
+                <input type="text" class="form-control" id="dtainicio" name="dtainicio" value="{{request()->input('dtainicio')}}" autocomplete="off">  
+              </div>
+              <div class="form-group col-md-3">
+                <label for="dtafinal">Data Pregão Fim</label>
+                <input type="text" class="form-control" id="dtafinal" name="dtafinal" value="{{request()->input('dtafinal')}}" autocomplete="off">
+              </div>
+            </div>
+
             <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-search"></i> Pesquisar</button>
             <a href="{{ route('trs.index') }}" class="btn btn-primary btn-sm" role="button">Limpar</a>
           </form>
@@ -189,13 +214,23 @@
 </div>
 @endsection
 @section('script-footer')
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('locales/bootstrap-datepicker.pt-BR.min.js') }}"></script>
 <script>
 $(document).ready(function(){
     $('#perpage').on('change', function() {
-        perpage = $(this).find(":selected").val(); 
-        
+        perpage = $(this).find(":selected").val();
         window.open("{{ route('trs.index') }}" + "?perpage=" + perpage,"_self");
     });
+
+    $('#dtainicio, #dtafinal').datepicker({
+          format: "dd/mm/yyyy",
+          todayBtn: "linked",
+          clearBtn: true,
+          language: "pt-BR",
+          autoclose: true,
+          todayHighlight: true
+      });
 
     $('#btnExportarCSV').on('click', function(){
         var filtro_numero = $('input[name="numero"]').val();

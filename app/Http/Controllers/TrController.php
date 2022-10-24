@@ -56,17 +56,31 @@ class TrController extends Controller
         $trs = new Tr;
 
         // fitros
-        $lista_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital'];
+        $lista_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital', 'responsavel_id'];
 
         foreach ($lista_de_filtros as $filtro) {
             if (request()->has($filtro) && !empty(request($filtro))){
-                if (is_int(request($filtro))) {
+                if (is_numeric(request($filtro))) {
                     $trs = $trs->where($filtro, '=', request($filtro));
                 } else {
                     $trs = $trs->where($filtro, 'like', '%' . request($filtro) . '%');
                 }
-            }   
+            }
         }
+
+        if (request()->has('dtainicio')){
+            if (request('dtainicio') != ""){
+               $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d 00:00:00');           
+               $trs = $trs->where('dataPregao', '>=', $dataFormatadaMysql);                
+            }
+       }
+
+       if (request()->has('dtafinal')){
+            if (request('dtafinal') != ""){
+               $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dtafinal'))->format('Y-m-d 23:59:59');         
+               $trs = $trs->where('dataPregao', '<=', $dataFormatadaMysql);                
+            }
+       }
 
         // ordena
         $trs = $trs->orderBy('ano', 'desc')->orderBy('numero', 'desc');
@@ -87,12 +101,15 @@ class TrController extends Controller
             'descricao' => request('descricao'),           
             'situacao_id' => request('situacao_id'),           
             'origem_id' => request('origem_id'),           
-            'tipo_id' => request('tipo_id'),           
-            'requisicaoCompras' => request('requisicaoCompras'),           
-            'protocoloSisprot' => request('protocoloSisprot'),           
-            'modalidade_id' => request('modalidade_id'),           
-            'numeroModalidade' => request('numeroModalidade'),           
-            'numeroEdital' => request('numeroEdital'),                   
+            'tipo_id' => request('tipo_id'),
+            'responsavel_id' => request('responsavel_id'),
+            'requisicaoCompras' => request('requisicaoCompras'),
+            'protocoloSisprot' => request('protocoloSisprot'),
+            'modalidade_id' => request('modalidade_id'),
+            'numeroModalidade' => request('numeroModalidade'),
+            'numeroEdital' => request('numeroEdital'),
+            'dtainicio' => request('dtainicio'),
+            'dtafinal' => request('dtafinal'),
             ]);
 
 
@@ -100,8 +117,9 @@ class TrController extends Controller
         $origems = Origem::orderBy('descricao', 'asc')->get();
         $tipos = Tipo::orderBy('descricao', 'asc')->get();
         $modalidades = Modalidade::orderBy('descricao', 'asc')->get();
+        $responsavels = Responsavel::orderBy('nome', 'asc')->get();
 
-        return view('trs.index', compact('trs', 'perpages', 'situacaos', 'origems', 'tipos', 'modalidades'));
+        return view('trs.index', compact('trs', 'perpages', 'situacaos', 'origems', 'tipos', 'modalidades', 'responsavels'));
     }
 
     /**
@@ -378,7 +396,7 @@ class TrController extends Controller
 
         foreach ($lista_de_filtros as $filtro) {
             if (request()->has($filtro) && !empty(request($filtro))){
-                if (is_int(request($filtro))) {
+                if (is_numeric(request($filtro))) {
                     $trs = $trs->where($filtro, '=', request($filtro));
                 } else {
                     $trs = $trs->where($filtro, 'like', '%' . request($filtro) . '%');
