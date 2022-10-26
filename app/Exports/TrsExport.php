@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
 
@@ -111,12 +112,16 @@ class TrsExport implements FromQuery, WithHeadings
         // fitros
         foreach ($this->filtros as $filtro => $valor) {
             if (!empty($valor)){
-                if (is_int($valor)){
+                if ($filtro == 'dtainicio') {         
+                    $result = $result->where('trs.dataPregao', '>=', $valor);  
+                } else if ($filtro == 'dtafinal') {       
+                    $result = $result->where('trs.dataPregao', '<=', $valor);  
+                } else if (is_numeric($valor)){
                     $result = $result->where('trs.' . $filtro, '=', $valor);   
                 } else {
                     $result = $result->Where('trs.' . $filtro, 'like', '%' . $valor . '%');
                 }
-            }    
+            }
         }
 
         // sort

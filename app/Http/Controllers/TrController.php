@@ -352,13 +352,17 @@ class TrController extends Controller
         }
 
         # filtragem
-        $lista_de_campos_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital'];
+        $lista_de_campos_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital', 'responsavel_id'];
 
         $lista_de_filtros_ajustada = [];
 
         foreach ($lista_de_campos_de_filtros as $filtro) {
             $lista_de_filtros_ajustada[$filtro] =(request()->has($filtro) ? request($filtro) : '');
         }
+
+        $lista_de_filtros_ajustada['dtainicio']  = (request()->has('dtainicio') ? Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d') : '');
+
+        $lista_de_filtros_ajustada['dtafinal']  = (request()->has('dtafinal') ? Carbon::createFromFormat('d/m/Y', request('dtafinal'))->format('Y-m-d') : '');
 
         return Excel::download(new TrsExport($lista_de_filtros_ajustada), 'Trs_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
     }
@@ -371,13 +375,17 @@ class TrController extends Controller
         }
 
         # filtragem
-        $lista_de_campos_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital'];
+        $lista_de_campos_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital', 'responsavel_id'];
 
         $lista_de_filtros_ajustada = [];
 
         foreach ($lista_de_campos_de_filtros as $filtro) {
             $lista_de_filtros_ajustada[$filtro] = (request()->has($filtro) ? request($filtro) : '');
         }
+
+        $lista_de_filtros_ajustada['dtainicio']  = (request()->has('dtainicio') ? Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d') : '');
+
+        $lista_de_filtros_ajustada['dtafinal']  = (request()->has('dtafinal') ? Carbon::createFromFormat('d/m/Y', request('dtafinal'))->format('Y-m-d') : '');
 
         return Excel::download(new TrsExport($lista_de_filtros_ajustada), 'Trs_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
@@ -392,7 +400,7 @@ class TrController extends Controller
         $trs = new Tr;
 
         // fitros
-        $lista_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital'];
+        $lista_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital', 'responsavel_id'];
 
         foreach ($lista_de_filtros as $filtro) {
             if (request()->has($filtro) && !empty(request($filtro))){
@@ -403,6 +411,20 @@ class TrController extends Controller
                 }
             }   
         }
+
+        if (request()->has('dtainicio')){
+            if (request('dtainicio') != ""){
+               $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d 00:00:00');           
+               $trs = $trs->where('dataPregao', '>=', $dataFormatadaMysql);                
+            }
+       }
+
+       if (request()->has('dtafinal')){
+            if (request('dtafinal') != ""){
+               $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dtafinal'))->format('Y-m-d 23:59:59');         
+               $trs = $trs->where('dataPregao', '<=', $dataFormatadaMysql);                
+            }
+       }
 
         // ordena
         $trs = $trs->orderBy('ano', 'desc')->orderBy('numero', 'asc');

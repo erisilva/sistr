@@ -254,9 +254,15 @@ $(document).ready(function(){
         if (typeof filtro_modalidade_id === "undefined") {
             filtro_modalidade_id = "";
         }
+        var filtro_responsavel_id = $('select[name="responsavel_id"]').val();
+        if (typeof filtro_responsavel_id === "undefined") {
+            filtro_responsavel_id = "";
+        }
         var filtro_numeroModalidade = $('input[name="numeroModalidade"]').val();
         var filtro_numeroEdital = $('input[name="numeroEdital"]').val();
-        window.open("{{ route('trs.export.csv') }}" + "?numero=" + filtro_numero + "&ano=" + filtro_ano + "&descricao=" + filtro_descricao + "&situacao_id=" + filtro_situacao_id + "&origem_id=" + filtro_origem_id + "&tipo_id=" + filtro_tipo_id + "&requisicaoCompras=" + filtro_requisicaoCompras + "&protocoloSisprot=" + filtro_protocoloSisprot + "&modalidade_id=" + filtro_modalidade_id + "&numeroModalidade=" + filtro_numeroModalidade + "&numeroEdital=" + filtro_numeroEdital,"_self");
+        var filtro_dtainicio = $('input[name="dtainicio"]').val();
+        var filtro_dtafinal = $('input[name="dtafinal"]').val();
+        window.open("{{ route('trs.export.csv') }}" + "?numero=" + filtro_numero + "&ano=" + filtro_ano + "&descricao=" + filtro_descricao + "&situacao_id=" + filtro_situacao_id + "&origem_id=" + filtro_origem_id + "&tipo_id=" + filtro_tipo_id + "&requisicaoCompras=" + filtro_requisicaoCompras + "&protocoloSisprot=" + filtro_protocoloSisprot + "&modalidade_id=" + filtro_modalidade_id + "&numeroModalidade=" + filtro_numeroModalidade + "&numeroEdital=" + filtro_numeroEdital + "&responsavel_id=" + filtro_responsavel_id + "&dtainicio=" + filtro_dtainicio + "&dtafinal=" + filtro_dtafinal, "_self");
     });
 
     $('#btnExportarXLS').on('click', function(){
@@ -281,9 +287,15 @@ $(document).ready(function(){
         if (typeof filtro_modalidade_id === "undefined") {
             filtro_modalidade_id = "";
         }
+        var filtro_responsavel_id = $('select[name="responsavel_id"]').val();
+        if (typeof filtro_responsavel_id === "undefined") {
+            filtro_responsavel_id = "";
+        }
         var filtro_numeroModalidade = $('input[name="numeroModalidade"]').val();
         var filtro_numeroEdital = $('input[name="numeroEdital"]').val();
-        window.open("{{ route('trs.export.xls') }}" + "?numero=" + filtro_numero + "&ano=" + filtro_ano + "&descricao=" + filtro_descricao + "&situacao_id=" + filtro_situacao_id + "&origem_id=" + filtro_origem_id + "&tipo_id=" + filtro_tipo_id + "&requisicaoCompras=" + filtro_requisicaoCompras + "&protocoloSisprot=" + filtro_protocoloSisprot + "&modalidade_id=" + filtro_modalidade_id + "&numeroModalidade=" + filtro_numeroModalidade + "&numeroEdital=" + filtro_numeroEdital,"_self");
+        var filtro_dtainicio = $('input[name="dtainicio"]').val();
+        var filtro_dtafinal = $('input[name="dtafinal"]').val();
+        window.open("{{ route('trs.export.xls') }}" + "?numero=" + filtro_numero + "&ano=" + filtro_ano + "&descricao=" + filtro_descricao + "&situacao_id=" + filtro_situacao_id + "&origem_id=" + filtro_origem_id + "&tipo_id=" + filtro_tipo_id + "&requisicaoCompras=" + filtro_requisicaoCompras + "&protocoloSisprot=" + filtro_protocoloSisprot + "&modalidade_id=" + filtro_modalidade_id + "&numeroModalidade=" + filtro_numeroModalidade + "&numeroEdital=" + filtro_numeroEdital + "&responsavel_id=" + filtro_responsavel_id + "&dtainicio=" + filtro_dtainicio + "&dtafinal=" + filtro_dtafinal,"_self");
     });
 
     $('#btnExportarPDF').on('click', function(){
@@ -308,9 +320,15 @@ $(document).ready(function(){
         if (typeof filtro_modalidade_id === "undefined") {
             filtro_modalidade_id = "";
         }
+        var filtro_responsavel_id = $('select[name="responsavel_id"]').val();
+        if (typeof filtro_responsavel_id === "undefined") {
+            filtro_responsavel_id = "";
+        }
         var filtro_numeroModalidade = $('input[name="numeroModalidade"]').val();
         var filtro_numeroEdital = $('input[name="numeroEdital"]').val();
-        window.open("{{ route('trs.export.pdf') }}" + "?numero=" + filtro_numero + "&ano=" + filtro_ano + "&descricao=" + filtro_descricao + "&situacao_id=" + filtro_situacao_id + "&origem_id=" + filtro_origem_id + "&tipo_id=" + filtro_tipo_id + "&requisicaoCompras=" + filtro_requisicaoCompras + "&protocoloSisprot=" + filtro_protocoloSisprot + "&modalidade_id=" + filtro_modalidade_id + "&numeroModalidade=" + filtro_numeroModalidade + "&numeroEdital=" + filtro_numeroEdital,"_self");
+        var filtro_dtainicio = $('input[name="dtainicio"]').val();
+        var filtro_dtafinal = $('input[name="dtafinal"]').val();
+        window.open("{{ route('trs.export.pdf') }}" + "?numero=" + filtro_numero + "&ano=" + filtro_ano + "&descricao=" + filtro_descricao + "&situacao_id=" + filtro_situacao_id + "&origem_id=" + filtro_origem_id + "&tipo_id=" + filtro_tipo_id + "&requisicaoCompras=" + filtro_requisicaoCompras + "&protocoloSisprot=" + filtro_protocoloSisprot + "&modalidade_id=" + filtro_modalidade_id + "&numeroModalidade=" + filtro_numeroModalidade + "&numeroEdital=" + filtro_numeroEdital + "&responsavel_id=" + filtro_responsavel_id + "&dtainicio=" + filtro_dtainicio + "&dtafinal=" + filtro_dtafinal,"_self");
     });
 }); 
 </script>
