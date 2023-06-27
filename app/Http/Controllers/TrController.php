@@ -25,8 +25,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Gate;
 
-use Illuminate\Support\Facades\DB;
-
 use App\Exports\TrsExport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -360,9 +358,17 @@ class TrController extends Controller
             $lista_de_filtros_ajustada[$filtro] =(request()->has($filtro) ? request($filtro) : '');
         }
 
-        $lista_de_filtros_ajustada['dtainicio']  = (request()->has('dtainicio') ? Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d') : '');
+        if (request()->has('dtainicio')){
+            if (request('dtainicio') != ""){
+                $lista_de_filtros_ajustada['dtainicio']  = Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d 00:00:00');               
+            }
+        }
 
-        $lista_de_filtros_ajustada['dtafinal']  = (request()->has('dtafinal') ? Carbon::createFromFormat('d/m/Y', request('dtafinal'))->format('Y-m-d') : '');
+        if (request()->has('dtafinal')){
+            if (request('dtafinal') != ""){
+                $lista_de_filtros_ajustada['dtafinal'] = Carbon::createFromFormat('d/m/Y', request('dtafinal'))->format('Y-m-d 23:59:59');
+            }
+        }
 
         return Excel::download(new TrsExport($lista_de_filtros_ajustada), 'Trs_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
     }
@@ -383,9 +389,17 @@ class TrController extends Controller
             $lista_de_filtros_ajustada[$filtro] = (request()->has($filtro) ? request($filtro) : '');
         }
 
-        $lista_de_filtros_ajustada['dtainicio']  = (request()->has('dtainicio') ? Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d') : '');
+        if (request()->has('dtainicio')){
+            if (request('dtainicio') != ""){
+                $lista_de_filtros_ajustada['dtainicio']  = Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d 00:00:00');               
+            }
+        }
 
-        $lista_de_filtros_ajustada['dtafinal']  = (request()->has('dtafinal') ? Carbon::createFromFormat('d/m/Y', request('dtafinal'))->format('Y-m-d') : '');
+        if (request()->has('dtafinal')){
+            if (request('dtafinal') != ""){
+                $lista_de_filtros_ajustada['dtafinal'] = Carbon::createFromFormat('d/m/Y', request('dtafinal'))->format('Y-m-d 23:59:59');
+            }
+        }
 
         return Excel::download(new TrsExport($lista_de_filtros_ajustada), 'Trs_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
@@ -425,6 +439,7 @@ class TrController extends Controller
                $trs = $trs->where('dataPregao', '<=', $dataFormatadaMysql);                
             }
        }
+
 
         // ordena
         $trs = $trs->orderBy('ano', 'desc')->orderBy('numero', 'asc');

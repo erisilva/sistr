@@ -30,6 +30,8 @@
         <a class="dropdown-item" href="#" id="btnExportarXLS"><i class="bi bi-file-earmark-spreadsheet-fill"></i> Exportar Planilha Excel</a>
         <a class="dropdown-item" href="#" id="btnExportarCSV"><i class="bi bi-file-earmark-spreadsheet-fill"></i> Exportar Planilha CSV</a>
         <a class="dropdown-item" href="#" id="btnExportarPDF"><i class="bi bi-file-pdf-fill"></i> Exportar PDF</a>
+        <a class="dropdown-item" href="{{ route('relatorio.index') }}"><i class="bi bi-journal-plus"></i> Mais relatórios</a>
+        <a class="dropdown-item" href="{{ route('monitor.index') }}" target="_blank"><i class="bi bi-tv"></i> Monitorar</a>
       </div>
     </div>
   </div>

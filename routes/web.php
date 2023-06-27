@@ -112,3 +112,8 @@ Route::get('/trlogs/export/csv', 'TrlogController@exportcsv')->name('trlogs.expo
 Route::get('/trlogs/export/xls', 'TrlogController@exportxls')->name('trlogs.export.xls');
 Route::get('/trlogs/export/pdf', 'TrlogController@exportpdf')->name('trlogs.export.pdf');
 Route::resource('/trlogs', 'TrlogController')->only(['index']);
+
+Route::get('/monitor', 'MonitorController@index')->name('monitor.index');
+
+Route::get('/relatorio', 'RelatorioController@index')->name('relatorio.index');
+Route::get('/relatorio/porsituacao', 'RelatorioController@porSituacao')->name('relatorio.porsituacao');
