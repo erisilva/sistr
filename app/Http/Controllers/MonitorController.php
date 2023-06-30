@@ -15,9 +15,9 @@ class MonitorController extends Controller
      */
     public function index()
     {
-        if (Gate::denies('monitor-view')) {
-            abort(403, 'Acesso não autorizado!');
-        }
+        // if (Gate::denies('monitor-view')) {
+        //     abort(403, 'Acesso não autorizado!');
+        // }
 
         $porSituacao = DB::table('situacaos');
         $porSituacao = $porSituacao->select('situacaos.descricao', DB::raw('(select count(trs.id) from trs where trs.situacao_id = situacaos.id) as total'));

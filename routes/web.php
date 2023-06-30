@@ -115,5 +115,21 @@ Route::resource('/trlogs', 'TrlogController')->only(['index']);
 
 Route::get('/monitor', 'MonitorController@index')->name('monitor.index');
 
-Route::get('/relatorio', 'RelatorioController@index')->name('relatorio.index');
+# relatorios por status (Mesmo que situação) e período 
+Route::get('/relatorio/porsituacao/xls', 'RelatorioController@porSituacaoExportXLSX')->name('relatorio.porsituacao.xls');
+Route::get('/relatorio/porsituacao/csv', 'RelatorioController@porSituacaoExportCSV')->name('relatorio.porsituacao.csv');
 Route::get('/relatorio/porsituacao', 'RelatorioController@porSituacao')->name('relatorio.porsituacao');
+
+# relatorios por modalidade e período
+Route::get('/relatorio/pormodalidade/xls', 'RelatorioController@porModalidadeExportXLSX')->name('relatorio.pormodalidade.xls');
+Route::get('/relatorio/pormodalidade/csv', 'RelatorioController@porModalidadeExportCSV')->name('relatorio.pormodalidade.csv');
+Route::get('/relatorio/pormodalidade', 'RelatorioController@porModalidade')->name('relatorio.pormodalidade');
+
+# relatorios por usuários  e período
+Route::get('/relatorio/porusuario/xls', 'RelatorioController@porUsuarioExportXLSX')->name('relatorio.porusuario.xls');
+Route::get('/relatorio/porusuario/csv', 'RelatorioController@porUsuarioExportCSV')->name('relatorio.porusuario.csv');
+Route::get('/relatorio/porusuario', 'RelatorioController@porUsuario')->name('relatorio.porusuario');
+
+# Relatórios, página que lista os links para os relatórios
+Route::get('/relatorio', 'RelatorioController@index')->name('relatorio.index');
+

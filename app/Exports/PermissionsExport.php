@@ -12,6 +12,9 @@ class PermissionsExport implements FromQuery, WithHeadings
 {
     use Exportable;
 
+    private $name;
+    private $description;
+
     /**
     * @return \Illuminate\Support\Collection
     * 

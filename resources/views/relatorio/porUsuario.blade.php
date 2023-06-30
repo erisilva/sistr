@@ -10,12 +10,12 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item" aria-current="page"><a href="{{ route('trs.index') }}">Lista de TRs</a></li>
       <li class="breadcrumb-item"><a href="{{ route('relatorio.index') }}">Mais relatórios</a></li>
-      <li class="breadcrumb-item active"><a href="{{ route('relatorio.porsituacao') }}">TRs Cadastradas por Status e Período</a></li>
+      <li class="breadcrumb-item active"><a href="{{ route('relatorio.porusuario') }}">TRs Cadastradas por Usuários e Período</a></li>
     </ol>
   </nav>
 </div>
 <div class="container py-2">
-    <form method="GET" action="{{ route('relatorio.porsituacao') }}">
+    <form method="GET" action="{{ route('relatorio.porusuario') }}">
         @csrf
         <div class="form-row">
             <div class="form-group col-md-3">
@@ -37,17 +37,29 @@
     <table class="table table-striped">
       <thead>
         <tr>
-            <th scope="col">Status</th>
+            <th scope="col">Usuário</th>
             <th scope="col">Quantidade</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($porSituacao as $situacao)
-        <tr>
-          <td>{{ $situacao->descricao }}</td>
-          <td>{{ $situacao->total}}</td>
-        </tr>
-        @endforeach
+    
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                  <th scope="col">Modalidade</th>
+                  <th scope="col">Quantidade</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($porUsuario as $usuario)
+              <tr>
+                <td>{{ $usuario->name }}</td>
+                <td>{{ $usuario->total}}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+
       </tbody>
     </table>
     
@@ -60,21 +72,8 @@
 
 <div class="container">
     <div class="chart-container" style="height:70vh; width:100%">
-        <canvas id="porSituacaoChart"></canvas>
+        <canvas id="porUsuarioChart"></canvas>
     </div>
-</div>
-
-<div class="container bg-warning text-dark">
-    <p class="text-center"><strong><i class="bi bi-file-arrow-down"></i> Exportar</strong></p>
-</div>
-
-<div class="container py-2 text-center">
-    <a href="{{ route('relatorio.porsituacao.xls', ['dataInicial' => request()->input('dataInicial') ? request()->input('dataInicial') : now()->subDay(30)->format('d/m/Y'), 
-    'dataFinal' => request()->input('dataFinal') ?  request()->input('dataFinal') : now()->format('d/m/Y')]) }}" class="btn btn-secondary" role="button">
-        <i class="bi bi-file-earmark-spreadsheet-fill"></i> Planilha Excel
-    </a>
-    <a href="{{ route('relatorio.porsituacao.csv', ['dataInicial' => request()->input('dataInicial') ? request()->input('dataInicial') : now()->subDay(30)->format('d/m/Y'), 'dataFinal' => request()->input('dataFinal') ?  request()->input('dataFinal') : now()->format('d/m/Y')]) }}" class="btn btn-secondary" role="button"><i class="bi bi-file-earmark-spreadsheet-fill"></i> Planilha CSV</a>
-    <a href="#" class="btn btn-secondary" role="button"><i class="bi bi-file-pdf-fill"></i> Arquivo PDF</a>
 </div>
 
 <div class="container py-2 text-right">
@@ -89,22 +88,23 @@
 <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('locales/bootstrap-datepicker.pt-BR.min.js') }}"></script>
 <script>
-    var porSituacao = {{ Illuminate\Support\Js::from($porSituacao) }};
-    var labels = porSituacao.map(function(e) {
-        return e.descricao;
+
+var porUsuario = {{ Illuminate\Support\Js::from($porUsuario) }};
+    var labels = porUsuario.map(function(e) {
+        return e.name;
     });
-    var data = porSituacao.map(function(e) {
+    var data = porUsuario.map(function(e) {
         return e.total;
     });
 
-    const ctxSituacao = document.getElementById('porSituacaoChart');
+    const ctxUsuario = document.getElementById('porUsuarioChart');
 
-    new Chart(ctxSituacao, {
+    new Chart(ctxUsuario, {
         type: 'bar',
         data: {
         labels: labels,
         datasets: [{
-            label: 'Total de TRs/STATUS',
+            label: 'Total de TRs por Usuário',
             data: data,
             borderWidth: 1,
             borderRadius: 10

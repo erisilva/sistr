@@ -22,14 +22,19 @@
       <tbody>
         <tr>
           <th scope="row">1</th>
-          <td><a href="{{ route('relatorio.porsituacao') }}">TRs por STATUS</a></td>
-          <td>Relatório que quantifica todas TRs do sistema por cada STATUS</td>
+          <td><a href="{{ route('relatorio.porsituacao') }}">TRs Cadastradas por Status e Período</a></td>
+          <td>Este relatório apresenta a quantidade de TRs agrupadas por status. O período de análise se baseia na data de criação do relatório, exibindo, por padrão, os dados relativos ao último mês. O filtro é aplicado com base na data de cadastro dos registros. Os dados podem ser exportados em formatos de planilhas e arquivos PDF.</td>
         </tr>
         <tr>
           <th scope="row">2</th>
-          <td><a href="#">TRs por Modalidade</a></td>
-          <td>Relatório de TRs por Modalidade</td>
-        </tr>  
+          <td><a href="{{ route('relatorio.pormodalidade') }}">TRs Cadastradas por Modalidades e Período</a></td>
+          <td>Este relatório apresenta a quantidade de TRs agrupadas pelas modalidades. O período de análise se baseia na data de criação do relatório, exibindo, por padrão, os dados relativos ao último mês. O filtro é aplicado com base na data de cadastro dos registros. Os dados podem ser exportados em formatos de planilhas e arquivos PDF</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td><a href="{{ route('relatorio.porusuario') }}">TRs Cadastradas por Usuários e Período</a></td>
+          <td>Relatório de TRs por Usuário</td>
+        </tr>   
       </tbody>
     </table>     
   </div>    

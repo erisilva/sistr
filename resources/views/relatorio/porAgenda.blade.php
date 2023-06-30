@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item" aria-current="page"><a href="{{ route('trs.index') }}">Lista de TRs</a></li>
       <li class="breadcrumb-item"><a href="{{ route('relatorio.index') }}">Mais relatórios</a></li>
-      <li class="breadcrumb-item active"><a href="{{ route('relatorio.porsituacao') }}">TRs Cadastradas por Status e Período</a></li>
+      <li class="breadcrumb-item active"><a href="{{ route('relatorio.porModalidade') }}">TRs Cadastradas por Status e Período</a></li>
     </ol>
   </nav>
 </div>
@@ -42,12 +42,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($porSituacao as $situacao)
-        <tr>
-          <td>{{ $situacao->descricao }}</td>
-          <td>{{ $situacao->total}}</td>
-        </tr>
-        @endforeach
+
       </tbody>
     </table>
     
@@ -69,11 +64,8 @@
 </div>
 
 <div class="container py-2 text-center">
-    <a href="{{ route('relatorio.porsituacao.xls', ['dataInicial' => request()->input('dataInicial') ? request()->input('dataInicial') : now()->subDay(30)->format('d/m/Y'), 
-    'dataFinal' => request()->input('dataFinal') ?  request()->input('dataFinal') : now()->format('d/m/Y')]) }}" class="btn btn-secondary" role="button">
-        <i class="bi bi-file-earmark-spreadsheet-fill"></i> Planilha Excel
-    </a>
-    <a href="{{ route('relatorio.porsituacao.csv', ['dataInicial' => request()->input('dataInicial') ? request()->input('dataInicial') : now()->subDay(30)->format('d/m/Y'), 'dataFinal' => request()->input('dataFinal') ?  request()->input('dataFinal') : now()->format('d/m/Y')]) }}" class="btn btn-secondary" role="button"><i class="bi bi-file-earmark-spreadsheet-fill"></i> Planilha CSV</a>
+    <a href="{{ route('relatorio.porsituacao.xls', ['dataInicial' => request()->input('dataInicial'), 'dataFinal' => request()->input('dataFinal')]) }}" class="btn btn-secondary" role="button"><i class="bi bi-file-earmark-spreadsheet-fill"></i> Planilha Excel</a>
+    <a href="{{ route('relatorio.porsituacao.csv', ['dataInicial' => request()->input('dataInicial'), 'dataFinal' => request()->input('dataFinal')]) }}" class="btn btn-secondary" role="button"><i class="bi bi-file-earmark-spreadsheet-fill"></i> Planilha CSV</a>
     <a href="#" class="btn btn-secondary" role="button"><i class="bi bi-file-pdf-fill"></i> Arquivo PDF</a>
 </div>
 
@@ -89,67 +81,6 @@
 <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('locales/bootstrap-datepicker.pt-BR.min.js') }}"></script>
 <script>
-    var porSituacao = {{ Illuminate\Support\Js::from($porSituacao) }};
-    var labels = porSituacao.map(function(e) {
-        return e.descricao;
-    });
-    var data = porSituacao.map(function(e) {
-        return e.total;
-    });
-
-    const ctxSituacao = document.getElementById('porSituacaoChart');
-
-    new Chart(ctxSituacao, {
-        type: 'bar',
-        data: {
-        labels: labels,
-        datasets: [{
-            label: 'Total de TRs/STATUS',
-            data: data,
-            borderWidth: 1,
-            borderRadius: 10
-        }]
-        },
-        options: {
-            responsive: true,            
-            scales: {
-                y: {
-                    beginAtZero: true
-                },
-                x: {
-                    grid: {
-                        offset: true
-                    }
-                }
-            },
-            indexAxis: 'y'
-        }
-    });
-
-    $(document).ready(function(){
-
-        $('#dataInicial').datepicker({
-            format: 'dd/mm/yyyy',
-            language: 'pt-BR',
-            autoclose: true,
-            todayHighlight: true,
-            toggleActive: true,
-            todayBtn: true,
-            clearBtn: true,
-            endDate: new Date()
-        });
-
-        $('#dataFinal').datepicker({
-            format: 'dd/mm/yyyy',
-            language: 'pt-BR',
-            autoclose: true,
-            todayHighlight: true,
-            toggleActive: true,
-            todayBtn: true,
-            clearBtn: true,
-            endDate: new Date()
-        });
-    });
 
 </script>
 @endsection

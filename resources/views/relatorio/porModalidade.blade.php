@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item" aria-current="page"><a href="{{ route('trs.index') }}">Lista de TRs</a></li>
       <li class="breadcrumb-item"><a href="{{ route('relatorio.index') }}">Mais relatórios</a></li>
-      <li class="breadcrumb-item active"><a href="{{ route('relatorio.porsituacao') }}">TRs Cadastradas por Status e Período</a></li>
+      <li class="breadcrumb-item active"><a href="{{ route('relatorio.pormodalidade') }}">TRs Cadastradas por Modalidades e Período</a></li>
     </ol>
   </nav>
 </div>
@@ -42,12 +42,24 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($porSituacao as $situacao)
-        <tr>
-          <td>{{ $situacao->descricao }}</td>
-          <td>{{ $situacao->total}}</td>
-        </tr>
-        @endforeach
+    
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                  <th scope="col">Modalidade</th>
+                  <th scope="col">Quantidade</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($porModalidade as $modalidade)
+              <tr>
+                <td>{{ $modalidade->descricao }}</td>
+                <td>{{ $modalidade->total}}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+
       </tbody>
     </table>
     
@@ -60,7 +72,7 @@
 
 <div class="container">
     <div class="chart-container" style="height:70vh; width:100%">
-        <canvas id="porSituacaoChart"></canvas>
+        <canvas id="porModalidadeChart"></canvas>
     </div>
 </div>
 
@@ -69,11 +81,8 @@
 </div>
 
 <div class="container py-2 text-center">
-    <a href="{{ route('relatorio.porsituacao.xls', ['dataInicial' => request()->input('dataInicial') ? request()->input('dataInicial') : now()->subDay(30)->format('d/m/Y'), 
-    'dataFinal' => request()->input('dataFinal') ?  request()->input('dataFinal') : now()->format('d/m/Y')]) }}" class="btn btn-secondary" role="button">
-        <i class="bi bi-file-earmark-spreadsheet-fill"></i> Planilha Excel
-    </a>
-    <a href="{{ route('relatorio.porsituacao.csv', ['dataInicial' => request()->input('dataInicial') ? request()->input('dataInicial') : now()->subDay(30)->format('d/m/Y'), 'dataFinal' => request()->input('dataFinal') ?  request()->input('dataFinal') : now()->format('d/m/Y')]) }}" class="btn btn-secondary" role="button"><i class="bi bi-file-earmark-spreadsheet-fill"></i> Planilha CSV</a>
+    <a href="#" class="btn btn-secondary" role="button"><i class="bi bi-file-earmark-spreadsheet-fill"></i> Planilha Excel</a>
+    <a href="#" class="btn btn-secondary" role="button"><i class="bi bi-file-earmark-spreadsheet-fill"></i> Planilha CSV</a>
     <a href="#" class="btn btn-secondary" role="button"><i class="bi bi-file-pdf-fill"></i> Arquivo PDF</a>
 </div>
 
@@ -89,22 +98,23 @@
 <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('locales/bootstrap-datepicker.pt-BR.min.js') }}"></script>
 <script>
-    var porSituacao = {{ Illuminate\Support\Js::from($porSituacao) }};
-    var labels = porSituacao.map(function(e) {
+
+var porModalidade = {{ Illuminate\Support\Js::from($porModalidade) }};
+    var labels = porModalidade.map(function(e) {
         return e.descricao;
     });
-    var data = porSituacao.map(function(e) {
+    var data = porModalidade.map(function(e) {
         return e.total;
     });
 
-    const ctxSituacao = document.getElementById('porSituacaoChart');
+    const ctxModalidade = document.getElementById('porModalidadeChart');
 
-    new Chart(ctxSituacao, {
+    new Chart(ctxModalidade, {
         type: 'bar',
         data: {
         labels: labels,
         datasets: [{
-            label: 'Total de TRs/STATUS',
+            label: 'Total de TRs/Modalidade',
             data: data,
             borderWidth: 1,
             borderRadius: 10
