@@ -163,19 +163,19 @@ class RelatorioController extends Controller
         }
 
         # get data
-        $porUsuario = DB::table('trs')
-            ->join('users', 'users.id', '=', 'trs.user_id')
-            ->select('users.name', DB::raw('count(trs.id) as total'))
-            ->where('trs.created_at', '>=', $dataInicial)
-            ->where('trs.created_at', '<=', $dataFinal)
-            ->groupBy('trs.user_id')
+        $porUsuario = DB::table('trlogs')
+            ->join('users', 'users.id', '=', 'trlogs.user_id')
+            ->select('users.name', DB::raw('count(trlogs.id) as total'))
+            ->where('trlogs.created_at', '>=', $dataInicial)
+            ->where('trlogs.created_at', '<=', $dataFinal)
+            ->groupBy('trlogs.user_id')
             ->orderBy('users.name')
             ->get();
 
         # get total of trs
-        $counterTr = DB::table('trs')
-            ->where('trs.created_at', '>=', $dataInicial)
-            ->where('trs.created_at', '<=', $dataFinal)
+        $counterTr = DB::table('trlogs')
+            ->where('trlogs.created_at', '>=', $dataInicial)
+            ->where('trlogs.created_at', '<=', $dataFinal)
             ->count();
         
         return view('relatorio.porusuario', [         
@@ -184,15 +184,6 @@ class RelatorioController extends Controller
         ]);
     }
 
-    /**
-     * Exibe uma página com um relatório de TRs de acordo com a data do pregão, filtrados por período
-     *
-     */
-    public function porAgenda()
-    {  
-
-
-    }
 
 
 }

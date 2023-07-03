@@ -32,9 +32,9 @@
         </tr>
         <tr>
           <th scope="row">3</th>
-          <td><a href="{{ route('relatorio.porusuario') }}">TRs Cadastradas por Usuários e Período</a></td>
-          <td>Relatório de TRs por Usuário</td>
-        </tr>   
+          <td><a href="{{ route('relatorio.porusuario') }}">TRs Cadastradas/Alteradas por Usuários e Período</a></td>
+          <td>Este relatório apresenta o quantitativo de alterações e cadastros de registros feitos pelos usuários do sistema. O período de análise utiliza os dados de Log das TRs, exibindo, por padrão, os dados relativos ao último mês.</td>
+        </tr>          
       </tbody>
     </table>     
   </div>    

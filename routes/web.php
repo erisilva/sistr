@@ -126,8 +126,6 @@ Route::get('/relatorio/pormodalidade/csv', 'RelatorioController@porModalidadeExp
 Route::get('/relatorio/pormodalidade', 'RelatorioController@porModalidade')->name('relatorio.pormodalidade');
 
 # relatorios por usuários  e período
-Route::get('/relatorio/porusuario/xls', 'RelatorioController@porUsuarioExportXLSX')->name('relatorio.porusuario.xls');
-Route::get('/relatorio/porusuario/csv', 'RelatorioController@porUsuarioExportCSV')->name('relatorio.porusuario.csv');
 Route::get('/relatorio/porusuario', 'RelatorioController@porUsuario')->name('relatorio.porusuario');
 
 # Relatórios, página que lista os links para os relatórios
