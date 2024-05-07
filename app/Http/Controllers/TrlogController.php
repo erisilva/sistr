@@ -55,7 +55,7 @@ class TrlogController extends Controller
         $trlogs = $trlogs->paginate(session('perPage', '5'))->appends([          
             'numero' => request('numero'),
             'ano' => request('ano'),           
-            ]);
+            ])->withPath(env('APP_URL', null) .  '/trlogs');
 
         return view('trlogs.index', compact('trlogs', 'perpages'));
     }

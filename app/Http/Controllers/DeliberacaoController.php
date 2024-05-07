@@ -54,7 +54,7 @@ class DeliberacaoController extends Controller
         $perpages = Perpage::orderBy('valor')->get();
 
         // paginação
-        $deliberacaos = $deliberacaos->paginate(session('perPage', '5'));
+        $deliberacaos = $deliberacaos->paginate(session('perPage', '5'))->withPath(env('APP_URL', null) .  '/deliberacaos');
 
         return view('deliberacaos.index', compact('deliberacaos', 'perpages'));
     }

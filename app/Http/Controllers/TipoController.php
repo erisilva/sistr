@@ -54,7 +54,7 @@ class TipoController extends Controller
         $perpages = Perpage::orderBy('valor')->get();
 
         // paginação
-        $tipos = $tipos->paginate(session('perPage', '5'));
+        $tipos = $tipos->paginate(session('perPage', '5'))->withPath(env('APP_URL', null) .  '/tipos');
 
         return view('tipos.index', compact('tipos', 'perpages'));
     }

@@ -54,7 +54,7 @@ class ModalidadeController extends Controller
         $perpages = Perpage::orderBy('valor')->get();
 
         // paginação
-        $modalidades = $modalidades->paginate(session('perPage', '5'));
+        $modalidades = $modalidades->paginate(session('perPage', '5'))->withPath(env('APP_URL', null) .  '/modalidades');
 
         return view('modalidades.index', compact('modalidades', 'perpages'));
     }

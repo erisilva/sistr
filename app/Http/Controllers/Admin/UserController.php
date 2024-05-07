@@ -63,7 +63,7 @@ class UserController extends Controller
         $users = $users->paginate(session('perPage', '5'))->appends([          
             'name' => request('name'),
             'email' => request('email'),           
-            ]);
+            ])->withPath(env('APP_URL', null) .  '/admin/users');
 
         return view('admin.users.index', compact('users', 'perpages'));
     }

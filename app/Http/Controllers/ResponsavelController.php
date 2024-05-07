@@ -54,7 +54,7 @@ class ResponsavelController extends Controller
         $perpages = Perpage::orderBy('valor')->get();
 
         // paginação
-        $responsavels = $responsavels->paginate(session('perPage', '5'));
+        $responsavels = $responsavels->paginate(session('perPage', '5'))->withPath(env('APP_URL', null) .  '/responsavels');
 
         return view('responsavels.index', compact('responsavels', 'perpages'));
     }

@@ -108,7 +108,7 @@ class TrController extends Controller
             'numeroEdital' => request('numeroEdital'),
             'dtainicio' => request('dtainicio'),
             'dtafinal' => request('dtafinal'),
-            ]);
+            ])->withPath(env('APP_URL', null) .  '/trs'); // necessário para rodar no linux
 
 
         $situacaos = Situacao::orderBy('descricao', 'asc')->get();

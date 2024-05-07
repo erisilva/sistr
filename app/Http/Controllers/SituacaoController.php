@@ -54,7 +54,7 @@ class SituacaoController extends Controller
         $perpages = Perpage::orderBy('valor')->get();
 
         // paginação
-        $situacaos = $situacaos->paginate(session('perPage', '5'));
+        $situacaos = $situacaos->paginate(session('perPage', '5'))->withPath(env('APP_URL', null) .  '/situacaos');
 
         return view('situacaos.index', compact('situacaos', 'perpages'));
     }

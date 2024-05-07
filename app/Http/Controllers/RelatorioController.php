@@ -178,7 +178,7 @@ class RelatorioController extends Controller
             ->where('trlogs.created_at', '<=', $dataFinal)
             ->count();
         
-        return view('relatorio.porusuario', [         
+        return view('relatorio.porUsuario', [         
             'porUsuario' => $porUsuario,
             'counterTr' => $counterTr
         ]);

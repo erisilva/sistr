@@ -54,7 +54,7 @@ class PregoeiroController extends Controller
         $perpages = Perpage::orderBy('valor')->get();
 
         // paginação
-        $pregoeiros = $pregoeiros->paginate(session('perPage', '5'));
+        $pregoeiros = $pregoeiros->paginate(session('perPage', '5'))->withPath(env('APP_URL', null) .  '/pregoeiros');
 
         return view('pregoeiros.index', compact('pregoeiros', 'perpages'));
     }

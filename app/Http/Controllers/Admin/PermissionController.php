@@ -61,7 +61,7 @@ class PermissionController extends Controller
         $permissions = $permissions->paginate(session('perPage', '5'))->appends([          
             'name' => request('name'),
             'description' => request('description'),           
-            ]);
+            ])->withPath(env('APP_URL', null) .  '/admin/permissions');
 
         return view('admin.permissions.index', compact('permissions', 'perpages'));
     }

@@ -61,7 +61,7 @@ class RoleController extends Controller
         $roles = $roles->paginate(session('perPage', '5'))->appends([          
             'name' => request('name'),
             'description' => request('description'),           
-            ]);
+            ])->withPath(env('APP_URL', null) .  '/admin/roles');
 
         return view('admin.roles.index', compact('roles', 'perpages'));
     }

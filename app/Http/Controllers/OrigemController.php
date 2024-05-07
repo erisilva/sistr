@@ -54,7 +54,7 @@ class OrigemController extends Controller
         $perpages = Perpage::orderBy('valor')->get();
 
         // paginação
-        $origems = $origems->paginate(session('perPage', '5'));
+        $origems = $origems->paginate(session('perPage', '5'))->withPath(env('APP_URL', null) .  '/origems');
 
         return view('origems.index', compact('origems', 'perpages'));
     }
