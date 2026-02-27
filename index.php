@@ -3,7 +3,7 @@
 
 <head>
 <title>Redirecionando</title>
-    <meta http-equiv="refresh" content="0; url=http://castracao.contagem.mg.gov.br/castracao/public/">
+    <meta http-equiv="refresh" content="0; url=http://saude.contagem.mg.gov.br/sistr/public/">
     <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -52,7 +52,7 @@
     <div class="container">
         <div class="content">
             <div class="title">Secretaria Municipal de Saúde - Contagem/MG</div>
-            <p>Redirecionamento para <a href="http://castracao.contagem.mg.gov.br/castracao/public/"></a>link</p>
+            <p>Redirecionamento para <a href="http://saude.contagem.mg.gov.br/sistr/public/"></a>link</p>
         </div>
     </div>
 </body>

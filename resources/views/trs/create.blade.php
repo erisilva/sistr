@@ -20,7 +20,7 @@
       <div class="form-group col-md-4">
         <label for="situacao_id">STATUS <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="situacao_id" name="situacao_id">
-            <option value="" selected="true">Clique para escolher...</option> 
+            <option value="" selected="true">Clique para escolher...</option>
             @foreach($situacaos as $situacao)
             <option value="{{$situacao->id}}" {{ old("situacao_id") == $situacao->id ? "selected":"" }}>{{$situacao->descricao}}</option>
             @endforeach
@@ -29,12 +29,12 @@
         <div class="text-danger">
         {{ $errors->first('situacao_id') }}
         </div>
-        @endif 
+        @endif
       </div>
       <div class="form-group col-md-4">
         <label for="origem_id">Solicitante <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="origem_id" name="origem_id">
-            <option value="" selected="true">Clique para escolher...</option> 
+            <option value="" selected="true">Clique para escolher...</option>
             @foreach($origems as $origem)
             <option value="{{$origem->id}}" {{ old("origem_id") == $origem->id ? "selected":"" }}>{{$origem->descricao}}</option>
             @endforeach
@@ -43,12 +43,12 @@
         <div class="text-danger">
         {{ $errors->first('origem_id') }}
         </div>
-        @endif 
+        @endif
       </div>
       <div class="form-group col-md-4">
         <label for="tipo_id">Tipo <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="tipo_id" name="tipo_id">
-            <option value="" selected="true">Clique ...</option> 
+            <option value="" selected="true">Clique ...</option>
             @foreach($tipos as $tipo)
             <option value="{{$tipo->id}}" {{ old("tipo_id") == $tipo->id ? "selected":"" }}>{{$tipo->descricao}}</option>
             @endforeach
@@ -92,7 +92,7 @@
       <div class="form-group col-md-4">
         <label for="responsavel_id">Responsável cotação <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="responsavel_id" name="responsavel_id">
-            <option value="" selected="true">Clique para escolher...</option> 
+            <option value="" selected="true">Clique para escolher...</option>
             @foreach($responsavels as $responsavel)
             <option value="{{$responsavel->id}}" {{ old("responsavel_id") == $responsavel->id ? "selected":"" }}>{{$responsavel->nome}}</option>
             @endforeach
@@ -101,7 +101,7 @@
         <div class="text-danger">
         {{ $errors->first('responsavel_id') }}
         </div>
-        @endif       
+        @endif
       </div>
       <div class="form-group col-md-4">
         <label for="inicioCotacao">Início cotação </label>
@@ -116,11 +116,11 @@
 
     <div class="form-row">
       <div class="form-group col-md-3">
-        <label for="requisicaoCompras">Requisição Compras Nº </label>  
+        <label for="requisicaoCompras">Requisição Compras Nº </label>
         <input type="text" class="form-control" name="requisicaoCompras" id="requisicaoCompras" value="{{ old('requisicaoCompras') ?? '' }}">
       </div>
       <div class="form-group col-md-3">
-        <label for="valor">Valor R$ </label>  
+        <label for="valor">Valor R$ </label>
         <input type="text" class="form-control" name="valor" id="valor" value="{{ old('valor') ?? '' }}">
       </div>
       <div class="form-group col-md-3">
@@ -131,7 +131,7 @@
         <label for="retornoSuplanPro">Retorno SUPLAN </label>
         <input type="text" class="form-control" name="retornoSuplanPro" id="retornoSuplanPro" value="{{ old('retornoSuplanPro') ?? '' }}" autocomplete="off">
       </div>
-    </div>  
+    </div>
 
     <div class="form-row">
       <div class="form-group col-md-3">
@@ -139,11 +139,11 @@
         <input type="text" class="form-control" name="protocoloSisprot" id="protocoloSisprot" value="{{ old('protocoloSisprot') ?? '' }}">
       </div>
       <div class="form-group col-md-3">
-        <label for="envioCCOAF">Envio CCOAF </label>  
+        <label for="envioCCOAF">Envio CCOAF </label>
         <input type="text" class="form-control" name="envioCCOAF" id="envioCCOAF" value="{{ old('envioCCOAF') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-3">
-        <label for="retornoCCOAF">Retorno CCOAF </label>  
+        <label for="retornoCCOAF">Retorno CCOAF </label>
         <input type="text" class="form-control" name="retornoCCOAF" id="retornoCCOAF" value="{{ old('retornoCCOAF') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-3">
@@ -158,13 +158,13 @@
         <div class="text-danger">
         {{ $errors->first('deliberacao_id') }}
         </div>
-        @endif 
+        @endif
       </div>
-    </div>  
+    </div>
 
     <div class="form-row">
       <div class="form-group col-md-2">
-        <label for="numeroPAC">PAC Nº </label>  
+        <label for="numeroPAC">PAC Nº </label>
         <input type="text" class="form-control" name="numeroPAC" id="numeroPAC" value="{{ old('numeroPAC') ?? '' }}">
       </div>
       <div class="form-group col-md-3">
@@ -182,39 +182,39 @@
         @endif
       </div>
       <div class="form-group col-md-3">
-        <label for="numeroModalidade">Nº Modalidade </label>  
+        <label for="numeroModalidade">Nº Modalidade </label>
         <input type="text" class="form-control" name="numeroModalidade" id="numeroModalidade" value="{{ old('numeroModalidade') ?? '' }}">
       </div>
       <div class="form-group col-md-4">
-        <label for="autuacao">Autuação PAC </label>  
+        <label for="autuacao">Autuação PAC </label>
         <input type="text" class="form-control" name="autuacao" id="autuacao" value="{{ old('autuacao') ?? '' }}" autocomplete="off">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="inicioMinutas">Início minuta (contrato/aditivo) </label>  
+        <label for="inicioMinutas">Início minuta (contrato/aditivo) </label>
         <input type="text" class="form-control" name="inicioMinutas" id="inicioMinutas" value="{{ old('inicioMinutas') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
-        <label for="terminoMinutas">Término minuta (contrato/aditivo) </label>  
+        <label for="terminoMinutas">Término minuta (contrato/aditivo) </label>
         <input type="text" class="form-control" name="terminoMinutas" id="terminoMinutas" value="{{ old('terminoMinutas') ?? '' }}" autocomplete="off">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="inicioMinutasARP">Início minuta ARP </label>  
+        <label for="inicioMinutasARP">Início minuta ARP </label>
         <input type="text" class="form-control" name="inicioMinutasARP" id="inicioMinutasARP" value="{{ old('inicioMinutasARP') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-4">
-        <label for="terminoMinutasARP">Término minuta ARP </label>  
+        <label for="terminoMinutasARP">Término minuta ARP </label>
         <input type="text" class="form-control" name="terminoMinutasARP" id="terminoMinutasARP" value="{{ old('terminoMinutasARP') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-4">
         <label for="pregoeiro_id">Pregoeiro (a) <strong  class="text-danger">(*)</strong></label>
         <select class="form-control" id="pregoeiro_id" name="pregoeiro_id">
-            <option value="" selected="true">Clique para escolher...</option> 
+            <option value="" selected="true">Clique para escolher...</option>
             @foreach($pregoeiros as $pregoeiro)
             <option value="{{$pregoeiro->id}}" {{ old("pregoeiro_id") == $pregoeiro->id ? "selected":"" }}>{{$pregoeiro->nome}}</option>
             @endforeach
@@ -224,92 +224,97 @@
         {{ $errors->first('pregoeiro_id') }}
         </div>
         @endif
-      </div>  
-    </div>      
+      </div>
+    </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="inicioMinutasEdital">Início minuta Edital </label>  
+        <label for="inicioMinutasEdital">Início minuta Edital </label>
         <input type="text" class="form-control" name="inicioMinutasEdital" id="inicioMinutasEdital" value="{{ old('inicioMinutasEdital') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
-        <label for="terminoMinutasEdital">Término minuta Edital </label>  
+        <label for="terminoMinutasEdital">Término minuta Edital </label>
         <input type="text" class="form-control" name="terminoMinutasEdital" id="terminoMinutasEdital" value="{{ old('terminoMinutasEdital') ?? '' }}" autocomplete="off">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="envioPgm">Envio PGM </label>  
+        <label for="envioPgm">Envio PGM </label>
         <input type="text" class="form-control" name="envioPgm" id="envioPgm" value="{{ old('envioPgm') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
-        <label for="retornoPgm">Retorno PGM </label>  
+        <label for="retornoPgm">Retorno PGM </label>
         <input type="text" class="form-control" name="retornoPgm" id="retornoPgm" value="{{ old('retornoPgm') ?? '' }}" autocomplete="off">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="inicioSaneamentoPendencias">Início Saneamento Pendênias </label>  
+        <label for="inicioSaneamentoPendencias">Início Saneamento Pendênias </label>
         <input type="text" class="form-control" name="inicioSaneamentoPendencias" id="inicioSaneamentoPendencias" value="{{ old('inicioSaneamentoPendencias') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
-        <label for="terminoSaneamentoPendencias">Término Saneamento Pendências </label>  
+        <label for="terminoSaneamentoPendencias">Término Saneamento Pendências </label>
         <input type="text" class="form-control" name="terminoSaneamentoPendencias" id="terminoSaneamentoPendencias" value="{{ old('terminoSaneamentoPendencias') ?? '' }}" autocomplete="off">
       </div>
-    </div>  
+    </div>
 
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="numeroEdital">Nº EDITAL </label>  
+        <label for="numeroEdital">Nº EDITAL </label>
         <input type="text" class="form-control" name="numeroEdital" id="numeroEdital" value="{{ old('numeroEdital') ?? '' }}">
       </div>
       <div class="form-group col-md-4">
-        <label for="dataPregao">Data PREGÃO </label>  
+        <label for="dataPregao">Data PREGÃO </label>
         <input type="text" class="form-control" name="dataPregao" id="dataPregao" value="{{ old('dataPregao') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-4">
-        <label for="impugnacao">Impugnação / Suspensão </label>  
+        <label for="impugnacao">Impugnação / Suspensão </label>
         <input type="text" class="form-control" name="impugnacao" id="impugnacao" value="{{ old('impugnacao') ?? '' }}" autocomplete="off">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="inicioAnaliseTecnica">Início Análise Técnica </label>  
+        <label for="inicioAnaliseTecnica">Início Análise Técnica </label>
         <input type="text" class="form-control" name="inicioAnaliseTecnica" id="inicioAnaliseTecnica" value="{{ old('inicioAnaliseTecnica') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-6">
-        <label for="terminoAnaliseTecnica">Término Análise Técnica </label>  
+        <label for="terminoAnaliseTecnica">Término Análise Técnica </label>
         <input type="text" class="form-control" name="terminoAnaliseTecnica" id="terminoAnaliseTecnica" value="{{ old('terminoAnaliseTecnica') ?? '' }}" autocomplete="off">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="dataHomologacao">Homologação </label>  
+        <label for="dataHomologacao">Homologação </label>
         <input type="text" class="form-control" name="dataHomologacao" id="dataHomologacao" value="{{ old('dataHomologacao') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-4">
-        <label for="dataRatificacao">Ratificação </label>  
+        <label for="dataRatificacao">Ratificação </label>
         <input type="text" class="form-control" name="dataRatificacao" id="dataRatificacao" value="{{ old('dataRatificacao') ?? '' }}" autocomplete="off">
       </div>
       <div class="form-group col-md-4">
-        <label for="dataReratificacao">Reratificação </label>  
+        <label for="dataReratificacao">Reratificação </label>
         <input type="text" class="form-control" name="dataReratificacao" id="dataReratificacao" value="{{ old('dataReratificacao') ?? '' }}" autocomplete="off">
-      </div>      
-    </div>  
+      </div>
+    </div>
 
     <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="formalizacaoContratoArp">Formalização (contrato/aditivo/ARP) </label>  
+      <div class="form-group col-md-4">
+        <label for="formalizacaoContratoArp">Formalização (contrato/aditivo/ARP) </label>
         <input type="text" class="form-control" name="formalizacaoContratoArp" id="formalizacaoContratoArp" value="{{ old('formalizacaoContratoArp') ?? '' }}" autocomplete="off">
       </div>
-      <div class="form-group col-md-6">
-        <label for="dataContratoArp">Data (contrato/aditivo/ARP) </label>  
+      <div class="form-group col-md-4">
+        <label for="dataContratoArp">Data (contrato/aditivo/ARP) </label>
         <input type="text" class="form-control" name="dataContratoArp" id="dataContratoArp" value="{{ old('dataContratoArp') ?? '' }}" autocomplete="off">
       </div>
+      <div class="form-group col-md-4">
+        <label for="sei">Nº SEI </label>
+        <input type="text" class="form-control" name="sei" id="sei" value="{{ old('sei') ?? '' }}">
+      </div>
+
     </div>
 
     <div class="form-group">

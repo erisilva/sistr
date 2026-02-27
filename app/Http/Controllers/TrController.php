@@ -34,7 +34,7 @@ use Carbon\Carbon;
 
 class TrController extends Controller
 {
-    public function __construct() 
+    public function __construct()
     {
         $this->middleware(['middleware' => 'auth']);
         $this->middleware(['middleware' => 'hasaccess']);
@@ -54,7 +54,7 @@ class TrController extends Controller
         $trs = new Tr;
 
         // fitros
-        $lista_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital', 'responsavel_id'];
+        $lista_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital', 'responsavel_id', 'sei'];
 
         foreach ($lista_de_filtros as $filtro) {
             if (request()->has($filtro) && !empty(request($filtro))){
@@ -68,15 +68,15 @@ class TrController extends Controller
 
         if (request()->has('dtainicio')){
             if (request('dtainicio') != ""){
-               $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d 00:00:00');           
-               $trs = $trs->where('dataPregao', '>=', $dataFormatadaMysql);                
+               $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d 00:00:00');
+               $trs = $trs->where('dataPregao', '>=', $dataFormatadaMysql);
             }
        }
 
        if (request()->has('dtafinal')){
             if (request('dtafinal') != ""){
-               $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dtafinal'))->format('Y-m-d 23:59:59');         
-               $trs = $trs->where('dataPregao', '<=', $dataFormatadaMysql);                
+               $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dtafinal'))->format('Y-m-d 23:59:59');
+               $trs = $trs->where('dataPregao', '<=', $dataFormatadaMysql);
             }
        }
 
@@ -94,11 +94,11 @@ class TrController extends Controller
         $perpages = Perpage::orderBy('valor')->get();
 
         // paginação
-        $trs = $trs->paginate(session('perPage', '5'))->appends([          
+        $trs = $trs->paginate(session('perPage', '5'))->appends([
             'numero' => request('numero'),
-            'descricao' => request('descricao'),           
-            'situacao_id' => request('situacao_id'),           
-            'origem_id' => request('origem_id'),           
+            'descricao' => request('descricao'),
+            'situacao_id' => request('situacao_id'),
+            'origem_id' => request('origem_id'),
             'tipo_id' => request('tipo_id'),
             'responsavel_id' => request('responsavel_id'),
             'requisicaoCompras' => request('requisicaoCompras'),
@@ -108,6 +108,7 @@ class TrController extends Controller
             'numeroEdital' => request('numeroEdital'),
             'dtainicio' => request('dtainicio'),
             'dtafinal' => request('dtafinal'),
+            'sei' => request('sei'),
             ])->withPath(env('APP_URL', null) .  '/trs'); // necessário para rodar no linux
 
 
@@ -280,15 +281,15 @@ class TrController extends Controller
         }
 
         $tr = Tr::findOrFail($id);
-            
+
         $tr->update($new_tr);
-        
+
         Trlog::create([
             'tr_id' => $tr->id,
             'user_id' => Auth::user()->id,
             'changes' => json_encode($tr->getchanges()),
         ]);
-        
+
         Session::flash('edited_tr', 'TR alterado com sucesso!');
 
         return redirect(route('trs.edit', $id));
@@ -318,7 +319,7 @@ class TrController extends Controller
         if (Gate::denies('tr-edit-numero-ano')) {
             abort(403, 'Acesso negado.');
         }
-        
+
         $formFields = $request->validate([
             'ano_edit' => 'required|numeric',
             'numero_edit' => 'required|numeric',
@@ -332,15 +333,15 @@ class TrController extends Controller
         );
 
         if(Tr::where('ano', '=', $formFields['ano_edit'])->where('numero', '=', $formFields['numero_edit'])->exists()){
-            return redirect(route('trs.edit', $tr))->with('ano_edit_existe', 'O TR nº e ano já estão sendo usados no sistema!');    
+            return redirect(route('trs.edit', $tr))->with('ano_edit_existe', 'O TR nº e ano já estão sendo usados no sistema!');
         } else {
             $tr->update([
-                'ano' => $formFields['ano_edit'], 
-                'numero' => $formFields['numero_edit'] 
+                'ano' => $formFields['ano_edit'],
+                'numero' => $formFields['numero_edit']
             ]);
-            return redirect(route('trs.edit', $tr))->with('ano_edit_alteradp', 'O TR nº e ano foram alterados!');    
+            return redirect(route('trs.edit', $tr))->with('ano_edit_alteradp', 'O TR nº e ano foram alterados!');
         }
-    }  
+    }
 
 
     public function exportcsv()
@@ -350,7 +351,7 @@ class TrController extends Controller
         }
 
         # filtragem
-        $lista_de_campos_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital', 'responsavel_id'];
+        $lista_de_campos_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital', 'responsavel_id', 'sei'];
 
         $lista_de_filtros_ajustada = [];
 
@@ -360,7 +361,7 @@ class TrController extends Controller
 
         if (request()->has('dtainicio')){
             if (request('dtainicio') != ""){
-                $lista_de_filtros_ajustada['dtainicio']  = Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d 00:00:00');               
+                $lista_de_filtros_ajustada['dtainicio']  = Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d 00:00:00');
             }
         }
 
@@ -381,7 +382,7 @@ class TrController extends Controller
         }
 
         # filtragem
-        $lista_de_campos_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital', 'responsavel_id'];
+        $lista_de_campos_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital', 'responsavel_id', 'sei'];
 
         $lista_de_filtros_ajustada = [];
 
@@ -391,7 +392,7 @@ class TrController extends Controller
 
         if (request()->has('dtainicio')){
             if (request('dtainicio') != ""){
-                $lista_de_filtros_ajustada['dtainicio']  = Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d 00:00:00');               
+                $lista_de_filtros_ajustada['dtainicio']  = Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d 00:00:00');
             }
         }
 
@@ -414,7 +415,7 @@ class TrController extends Controller
         $trs = new Tr;
 
         // fitros
-        $lista_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital', 'responsavel_id'];
+        $lista_de_filtros = ['numero', 'ano', 'descricao', 'situacao_id', 'origem_id', 'tipo_id', 'requisicaoCompras', 'protocoloSisprot', 'modalidade_id', 'numeroModalidade', 'numeroEdital', 'responsavel_id', 'sei'];
 
         foreach ($lista_de_filtros as $filtro) {
             if (request()->has($filtro) && !empty(request($filtro))){
@@ -423,20 +424,20 @@ class TrController extends Controller
                 } else {
                     $trs = $trs->where($filtro, 'like', '%' . request($filtro) . '%');
                 }
-            }   
+            }
         }
 
         if (request()->has('dtainicio')){
             if (request('dtainicio') != ""){
-               $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d 00:00:00');           
-               $trs = $trs->where('dataPregao', '>=', $dataFormatadaMysql);                
+               $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dtainicio'))->format('Y-m-d 00:00:00');
+               $trs = $trs->where('dataPregao', '>=', $dataFormatadaMysql);
             }
        }
 
        if (request()->has('dtafinal')){
             if (request('dtafinal') != ""){
-               $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dtafinal'))->format('Y-m-d 23:59:59');         
-               $trs = $trs->where('dataPregao', '<=', $dataFormatadaMysql);                
+               $dataFormatadaMysql = Carbon::createFromFormat('d/m/Y', request('dtafinal'))->format('Y-m-d 23:59:59');
+               $trs = $trs->where('dataPregao', '<=', $dataFormatadaMysql);
             }
        }
 
@@ -447,7 +448,7 @@ class TrController extends Controller
         $trs = $trs->get();
 
         $pdf = PDF::loadView('trs.report', compact('trs'))->setPaper('a4', 'landscape');
-        
+
         return $pdf->download('TRs_' .  date("Y-m-d H:i:s") . '.pdf');
 
     }
@@ -459,7 +460,7 @@ class TrController extends Controller
         }
 
         $pdf = PDF::loadView('trs.reportsingle', compact('tr'))->setPaper('a4', 'landscape');
-        
+
         return $pdf->download('TRs_' .  date("Y-m-d H:i:s") . '.pdf');
 
     }

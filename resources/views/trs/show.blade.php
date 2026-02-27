@@ -14,7 +14,7 @@
 
     <div class="form-row">
       <div class="form-group col-md-3">
-          <div class="p-3 bg-primary text-white text-right h2">Nº {{ $tr->numero }}/{{ $tr->ano }}</div>    
+          <div class="p-3 bg-primary text-white text-right h2">Nº {{ $tr->numero }}/{{ $tr->ano }}</div>
       </div>
       <div class="form-group col-md-3">
         <label for="situacao">STATUS</label>
@@ -52,7 +52,7 @@
 
 
     <div class="form-row">
-      
+
       <div class="form-group col-md-2">
         <label for="responsavel">Responsável cotação</label>
         <input type="text" class="form-control" name="responsavel" value="{{ $tr->responsavel->nome }}" readonly>
@@ -85,7 +85,7 @@
         <label for="retornoSuplanPro">Retorno SUPLAN</label>
         <input type="text" class="form-control" name="retornoSuplanPro" value="{{ isset($tr->retornoSuplanPro) ?  $tr->retornoSuplanPro->format('d/m/Y') : '-' }}" readonly>
       </div>
-    </div>  
+    </div>
 
     <div class="form-row">
       <div class="form-group col-md-3">
@@ -105,7 +105,7 @@
         <label for="deliberacao">Deliberação CCOAF</label>
         <input type="text" class="form-control" name="deliberacao" value="{{ $tr->deliberacao->descricao }}" readonly>
       </div>
-    </div>  
+    </div>
 
     <div class="form-row">
       <div class="form-group col-md-2">
@@ -150,7 +150,7 @@
         <label for="pregoeiro">Pregoeiro (a)</label>
         <input type="text" class="form-control" name="pregoeiro" value="{{ $tr->pregoeiro->nome }}" readonly>
       </div>
-    </div>  
+    </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
@@ -171,7 +171,7 @@
       <div class="form-group col-md-6">
         <label for="retornoPgm">Retorno PGM</label>
         <input type="text" class="form-control" name="retornoPgm" value="{{ isset($tr->retornoPgm) ?  $tr->retornoPgm->format('d/m/Y') : '-' }}" readonly>
-      </div>      
+      </div>
     </div>
 
     <div class="form-row">
@@ -183,7 +183,7 @@
         <label for="terminoSaneamentoPendencias">Término Saneamento Pendências </label>
         <input type="text" class="form-control" name="terminoSaneamentoPendencias" value="{{ isset($tr->terminoSaneamentoPendencias) ?  $tr->terminoSaneamentoPendencias->format('d/m/Y') : '-' }}" readonly>
       </div>
-    </div>  
+    </div>
 
     <div class="form-row">
       <div class="form-group col-md-4">
@@ -219,21 +219,25 @@
       <div class="form-group col-md-4">
         <label for="dataRatificacao">Ratificação </label>
         <input type="text" class="form-control" name="dataRatificacao" value="{{ isset($tr->dataRatificacao) ?  $tr->dataRatificacao->format('d/m/Y') : '-' }}" readonly>
-      </div>      
+      </div>
       <div class="form-group col-md-4">
         <label for="dataReratificacao">Reratificação </label>
         <input type="text" class="form-control" name="dataReratificacao" value="{{ isset($tr->dataReratificacao) ?  $tr->dataReratificacao->format('d/m/Y') : '-' }}" readonly>
       </div>
-    </div>  
+    </div>
 
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="formalizacaoContratoArp">Formalização (contrato/aditivo/ARP) </label>
         <input type="text" class="form-control" name="formalizacaoContratoArp" value="{{ isset($tr->formalizacaoContratoArp) ?  $tr->formalizacaoContratoArp->format('d/m/Y') : '-' }}" readonly>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="dataContratoArp">Data (contrato/aditivo/ARP)  </label>
         <input type="text" class="form-control" name="dataContratoArp" value="{{ isset($tr->dataContratoArp) ?  $tr->dataContratoArp->format('d/m/Y') : '-' }}" readonly>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="sei">Nº SEI </label>
+        <input type="text" class="form-control" name="sei" value="{{ $tr->sei }}" readonly>
       </div>
     </div>
 
@@ -261,10 +265,10 @@
         <label for="username">Funcionário Responsável</label>
         <input type="text" class="form-control" name="username" value="{{ $tr->user->name }}" readonly>
       </div>
-    </div>  
+    </div>
 
 
-  </form> 
+  </form>
 </div>
 <div class="container py-3">
   <a href="{{ route('trs.index') }}" class="btn btn-primary" role="button"><i class="bi bi-arrow-left"></i> Voltar</i></a>
@@ -288,12 +292,12 @@
           @csrf
           @method('DELETE')
           <div class="form-group">
-            <label for="motivo">Motivo</label>  
+            <label for="motivo">Motivo</label>
             <input type="text" class="form-control" name="motivo" id="motivo" value="">
           </div>
           <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Enviar para Lixeira</button>
         </form>
-      </div>     
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
       </div>

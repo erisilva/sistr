@@ -28,9 +28,9 @@
 
             /** Define the footer rules **/
             footer {
-                position: fixed; 
-                bottom: 0cm; 
-                left: 0cm; 
+                position: fixed;
+                bottom: 0cm;
+                left: 0cm;
                 right: 0cm;
                 height: 1cm;
                 background-color: rgb(200, 200, 200);
@@ -58,7 +58,7 @@
         </header>
 
         <footer>
-          <span>{{ date('d/m/Y H:i:s') }} - </span><span class="page-number">Página </span>         
+          <span>{{ date('d/m/Y H:i:s') }} - </span><span class="page-number">Página </span>
         </footer>
 
         <main>
@@ -69,7 +69,7 @@
                     <td colspan="3">
                         <label for="situacao"><strong>STATUS</strong></label>
                         <div id="situacao">{{$tr->situacao->descricao}}</div>
-                    </td>  
+                    </td>
 
                     <td colspan="3" style = "text-align: center; font-size: 18px;">
                         <strong>Nº {{ $tr->numero }}/{{ $tr->ano }}</strong>
@@ -83,18 +83,18 @@
                     <td colspan="9">
                         <label for="descricao"><strong>Objeto</strong></label>
                         <div id="descricao">{{$tr->descricao}}</div>
-                    </td>    
+                    </td>
                 </tr>
 
                 <tr>
                     <td colspan="1"  style = "text-align: right;">
                         <label for="tipo"><strong>Qtde. Itens</strong></label>
                         <div id="tipo">{{$tr->quantidadeItens}}</div>
-                    </td> 
+                    </td>
                     <td colspan="2">
                         <label for="tipo"><strong>Tipo</strong></label>
                         <div id="tipo">{{$tr->tipo->descricao}}</div>
-                    </td>  
+                    </td>
                     <td colspan="2" style = "text-align: center;">
                         <label for="entregueSupAdm"><strong>Entrada na S.A.</strong></label>
                         <div id="entregueSupAdm">{{ (isset($tr->entregueSupAdm)) ? $tr->entregueSupAdm->format('d/m/Y') : '-'}}</div>
@@ -113,7 +113,7 @@
                     <td colspan="2" style = "text-align: center;">
                         <label for="inicioCotacao"><strong>Início Cotação</strong></label>
                         <div id="inicioCotacao">{{ (isset($tr->inicioCotacao)) ? $tr->inicioCotacao->format('d/m/Y') : '-'}}</div>
-                    </td>  
+                    </td>
                     <td colspan="2" style = "text-align: center;">
                         <label for="terminoCotacao"><strong>Término cotação</strong></label>
                         <div id="terminoCotacao">{{ (isset($tr->terminoCotacao)) ? $tr->terminoCotacao->format('d/m/Y') : '-'}}</div>
@@ -150,12 +150,12 @@
                         <div id="retornoCCOAF">{{ (isset($tr->retornoCCOAF)) ? $tr->retornoCCOAF->format('d/m/Y') : '-'}}</div>
                     </td>
                 </tr>
-                
+
                 <tr>
                     <td colspan="2">
                         <label for="deliberacao"><strong>Deliberação CCOAF</strong></label>
                         <div id="deliberacao">{{$tr->deliberacao->descricao}}</div>
-                    </td>  
+                    </td>
                     <td colspan="2">
                         <label for="numeroPAC"><strong>PAC Nº</strong></label>
                         <div id="numeroPAC">{{ (isset($tr->numeroPAC)) ? $tr->numeroPAC : '-'}}</div>
@@ -167,7 +167,7 @@
                     <td colspan="2">
                         <label for="numeroModalidade"><strong>Nº Modalidade</strong></label>
                         <div id="numeroModalidade">{{ (isset($tr->numeroModalidade)) ? $tr->numeroModalidade : '-'}}</div>
-                    </td> 
+                    </td>
                 </tr>
 
                 <tr>
@@ -190,7 +190,7 @@
                     <td colspan="2" style = "text-align: center;">
                         <label for="terminoMinutasARP"><strong>Término minuta ARP</strong></label>
                         <div id="terminoMinutasARP">{{ (isset($tr->terminoMinutasARP)) ? $tr->terminoMinutasARP->format('d/m/Y') : '-'}}</div>
-                    </td>                      
+                    </td>
                 </tr>
 
                 <tr>
@@ -205,7 +205,7 @@
                     <td colspan="3" style = "text-align: center;">
                         <label for="terminoMinutasEdital"><strong>Término minuta Edital</strong></label>
                         <div id="terminoMinutasEdital">{{ (isset($tr->terminoMinutasEdital)) ? $tr->terminoMinutasEdital->format('d/m/Y') : '-'}}</div>
-                    </td>           
+                    </td>
                 </tr>
 
                 <tr>
@@ -226,8 +226,8 @@
                         <div id="terminoSaneamentoPendencias">{{ (isset($tr->terminoSaneamentoPendencias)) ? $tr->terminoSaneamentoPendencias->format('d/m/Y') : '-'}}</div>
                     </td>
                 </tr>
-                
-                <tr>       
+
+                <tr>
                     <td colspan="1">
                         <label for="numeroEdital"><strong>Nº EDITAL</strong></label>
                         <div id="numeroEdital">{{ (isset($tr->numeroEdital)) ? $tr->numeroEdital : '-'}}</div>
@@ -262,29 +262,37 @@
                     <td colspan="2" style = "text-align: center;">
                         <label for="dataReratificacao"><strong>Reratificação</strong></label>
                         <div id="dataReratificacao">{{ (isset($tr->dataReratificacao)) ? $tr->dataReratificacao->format('d/m/Y') : '-'}}</div>
-                    </td> 
+                    </td>
                     <td colspan="2" style = "text-align: center;">
                         <label for="formalizacaoContratoArp"><strong>Formalização (contrato/aditivo/ARP)</strong></label>
                         <div id="formalizacaoContratoArp">{{ (isset($tr->formalizacaoContratoArp)) ? $tr->formalizacaoContratoArp->format('d/m/Y') : '-'}}</div>
-                    </td> 
+                    </td>
                     <td colspan="2" style = "text-align: center;">
                         <label for="dataContratoArp"><strong>Data (contrato/aditivo/ARP)</strong></label>
                         <div id="dataContratoArp">{{ (isset($tr->dataContratoArp)) ? $tr->dataContratoArp->format('d/m/Y') : '-'}}</div>
-                    </td>   
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <label for="sei"><strong>Nº SEI</strong></label>
+                        <div id="sei">{{ (isset($tr->sei)) ? $tr->sei : '-'}}</div>
+                    </td>
+                    <td colspan="7"></td>
                 </tr>
 
                 <tr>
                     <td colspan="9">
                         <label for="publicacao"><strong>PUBLICAÇÃO DOC</strong></label>
                         <div id="publicacao">{{$tr->publicacao}}</div>
-                    </td>    
+                    </td>
                 </tr>
 
                 <tr>
                     <td colspan="9">
                         <label for="observacao"><strong>Observações</strong></label>
                         <div id="observacao">{{$tr->observacao}}</div>
-                    </td>    
+                    </td>
                 </tr>
 
               </tbody>
