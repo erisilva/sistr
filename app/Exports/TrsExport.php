@@ -35,7 +35,8 @@ class TrsExport implements FromQuery, WithHeadings
     {
         $result = Tr::query()->select('situacaos.descricao as situacao',
                                       'trs.numero', 
-                                      'trs.ano', 
+                                      'trs.ano',
+                                      'trs.sei',
                                       'origems.descricao as origem',
                                       'tipos.descricao as tipo',
                                       'trs.descricao',
@@ -136,6 +137,7 @@ class TrsExport implements FromQuery, WithHeadings
         return ["Status", 
                 "TR Nº",
                 "Ano",
+                "SEI",
                 "Solicitante",
                 "Tipo TR",
                 "Objeto",
